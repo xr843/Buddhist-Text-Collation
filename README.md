@@ -1,5 +1,6 @@
-# 佛典标点与校勘研究平台 / Buddhist Text Punctuation & Collation Platform
+# 佛典标点与校勘研究平台 / Buddhist Text Collation Platform
 
+[![CI](https://github.com/xr843/buddhist-text-collation/actions/workflows/ci.yml/badge.svg)](https://github.com/xr843/buddhist-text-collation/actions/workflows/ci.yml)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/)
 [![React](https://img.shields.io/badge/react-18+-61dafb.svg)](https://react.dev/)
@@ -7,10 +8,20 @@
 [![CBETA](https://img.shields.io/badge/CBETA-integrated-green.svg)](#致谢--acknowledgements)
 [![DILA](https://img.shields.io/badge/DILA-integrated-green.svg)](#致谢--acknowledgements)
 
-> 面向佛典数字人文研究的开源工作平台。
-> An open-source workbench for digital humanities research on Buddhist texts.
+> **一句话** · 把佛经古籍的"标点对比、多版本对勘、注疏对读、版本谱系"统一进同一个研究工作台。
+>
+> **One line** · A unified research workbench for punctuation diff, multi-edition collation, commentary cross-reading, and version-lineage analysis of Buddhist canonical texts.
 
-📖 完整中文文档 / Full Chinese docs: **[docs/README.zh-CN.md](docs/README.zh-CN.md)**
+📖 详细中文文档 / Full Chinese docs: **[docs/README.zh-CN.md](docs/README.zh-CN.md)** · 🛡️ 安全 / Security: **[SECURITY.md](SECURITY.md)** · 🤝 参与 / Contribute: **[CONTRIBUTING.md](CONTRIBUTING.md)** · 📝 更新日志 / Changelog: **[CHANGELOG.md](CHANGELOG.md)**
+
+---
+
+> 💡 **当前版本说明** / Note on v0.1.0
+>
+> 本开源版**未集成第三方付费 OCR**（如 gj.cool）。如需图片→文字流程，请用任意外部 OCR 工具识别后，再把文本导入本平台校勘流程。
+>
+> The OCR digitization workbench from the internal version is **not** bundled.
+> Use any external OCR tool and import recognized text into the collation flow.
 
 ---
 

@@ -10,7 +10,7 @@ If you discover a security vulnerability, **please do not** open a public issue.
 
 - GitHub 私信 / GitHub Security Advisories（推荐 / preferred）：
   仓库主页 → **Security** → **Report a vulnerability**
-- 邮件 / Email: *（请在 fork 时替换为你的联系邮箱）*
+- 邮件 / Email: xianren843@protonmail.com
 
 我们会在 **3 个工作日内**回复，并在确认后协调披露窗口。
 

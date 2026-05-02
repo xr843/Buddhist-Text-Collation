@@ -66,8 +66,6 @@ python3 test_api_endpoints.py
 - ✅ CBETA API（3个端点）
 - ✅ 导出API（2个端点）
 - ✅ 对勘API（正常）
-- ✅ OCR API（正常）
-- ✅ 总计48个端点
 
 ---
 
@@ -330,7 +328,6 @@ BACKEND_CORS_ORIGINS = [
 - [ ] 地理分布图显示正常
 - [ ] Word导出功能正常
 - [ ] TEI XML导出功能正常
-- [ ] OCR送勘流程正常
 
 **Docker部署（可选）**：
 - [ ] 后端镜像构建成功
@@ -377,8 +374,8 @@ autorestart=true
 - 集成ELK/Grafana监控
 
 ### 4. 备份策略
-- 定期备份SQLite数据库
-- 备份用户上传的OCR文档
+- 定期备份PostgreSQL/SQLite数据库
+- 备份用户上传的项目数据
 
 ---
 
