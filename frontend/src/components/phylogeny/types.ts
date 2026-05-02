@@ -53,3 +53,40 @@ export interface PhylogenyAnalysisProps {
 }
 
 export type VariantType = 'error' | 'variant' | 'yantuo' | 'combined'
+
+// ==================== 版本源流图 / Lineage Graph ====================
+
+/**
+ * 单个版本节点
+ */
+export interface LineageNode {
+  id: string
+  name: string
+  year: number | string
+  system?: string
+  city?: string
+  period?: string
+  is_ancestor?: boolean
+}
+
+/**
+ * 版本之间的传承关系（有向边）
+ */
+export interface LineageEdge {
+  source: string
+  target: string
+  confidence: number
+  similarity?: number
+  shared_errors?: number
+  evidence?: string[]
+  is_known?: boolean
+}
+
+/**
+ * 版本源流图完整数据
+ */
+export interface LineageData {
+  nodes: LineageNode[]
+  edges: LineageEdge[]
+  conclusions?: string[]
+}

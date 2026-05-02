@@ -84,11 +84,10 @@ jobs:
         working-directory: frontend
         run: npm ci --no-audit --no-fund
 
-      # tsc 当前为 advisory 模式：项目存在历史类型债（缺失字段、隐式 any 等），
-      # Vite/esbuild 运行时不受影响。后续清理后可移除 continue-on-error。
-      - name: TypeScript check (advisory)
+      # tsc 已切回严格模式（gating）。如未来出现新的类型债，请在原 PR 中修掉，
+      # 不要回退到 advisory。
+      - name: TypeScript check
         working-directory: frontend
-        continue-on-error: true
         run: npx tsc --noEmit
 
       - name: Lint (advisory)
