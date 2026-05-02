@@ -1,0 +1,43 @@
+repos:
+  # 前端 Lint 和类型检查
+  - repo: local
+    hooks:
+      - id: frontend-lint
+        name: Frontend Lint
+        entry: bash -c 'cd frontend && npm run lint'
+        language: system
+        pass_filenames: false
+        files: ^frontend/src/.*\.(ts|tsx)$
+
+      - id: frontend-type-check
+        name: Frontend Type Check
+        entry: bash -c 'cd frontend && npm run type-check'
+        language: system
+        pass_filenames: false
+        files: ^frontend/src/.*\.(ts|tsx)$
+
+  # 通用检查
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: (^frontend/node_modules/|\.md$)
+      - id: end-of-file-fixer
+        exclude: ^frontend/node_modules/
+      - id: check-yaml
+      - id: check-json
+        exclude: ^frontend/node_modules/
+      - id: check-added-large-files
+        args: ['--maxkb=10000']  # 10MB 限制
+
+# 后端 Python 代码格式化说明：
+# 1. 安装工具（仅需一次）：
+#    pip install black isort --break-system-packages
+#    或在虚拟环境中: pip install black isort
+#
+# 2. 手动运行格式化：
+#    cd backend
+#    black . --line-length 100
+#    isort . --profile black
+#
+# 3. 配置在 backend/pyproject.toml 中

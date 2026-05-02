@@ -1,0 +1,83 @@
+/**
+ * SplitPane 样式
+ */
+
+/* 容器 */
+.split-pane {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.split-pane-horizontal {
+  flex-direction: row;
+}
+
+.split-pane-vertical {
+  flex-direction: column;
+}
+
+/* 面板 */
+.split-pane-panel {
+  overflow: auto;
+}
+
+/* 拖拽条 */
+.split-gutter {
+  background-color: var(--color-border, #E8E4DC);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.split-gutter:hover {
+  background-color: var(--color-primary, #384E77);
+}
+
+.split-gutter-horizontal {
+  cursor: col-resize;
+  width: 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='20'%3E%3Cpath d='M0 0h1v20H0zM3 0h1v20H3z' fill='%23999'/%3E%3C/svg%3E");
+}
+
+.split-gutter-vertical {
+  cursor: row-resize;
+  height: 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='4'%3E%3Cpath d='M0 0h20v1H0zM0 3h20v1H0z' fill='%23999'/%3E%3C/svg%3E");
+}
+
+/* 拖拽时的视觉反馈 */
+.split-gutter:active {
+  background-color: var(--color-primary-active, #2D3E5F);
+}
+
+/* 暗色模式适配 */
+[data-theme='dark'] .split-gutter {
+  background-color: var(--color-border, #3A3A3A);
+}
+
+[data-theme='dark'] .split-gutter:hover {
+  background-color: var(--color-primary, #5B7AAD);
+}
+
+[data-theme='dark'] .split-gutter-horizontal {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='20'%3E%3Cpath d='M0 0h1v20H0zM3 0h1v20H3z' fill='%23666'/%3E%3C/svg%3E");
+}
+
+[data-theme='dark'] .split-gutter-vertical {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='4'%3E%3Cpath d='M0 0h20v1H0zM0 3h20v1H0z' fill='%23666'/%3E%3C/svg%3E");
+}
+
+/* 折叠状态 */
+.split-pane-panel:empty {
+  display: none;
+}
+
+/* 拖拽时禁用选择 */
+.split-pane.dragging {
+  user-select: none;
+}
+
+.split-pane.dragging * {
+  pointer-events: none;
+}

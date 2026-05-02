@@ -1,0 +1,344 @@
+/**
+ * 全局样式 - "禅意/学术" 设计语言
+ *
+ * 设计原则：
+ * - 可读性优先
+ * - 护眼配色
+ * - 人文气息
+ */
+
+/* ==================== 基础重置 ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ==================== CSS 变量 - 浅色模式 ==================== */
+:root {
+  /* 主色 - 靛青 */
+  --color-primary: #384E77;
+  --color-primary-hover: #4A6491;
+  --color-primary-active: #2D3E5F;
+
+  /* 强调色 - 朱砂 */
+  --color-accent: #C64153;
+  --color-accent-hover: #D4596A;
+
+  /* 背景色 - 米白 */
+  --color-bg-base: #FDFBF7;
+  --color-bg-container: #FFFFFF;
+  --color-bg-layout: #F5F3EF;
+  --color-bg-elevated: #FFFFFF;
+
+  /* 文字色 */
+  --color-text-primary: rgba(0, 0, 0, 0.88);
+  --color-text-secondary: rgba(0, 0, 0, 0.65);
+  --color-text-tertiary: rgba(0, 0, 0, 0.45);
+
+  /* 边框色 */
+  --color-border: #E8E4DC;
+  --color-border-secondary: #F0ECE4;
+
+  /* 差异色 - 柔和版 */
+  --color-diff-insert: #73D13D;
+  --color-diff-insert-bg: #F6FFED;
+  --color-diff-insert-text: #389E0D;
+  --color-diff-delete: #FF4D4F;
+  --color-diff-delete-bg: #FFF1F0;
+  --color-diff-delete-text: #CF1322;
+  --color-diff-replace: #FAAD14;
+  --color-diff-replace-bg: #FFFBE6;
+  --color-diff-replace-text: #D46B08;
+  --color-diff-variant: #52C41A;
+  --color-diff-variant-bg: #F6FFED;
+  --color-diff-variant-text: #237804;
+
+  /* 字体 */
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-heading: 'Noto Serif SC', 'Source Han Serif SC', 'STSong', 'SimSun', serif;
+  --font-family-ancient: 'Noto Serif SC', 'Source Han Serif SC', 'STSong', 'SimSun', serif;
+  --font-family-code: 'Fira Code', 'Source Code Pro', Consolas, Monaco, monospace;
+
+  /* 字号 */
+  --font-size-base: 14px;
+  --font-size-sm: 12px;
+  --font-size-lg: 16px;
+  --font-size-xl: 20px;
+  --font-size-ancient: 18px;
+
+  /* 行高 */
+  --line-height-base: 1.6;
+  --line-height-heading: 1.4;
+  --line-height-ancient: 1.8;
+
+  /* 滚动条 */
+  --scrollbar-bg: #F5F3EF;
+  --scrollbar-thumb: #C4C0B8;
+  --scrollbar-thumb-hover: #A8A49C;
+
+  /* 纸张纹理（可关闭） */
+  --paper-texture-opacity: 0.03;
+
+  /* 基础设置 */
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  font-weight: 400;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-layout);
+
+  /* 渲染优化 */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==================== 基础布局 ==================== */
+body {
+  margin: 0;
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--color-bg-layout);
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ==================== Typography - 标题衬线体 ==================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading);
+  font-weight: 600;
+  line-height: var(--line-height-heading);
+  color: var(--color-text-primary);
+}
+
+h1 { font-size: 38px; }
+h2 { font-size: 30px; }
+h3 { font-size: 24px; }
+h4 { font-size: 20px; }
+h5 { font-size: 16px; }
+h6 { font-size: 14px; }
+
+/* Ant Design Typography 组件标题 */
+.ant-typography h1,
+.ant-typography h2,
+.ant-typography h3,
+.ant-typography h4,
+.ant-typography h5 {
+  font-family: var(--font-family-heading);
+}
+
+/* ==================== 古籍文本样式 ==================== */
+.ancient-text {
+  font-family: var(--font-family-ancient);
+  font-size: var(--font-size-ancient);
+  line-height: var(--line-height-ancient);
+  letter-spacing: 0.05em;
+  color: var(--color-text-primary);
+}
+
+/* 古籍阅读区域 - 纸张质感 */
+.ancient-text-container {
+  background-color: var(--color-bg-container);
+  padding: 24px 32px;
+  border-radius: 8px;
+  position: relative;
+}
+
+/* 纸张纹理层（可关闭） */
+.ancient-text-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: var(--paper-texture-opacity);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ==================== 差异高亮样式 ==================== */
+
+/* 新增/插入 - 草绿 */
+.diff-insert {
+  background-color: var(--color-diff-insert-bg);
+  color: var(--color-diff-insert-text);
+  border-bottom: 2px solid var(--color-diff-insert);
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* 删除/脱文 - 砖红 */
+.diff-delete {
+  background-color: var(--color-diff-delete-bg);
+  color: var(--color-diff-delete-text);
+  text-decoration: line-through;
+  text-decoration-color: var(--color-diff-delete);
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* 替换/讹误 - 琥珀 */
+.diff-replace {
+  background-color: var(--color-diff-replace-bg);
+  color: var(--color-diff-replace-text);
+  border-bottom: 2px dashed var(--color-diff-replace);
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* 异体字 - 绿色（虚线） */
+.diff-variant {
+  background-color: var(--color-diff-variant-bg);
+  color: var(--color-diff-variant-text);
+  border-bottom: 1px dotted var(--color-diff-variant);
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* 差异标记图标辅助（无障碍设计） */
+.diff-insert::before { content: '＋'; font-size: 0.7em; margin-right: 2px; opacity: 0.6; }
+.diff-delete::before { content: '－'; font-size: 0.7em; margin-right: 2px; opacity: 0.6; }
+
+/* 隐藏差异图标（可选） */
+.hide-diff-icons .diff-insert::before,
+.hide-diff-icons .diff-delete::before {
+  display: none;
+}
+
+/* ==================== 滚动条样式 ==================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-bg);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Firefox 滚动条 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
+}
+
+/* ==================== 专注模式 ==================== */
+.zen-mode {
+  /* 隐藏侧边栏 */
+  .ant-layout-sider {
+    display: none !important;
+  }
+
+  /* 隐藏顶栏 */
+  .ant-layout-header {
+    display: none !important;
+  }
+
+  /* 内容区全屏 */
+  .ant-layout-content {
+    margin: 0 !important;
+    padding: 16px !important;
+    max-width: 100% !important;
+  }
+}
+
+/* 专注模式浮动工具条 */
+.zen-mode-toolbar {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  background: var(--color-bg-elevated);
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
+}
+
+.zen-mode-toolbar:hover {
+  opacity: 1;
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 768px) {
+  :root {
+    --font-size-base: 14px;
+    --font-size-ancient: 16px;
+  }
+
+  h1 { font-size: 28px; }
+  h2 { font-size: 24px; }
+  h3 { font-size: 20px; }
+
+  .ancient-text-container {
+    padding: 16px;
+  }
+}
+
+/* ==================== 打印样式 ==================== */
+@media print {
+  :root {
+    --color-bg-base: #FFFFFF;
+    --color-bg-container: #FFFFFF;
+    --color-bg-layout: #FFFFFF;
+    --paper-texture-opacity: 0;
+  }
+
+  .ant-layout-sider,
+  .ant-layout-header,
+  .zen-mode-toolbar {
+    display: none !important;
+  }
+
+  .diff-insert::before,
+  .diff-delete::before {
+    display: none;
+  }
+}
+
+/* ==================== 异文汇校表行闪烁高亮 ==================== */
+@keyframes row-highlight-flash {
+  0% {
+    background-color: rgba(24, 144, 255, 0.3);
+  }
+  25% {
+    background-color: rgba(24, 144, 255, 0.1);
+  }
+  50% {
+    background-color: rgba(24, 144, 255, 0.3);
+  }
+  75% {
+    background-color: rgba(24, 144, 255, 0.1);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.variant-row-highlight {
+  animation: row-highlight-flash 2s ease-in-out;
+}
+
+.variant-row-highlight > td {
+  background-color: transparent !important;
+}

@@ -1,0 +1,141 @@
+# ==============================================================
+# Python
+# ==============================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+venv/
+venv-wsl/
+ENV/
+env/
+.venv
+.venv/
+
+# ==============================================================
+# Node
+# ==============================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+dist/
+dist-ssr/
+*.local
+
+# ==============================================================
+# Tests / Coverage / Type checkers
+# ==============================================================
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+*.cover
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+
+# ==============================================================
+# Environment & secrets (DO NOT COMMIT)
+# ==============================================================
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*.pem
+*.key
+secrets/
+
+# ==============================================================
+# Editors / OS
+# ==============================================================
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.ipynb_checkpoints
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.swp
+*.swo
+*~
+.directory
+.Trash-*
+
+# ==============================================================
+# Runtime artifacts
+# ==============================================================
+logs/
+*.log
+pip-log.txt
+uploads/
+exports/
+temp/
+tmp/
+*.bak
+*.tmp
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# ==============================================================
+# Docker / Alembic
+# ==============================================================
+.docker/
+alembic/versions/*.py
+!alembic/versions/__init__.py
+
+# ==============================================================
+# Project-specific
+# ==============================================================
+# Internal-only docs (PRD, dev notes, learning logs, etc.)
+_private/
+private/
+
+# Large data assets — distribute via GitHub Releases instead
+data/
+variant_data.tar.gz
+*.tar.gz
+*.zip
+
+# Local CBETA reference snapshot
+.cbeta_ref/
+
+# Claude Code / agent session-local settings
+.claude/
+
+# Local sample texts (CBETA / 佛光版 / 等带版权的语料不入库)
+CBETA_*.txt
+佛光版_*.txt
+
+# Frontend build output
+frontend/dist/
+frontend/build/
