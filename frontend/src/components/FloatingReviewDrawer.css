@@ -1,0 +1,187 @@
+/**
+ * 浮动审核抽屉样式
+ */
+
+.floating-review-drawer {
+  position: fixed;
+  width: 340px;
+  background: var(--color-bg-container, #fff);
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, opacity 0.2s ease;
+  user-select: none;
+}
+
+.floating-review-drawer.dragging {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+  opacity: 0.95;
+  cursor: grabbing;
+}
+
+.floating-review-drawer.pinned {
+  border: 2px solid var(--color-primary, #384E77);
+}
+
+.floating-review-drawer.minimized {
+  width: 260px;
+}
+
+/* 标题栏 */
+.floating-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: var(--color-primary, #384E77);
+  color: white;
+  cursor: grab;
+}
+
+.floating-review-drawer.pinned .floating-drawer-header {
+  cursor: default;
+}
+
+.floating-review-drawer.dragging .floating-drawer-header {
+  cursor: grabbing;
+}
+
+.floating-drawer-title {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.floating-drawer-header .ant-btn {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.floating-drawer-header .ant-btn:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 最小化状态 */
+.floating-drawer-minimized {
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.floating-drawer-minimized .ant-progress {
+  flex: 1;
+}
+
+/* 内容区域 */
+.floating-drawer-content {
+  padding: 12px;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  cursor: default;
+}
+
+/* 进度条 */
+.floating-drawer-progress {
+  margin-bottom: 12px;
+}
+
+.floating-drawer-progress .progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--color-text-secondary, #666);
+  margin-bottom: 4px;
+}
+
+/* 差异详情 */
+.floating-drawer-detail {
+  margin-bottom: 12px;
+}
+
+/* 上下文显示 */
+.floating-drawer-context {
+  font-family: var(--font-family-ancient, serif);
+  font-size: 15px;
+  line-height: 1.8;
+  padding: 4px 0;
+}
+
+.floating-drawer-context .context-before,
+.floating-drawer-context .context-after {
+  color: var(--color-text-primary, #333);
+}
+
+.floating-drawer-diff {
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.floating-drawer-diff.added {
+  background: var(--color-diff-insert-bg, #f6ffed);
+  color: var(--color-diff-insert-text, #389e0d);
+  border-bottom: 2px solid var(--color-diff-insert, #52c41a);
+}
+
+.floating-drawer-diff.deleted {
+  background: var(--color-diff-delete-bg, #fff1f0);
+  color: var(--color-diff-delete-text, #cf1322);
+  text-decoration: line-through;
+}
+
+.floating-drawer-diff.replaced {
+  background: var(--color-diff-replace-bg, #fffbe6);
+  color: var(--color-diff-replace-text, #d46b08);
+  border-bottom: 2px dashed var(--color-diff-replace, #faad14);
+}
+
+/* 操作按钮 */
+.floating-drawer-actions {
+  margin-bottom: 12px;
+}
+
+/* 备注 */
+.floating-drawer-note {
+  margin-bottom: 12px;
+}
+
+/* 导航按钮 */
+.floating-drawer-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border, #e8e8e8);
+}
+
+.floating-drawer-nav .ant-btn {
+  flex: 1;
+}
+
+/* 滚动条 */
+.floating-drawer-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.floating-drawer-content::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 3px;
+}
+
+.floating-drawer-content::-webkit-scrollbar-thumb:hover {
+  background: #bfbfbf;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .floating-review-drawer {
+    width: 300px;
+  }
+
+  .floating-review-drawer.minimized {
+    width: 200px;
+  }
+}

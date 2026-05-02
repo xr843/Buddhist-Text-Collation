@@ -1,0 +1,145 @@
+# ================================
+# 佛典智能标点与校勘研究平台 - Docker Compose 配置
+# ================================
+# 使用方法:
+#   启动: docker-compose up -d
+#   停止: docker-compose down
+#   重建: docker-compose up -d --build
+#   查看日志: docker-compose logs -f
+# ================================
+
+services:
+  # ================================
+  # 后端服务 (FastAPI)
+  # ================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: buddhist-text-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      # 本地/服务器侧配置文件（不应提交到仓库）
+      - ./backend/.env
+    volumes:
+      # 持久化上传文件和导出文件
+      - backend_uploads:/app/uploads
+      - backend_exports:/app/exports
+      - backend_logs:/app/logs
+      # 持久化 OCR 文档数据
+      - backend_data:/app/data
+    environment:
+      # 基础配置
+      ENV: production
+      DEBUG: "false"
+      HOST: "0.0.0.0"
+      PORT: "8000"
+      # Redis 配置（可选，不配置则自动降级）
+      REDIS_URL: redis://redis:6379/0
+      # CORS 配置 (JSON 格式) — 通过 .env 覆盖；默认仅本地
+      BACKEND_CORS_ORIGINS: ${BACKEND_CORS_ORIGINS:-'["http://localhost:3000","http://localhost:80"]'}
+      # 日志
+      LOG_LEVEL: INFO
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ================================
+  # 前端服务 (React + Nginx)
+  # ================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: production
+    container_name: buddhist-text-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ================================
+  # Umami 访问统计
+  # ================================
+  umami:
+    image: ghcr.nju.edu.cn/umami-software/umami:postgresql-latest
+    container_name: buddhist-text-umami
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    environment:
+      DATABASE_URL: postgresql://umami:${UMAMI_DB_PASSWORD:?UMAMI_DB_PASSWORD required}@umami-db:5432/umami
+      DATABASE_TYPE: postgresql
+      APP_SECRET: ${UMAMI_APP_SECRET:?UMAMI_APP_SECRET required}
+    depends_on:
+      umami-db:
+        condition: service_healthy
+
+  umami-db:
+    image: swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/postgres:15-alpine
+    container_name: buddhist-text-umami-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: umami
+      POSTGRES_USER: umami
+      POSTGRES_PASSWORD: ${UMAMI_DB_PASSWORD:?UMAMI_DB_PASSWORD required}
+    volumes:
+      - umami_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U umami"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ================================
+  # Redis 缓存（可选）
+  # ================================
+  redis:
+    image: redis:7-alpine
+    container_name: buddhist-text-redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+# ================================
+# 数据卷
+# ================================
+volumes:
+  backend_uploads:
+    driver: local
+  backend_exports:
+    driver: local
+  backend_logs:
+    driver: local
+  backend_data:
+    driver: local
+  redis_data:
+    driver: local
+  umami_db_data:
+    driver: local
+
+# 网络配置暂时注释，使用默认网络
+# networks:
+#   default:
+#     name: buddhist-text-network

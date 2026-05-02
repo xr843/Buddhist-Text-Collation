@@ -1,0 +1,148 @@
+{
+  "folders": [
+    {
+      "name": "🏠 Root",
+      "path": "."
+    },
+    {
+      "name": "🔧 Backend",
+      "path": "./backend"
+    },
+    {
+      "name": "🎨 Frontend",
+      "path": "./frontend"
+    }
+  ],
+  "settings": {
+    // Python配置
+    "python.defaultInterpreterPath": "${workspaceFolder}/backend/venv/bin/python",
+    "python.terminal.activateEnvironment": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": ["--line-length", "100"],
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true,
+
+    // 编辑器配置
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.rulers": [100, 120],
+    "editor.tabSize": 4,
+
+    // 文件配置
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/*.pyc": true,
+      "**/node_modules": true,
+      "**/.pytest_cache": true,
+      "**/.mypy_cache": true,
+      "**/venv": true,
+      "**/venv-wsl": true
+    },
+    "files.watcherExclude": {
+      "**/__pycache__/**": true,
+      "**/node_modules/**": true,
+      "**/venv/**": true,
+      "**/venv-wsl/**": true
+    },
+
+    // TypeScript/JavaScript配置
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+
+    // ESLint配置
+    "eslint.workingDirectories": ["./frontend"],
+    "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+
+    // Prettier配置
+    "prettier.configPath": "./frontend/.prettierrc",
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.tabSize": 2
+    },
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.tabSize": 2
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.tabSize": 2
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.tabSize": 2
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.tabSize": 2
+    },
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.black-formatter",
+      "editor.tabSize": 4
+    },
+
+    // 终端配置
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.cwd": "${workspaceFolder}",
+
+    // Git配置
+    "git.confirmSync": false,
+    "git.autofetch": true,
+
+    // 文件关联
+    "files.associations": {
+      "*.md": "markdown",
+      ".env*": "properties"
+    },
+
+    // 搜索排除
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/venv": true,
+      "**/*.pyc": true,
+      "**/__pycache__": true,
+      "**/dist": true,
+      "**/build": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      // Python开发
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "ms-python.black-formatter",
+
+      // JavaScript/TypeScript开发
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "dsznajder.es7-react-js-snippets",
+
+      // 数据库
+      "cweijan.vscode-database-client2",
+
+      // Git
+      "eamodio.gitlens",
+
+      // API测试
+      "rangav.vscode-thunder-client",
+
+      // 通用工具
+      "formulahendry.auto-close-tag",
+      "formulahendry.auto-rename-tag",
+      "streetsidesoftware.code-spell-checker",
+      "editorconfig.editorconfig",
+      "ms-vscode.vscode-typescript-next",
+
+      // Markdown
+      "yzhang.markdown-all-in-one",
+
+      // Docker（可选，如果需要）
+      "ms-azuretools.vscode-docker"
+    ]
+  }
+}

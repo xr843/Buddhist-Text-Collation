@@ -1,0 +1,279 @@
+/**
+ * 方案B - 混合对比视图样式
+ */
+
+/* 主容器 */
+.hybrid-comparison-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* 统计栏 */
+.stats-bar {
+  background: white;
+  padding: 16px 20px;
+  border-bottom: 1px solid #E4E7ED;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 内容区域 */
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* 并排视图 */
+.side-by-side-view {
+  flex: 1;
+  overflow: auto;
+}
+
+.version-content {
+  line-height: 2.2;
+  font-size: 16px;
+  color: #303133;
+}
+
+/* 差异标记基础样式 */
+.diff-marker {
+  display: inline-block;
+  padding: 2px 8px;
+  margin: 0 2px;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.diff-marker:hover .diff-checkbox {
+  opacity: 1 !important;
+}
+
+/* 未审核差异 */
+.diff-marker.deleted:not(.reviewed):not(.current) {
+  background: #FEF0F0;
+  border: 1px solid #FBC4C4;
+  color: #F56C6C;
+}
+
+.diff-marker.added:not(.reviewed):not(.current) {
+  background: #F0F9FF;
+  border: 1px solid #C2E7B0;
+  color: #67C23A;
+}
+
+.diff-marker.replaced:not(.reviewed):not(.current) {
+  background: #FFF3E0;
+  border: 1px solid #FFD699;
+  color: #E6A23C;
+}
+
+.diff-marker.none:not(.reviewed):not(.current) {
+  background: #F4F4F5;
+  border: 1px dashed #DCDFE6;
+  color: #909399;
+}
+
+/* 当前审核的差异 - 金色高亮 */
+.diff-marker.current {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  border: 2px solid #FF8C00;
+  color: #8B4513;
+  font-weight: 600;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6),
+              0 0 40px rgba(255, 215, 0, 0.4);
+  animation: pulse 2s ease-in-out infinite;
+  transform: scale(1.1);
+  z-index: 100;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6),
+                0 0 40px rgba(255, 215, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8),
+                0 0 60px rgba(255, 215, 0, 0.6);
+  }
+}
+
+/* 已审核的差异 - 变灰 */
+.diff-marker.reviewed {
+  background: #F4F4F5;
+  border: 1px solid #D3D3D3;
+  color: #909399;
+  opacity: 0.6;
+}
+
+/* 选中状态 */
+.diff-marker.selected {
+  outline: 2px solid #409EFF;
+  outline-offset: 2px;
+}
+
+/* 审核面板 */
+.review-panel {
+  width: 100%;
+  background: white;
+  border-left: 1px solid #E4E7ED;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);
+  height: 100%;
+}
+
+.panel-header {
+  padding: 10px 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.panel-progress {
+  padding: 10px 12px;
+  background: #F5F7FA;
+  border-bottom: 1px solid #E4E7ED;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #606266;
+  margin-bottom: 6px;
+}
+
+.panel-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.panel-index {
+  font-size: 13px;
+  color: #909399;
+  margin-bottom: 10px;
+}
+
+.panel-context {
+  background: white;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  line-height: 1.6;
+  border-left: 3px solid #409EFF;
+}
+
+.context-before,
+.context-after {
+  color: #606266;
+}
+
+.panel-diff {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  margin: 0 2px;
+}
+
+.panel-diff.deleted {
+  background: #FEF0F0;
+  color: #F56C6C;
+  border: 1px solid #FBC4C4;
+}
+
+.panel-diff.added {
+  background: #F0F9FF;
+  color: #67C23A;
+  border: 1px solid #C2E7B0;
+}
+
+.panel-diff.replaced {
+  background: #FFF3E0;
+  color: #E6A23C;
+  border: 1px solid #FFD699;
+}
+
+.panel-diff.none {
+  background: #F4F4F5;
+  color: #909399;
+  border: 1px dashed #DCDFE6;
+}
+
+.version-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #606266;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ai-title {
+  color: #409EFF;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.ai-content {
+  color: #606266;
+  line-height: 1.6;
+  font-size: 13px;
+}
+
+/* 快捷键提示 */
+.shortcut-hint {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 13px;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.shortcut-hint kbd {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 0 2px;
+}
+
+/* 响应式 */
+@media (max-width: 1024px) {
+  .review-panel {
+    width: 320px;
+  }
+}
