@@ -102,6 +102,10 @@ jobs:
         working-directory: frontend
         run: npx vite build
 
+      - name: Vitest smoke tests
+        working-directory: frontend
+        run: npm test
+
   secret-scan:
     name: Gitleaks secret scan
     runs-on: ubuntu-latest
