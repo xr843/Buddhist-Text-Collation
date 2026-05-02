@@ -1,6 +1,6 @@
 # 佛典标点与校勘研究平台 / Buddhist Text Collation Platform
 
-[![CI](https://github.com/xr843/buddhist-text-collation/actions/workflows/ci.yml/badge.svg)](https://github.com/xr843/buddhist-text-collation/actions/workflows/ci.yml)
+[![CI](https://github.com/xr843/Buddhist-Text-Collation/actions/workflows/ci.yml/badge.svg)](https://github.com/xr843/Buddhist-Text-Collation/actions/workflows/ci.yml)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/)
 [![React](https://img.shields.io/badge/react-18+-61dafb.svg)](https://react.dev/)
@@ -102,8 +102,8 @@ sessions.
 ### 2. 克隆 & 配置 / Clone & configure
 
 ```bash
-git clone https://github.com/<your-org>/buddhist-text-platform.git
-cd buddhist-text-platform
+git clone https://github.com/xr843/Buddhist-Text-Collation.git
+cd Buddhist-Text-Collation
 
 # 复制环境变量模板
 cp .env.example .env
