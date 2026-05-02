@@ -16,15 +16,6 @@
 
 ---
 
-> 💡 **当前版本说明** / Note on v0.1.0
->
-> 本开源版**未集成第三方付费 OCR**（如 gj.cool）。如需图片→文字流程，请用任意外部 OCR 工具识别后，再把文本导入本平台校勘流程。
->
-> The OCR digitization workbench from the internal version is **not** bundled.
-> Use any external OCR tool and import recognized text into the collation flow.
-
----
-
 ## 界面预览 / Screenshots
 
 ### 经论注疏对读 / Commentary Parallel Reading
