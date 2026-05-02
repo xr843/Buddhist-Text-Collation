@@ -13,14 +13,12 @@ import {
   Tabs,
   Avatar,
   Descriptions,
-  Divider,
   Space,
   Row,
   Col,
 } from 'antd'
 import {
   UserOutlined,
-  MailOutlined,
   BankOutlined,
   BookOutlined,
   EditOutlined,

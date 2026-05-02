@@ -3,7 +3,6 @@
  */
 
 import { useState, useMemo, useEffect, useCallback } from 'react'
-import { message } from 'antd'
 import type {
   AlignedSentence,
   CategoryFilter,

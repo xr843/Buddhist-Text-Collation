@@ -6,7 +6,6 @@ import type {
   AlignedSentence,
   CharSegment,
   CollationStatistics,
-  DiffDetails,
 } from './types'
 
 /**
