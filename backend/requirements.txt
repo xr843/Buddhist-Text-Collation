@@ -1,5 +1,5 @@
 # FastAPI 核心
-fastapi==0.104.1
+fastapi>=0.117.0,<0.121  # CVE-2024-24762 + transitively pulls starlette>=0.47 (CVE-2024-47874, CVE-2025-54121)
 uvicorn[standard]==0.24.0
 pydantic==2.5.0
 pydantic-settings==2.1.0
@@ -28,17 +28,17 @@ chardet==5.2.0
 
 # 文件处理（导入：txt/docx/pdf-text/html/md；导出：docx/TEI XML）
 python-docx==1.1.0
-lxml==5.1.0
+lxml>=6.1.0,<7  # CVE-2026-41066
 PyPDF2==3.0.1
 beautifulsoup4==4.12.2
-markdown==3.5.1
+markdown>=3.8.1,<4  # CVE-2025-69534
 
 # 工具库
 httpx==0.25.2
-python-dotenv==1.0.0
+python-dotenv>=1.2.2,<2  # CVE-2026-28684
 loguru==0.7.2
 
 # 测试
-pytest==7.4.3
-pytest-asyncio==0.21.1
-pytest-cov==4.1.0
+pytest>=8.4.2,<9  # CVE-2025-71176 (held at <9 for pytest-asyncio compat)
+pytest-asyncio>=0.24.0
+pytest-cov>=5.0.0
