@@ -378,8 +378,9 @@ def create_collation_table():
             row.cells[3].width = Cm(5.5)
             row.cells[4].width = Cm(4.0)
 
-    # 保存文档
-    output_path = '/home/lqsxi/projects/AI-Powered Platform for Buddhist Text Punctuation and Collation Research/顺正理论卷12-13校勘统计表.docx'
+    # 保存文档（默认当前工作目录；可通过 OUTPUT_DOCX 环境变量覆盖）
+    import os
+    output_path = os.environ.get('OUTPUT_DOCX', '顺正理论卷12-13校勘统计表.docx')
     doc.save(output_path)
     print(f'校勘統計表已更新：{output_path}')
     return output_path

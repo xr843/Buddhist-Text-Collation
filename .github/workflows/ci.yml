@@ -39,6 +39,34 @@ jobs:
         working-directory: backend
         run: python -m compileall -q app/
 
+  backend-smoke:
+    name: Backend smoke tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install dependencies
+        working-directory: backend
+        run: pip install -r requirements.txt
+
+      - name: Run smoke tests
+        working-directory: backend
+        env:
+          # Smoke tests run without external services (Redis/Postgres)
+          # The app must gracefully fall back to in-memory cache.
+          ENV: development
+          DEBUG: "true"
+          SECRET_KEY: ci-test-secret-key-not-for-production-use-only
+          REDIS_URL: ""
+        run: pytest tests/ -v --no-header
+
   frontend-typecheck:
     name: Frontend type-check
     runs-on: ubuntu-latest

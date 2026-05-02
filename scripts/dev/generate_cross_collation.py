@@ -508,5 +508,9 @@ if __name__ == '__main__':
         print(f"  {cat}: {count}")
 
     # 生成文档
-    output_path = '/home/lqsxi/projects/AI-Powered Platform for Buddhist Text Punctuation and Collation Research/顺正理论卷12-13校勘记总表_述文记印证.docx'
+    import os
+    output_path = os.environ.get(
+        'OUTPUT_DOCX',
+        '顺正理论卷12-13校勘记总表_述文记印证.docx'
+    )
     create_docx(items, stats, output_path)

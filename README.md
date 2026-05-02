@@ -25,6 +25,23 @@
 
 ---
 
+## 界面预览 / Screenshots
+
+> 📷 截图征集中——正在准备首批界面预览。
+> Screenshots wanted: working on the first batch of UI previews.
+>
+> 想帮忙的朋友可以提交 PR 把截图放进 [`docs/screenshots/`](docs/screenshots/)。
+> Contributions welcome — drop them in [`docs/screenshots/`](docs/screenshots/).
+
+<!-- 占位，等待加入：
+![标点对比 / Punctuation diff](docs/screenshots/feature-punctuation-diff.png)
+![多版本对勘 / Multi-edition collation](docs/screenshots/feature-multi-collation.png)
+![注疏对读 / Commentary parallel reading](docs/screenshots/feature-commentary-parallel.png)
+![版本谱系 / Lineage graph](docs/screenshots/feature-lineage-graph.png)
+-->
+
+---
+
 ## 这是什么 / What is this?
 
 中文：本平台帮助研究者在同一个工作台中完成佛经古籍的 **标点对比、多版本对勘、注疏对读、版本谱系分析**。底层集成 CBETA、DILA 等公开学术资源，前端提供"禅意/学术 UI"以适配长时间校勘工作。

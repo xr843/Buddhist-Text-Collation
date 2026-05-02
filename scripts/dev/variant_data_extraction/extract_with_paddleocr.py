@@ -17,10 +17,11 @@ import io
 import warnings
 warnings.filterwarnings('ignore')
 
-# 路径配置
-PDF_PATH = "/home/lqsxi/projects/AI-Powered Platform for Buddhist Text Punctuation and Collation Research/高麗大藏經異體字典 (李圭甲).pdf"
-OUTPUT_DIR = "/home/lqsxi/projects/AI-Powered Platform for Buddhist Text Punctuation and Collation Research/backend/app/services/variant_data/korean_tripitaka"
-MODEL_DIR = "/mnt/e/mineru_models/models/OCR/paddleocr_torch"
+# 路径配置（请通过环境变量覆盖；这是一次性离线提取脚本，仓库不再分发原始 PDF）
+import os
+PDF_PATH = os.environ.get("PDF_PATH", "/path/to/your_variants_dictionary.pdf")
+OUTPUT_DIR = os.environ.get("OUTPUT_DIR", "./korean_tripitaka_output")
+MODEL_DIR = os.environ.get("PADDLEOCR_MODEL_DIR", "/path/to/paddleocr_torch")
 
 
 class PaddleOCRExtractor:
