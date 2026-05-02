@@ -955,8 +955,8 @@ class CBETAService:
                 if elem.tag == f"{{{TEI_NS}}}app":
                     # 这是一个校勘条目
                     lem_elem = elem.find('tei:lem', ns)
-                    rdg_elems = elem.findall('tei:rdg', ns)
-                    note_elem = elem.find('tei:note', ns)
+                    elem.findall('tei:rdg', ns)
+                    elem.find('tei:note', ns)
 
                     if collecting and lem_elem is not None:
                         lem_text = norm(''.join(lem_elem.itertext()))

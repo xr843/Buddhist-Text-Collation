@@ -347,7 +347,7 @@ class SutraReadingService:
             if juan_text:
                 # 获取卷标题
                 jhead = juan_text.find('div', class_='jhead')
-                juan_title = jhead.get_text(strip=True) if jhead else f"卷第{juan_num}"
+                jhead.get_text(strip=True) if jhead else f"卷第{juan_num}"
 
                 # 获取所有段落
                 all_paragraphs = juan_text.find_all('p', class_='normal')
