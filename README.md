@@ -161,6 +161,9 @@ This repo does **not** redistribute copyrighted modern punctuated editions.
 
 - 中文完整文档 / Full Chinese docs · [docs/README.zh-CN.md](docs/README.zh-CN.md)
 - 架构设计 / Architecture · [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- 认证模块 / Auth · [docs/AUTH.md](docs/AUTH.md)
+- 协作模块 / Collaboration · [docs/COLLAB.md](docs/COLLAB.md)
+- 管理员模块 / Admin · [docs/ADMIN.md](docs/ADMIN.md)
 - 部署清单 / Deployment · [docs/DEPLOYMENT_CHECKLIST.md](docs/DEPLOYMENT_CHECKLIST.md)
 - WSL 环境 · [docs/WSL_SETUP.md](docs/WSL_SETUP.md)
 - 安全策略 / Security · [SECURITY.md](SECURITY.md)
