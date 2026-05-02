@@ -17,7 +17,7 @@ redis>=5.0.0  # 包含异步支持
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 python-multipart==0.0.6
-bcrypt==4.1.1
+bcrypt==5.0.0
 
 # 速率限制和中间件
 slowapi==0.1.9
