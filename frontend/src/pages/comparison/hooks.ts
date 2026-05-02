@@ -6,7 +6,6 @@ import { useState, useMemo, useCallback, useEffect } from 'react'
 import { message } from 'antd'
 import {
   fetchProjectList,
-  fetchProject,
   deleteProject as apiDeleteProject,
   updateProjectTitle as apiUpdateProjectTitle,
   fetchDecisions,

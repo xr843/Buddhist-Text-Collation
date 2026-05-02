@@ -2,7 +2,6 @@
  * 版本对勘 API 服务
  */
 
-import { message } from 'antd'
 import { apiFetchJson } from '../../utils/apiFetch'
 import type {
   MultiCollationResponse,
