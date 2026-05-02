@@ -24,7 +24,7 @@ slowapi==0.1.9
 
 # 文本处理
 python-Levenshtein==0.23.0
-chardet==5.2.0
+chardet==7.4.3
 
 # 文件处理
 python-docx==1.1.0
