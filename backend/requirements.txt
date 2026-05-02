@@ -1,4 +1,4 @@
-# FastAPI核心
+# FastAPI 核心
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
 pydantic==2.5.0
@@ -26,27 +26,19 @@ slowapi==0.1.9
 python-Levenshtein==0.23.0
 chardet==5.2.0
 
-# 文件处理
+# 文件处理（导入：txt/docx/pdf-text/html/md；导出：docx/TEI XML）
 python-docx==1.1.0
 lxml==5.1.0
-openpyxl==3.1.2
 PyPDF2==3.0.1
-PyMuPDF==1.24.0
-Pillow==10.2.0
 beautifulsoup4==4.12.2
 markdown==3.5.1
 
 # 工具库
 httpx==0.25.2
-aiofiles==23.2.1
 python-dotenv==1.0.0
 loguru==0.7.2
-
-# 监控和性能
-prometheus-fastapi-instrumentator==6.1.0
 
 # 测试
 pytest==7.4.3
 pytest-asyncio==0.21.1
 pytest-cov==4.1.0
-faker==20.1.0
