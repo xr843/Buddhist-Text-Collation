@@ -5,8 +5,17 @@
 // 导出版本对勘模块类型
 export * from './multiCollation'
 
-// 导出校勘视图模块类型
-export * from './collationView'
+// 导出校勘视图模块类型（排除与 multiCollation 重名的 InitialHighlight；
+// 校勘视图组件内部使用时直接 import './collationView' 拿原始版）
+export type {
+  CollationViewData,
+  CollationViewProps,
+  DiffNavigation,
+  CharSegment,
+  CollationStatistics,
+  AlignedSentence,
+  SideBySideResult,
+} from './collationView'
 
 // 标点请求
 export interface PunctuationRequest {

@@ -37,15 +37,34 @@ export interface PhylogenyNode {
   children: PhylogenyNode[]
 }
 
+/**
+ * 共同异文详情项
+ *
+ * 后端历史上字段名变过：旧版返回 `shared_error_char`，新版改用 `shared_char`。
+ * 这里两个都声明为可选，前端代码做 fallback：`detail.shared_error_char ?? detail.shared_char`
+ */
+export interface SharedErrorDetail {
+  position: number
+  base_char: string
+  shared_error_char?: string
+  shared_char?: string
+  category?: string  // 仅 yantuo_details 用：'衍'/'脱' 等
+}
+
 export interface SharedErrors {
   names: string[]
+  // 讹误（默认）
   matrix: number[][]
-  details?: Record<string, Array<{
-    position: number
-    base_char: string
-    shared_error_char: string
-  }>>
+  details?: Record<string, SharedErrorDetail[]>
   total_by_version?: Record<string, number>
+  // 异体字
+  variant_matrix?: number[][]
+  variant_details?: Record<string, SharedErrorDetail[]>
+  variant_total_by_version?: Record<string, number>
+  // 衍脱
+  yantuo_matrix?: number[][]
+  yantuo_details?: Record<string, SharedErrorDetail[]>
+  yantuo_total_by_version?: Record<string, number>
 }
 
 // ==================== API 响应类型 ====================

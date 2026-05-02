@@ -132,15 +132,28 @@ interface PhylogenyNode {
   children: PhylogenyNode[]
 }
 
+interface SharedErrorDetail {
+  position: number
+  base_char: string
+  shared_error_char?: string
+  shared_char?: string
+  category?: string
+}
+
 interface SharedErrors {
   names: string[]
+  // 讹误（默认）
   matrix: number[][]
-  details?: Record<string, Array<{
-    position: number
-    base_char: string
-    shared_error_char: string
-  }>>
+  details?: Record<string, SharedErrorDetail[]>
   total_by_version?: Record<string, number>
+  // 异体字
+  variant_matrix?: number[][]
+  variant_details?: Record<string, SharedErrorDetail[]>
+  variant_total_by_version?: Record<string, number>
+  // 衍脱
+  yantuo_matrix?: number[][]
+  yantuo_details?: Record<string, SharedErrorDetail[]>
+  yantuo_total_by_version?: Record<string, number>
 }
 
 interface MultiCollationResponse {
