@@ -30,11 +30,17 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: 'dist',
       sourcemap: false,
+      // 提高 chunk 警告阈值；同时通过 manualChunks 拆分大型 vendor，
+      // 配合路由级 React.lazy，让首屏只下载必要的 JS。
+      chunkSizeWarningLimit: 800,
       rollupOptions: {
         output: {
           manualChunks: {
             'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-            'ui-vendor': ['antd', '@ant-design/icons'],
+            'ui-vendor': ['antd'],
+            'icons-vendor': ['@ant-design/icons'],
+            'echarts-vendor': ['echarts', 'echarts-for-react'],
+            'utils-vendor': ['axios', 'dayjs', 'zustand', '@tanstack/react-query'],
           },
         },
       },

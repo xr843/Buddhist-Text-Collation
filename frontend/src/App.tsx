@@ -1,39 +1,58 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { Suspense, lazy } from 'react'
+import { Spin } from 'antd'
 import MainLayout from './components/Layout/MainLayout'
-import Workspace from './pages/Workspace'
-import Comparison from './pages/Comparison'
-import ComparisonNew from './pages/ComparisonNew'
-import MultiCollation from './pages/MultiCollation'
-import CBETAImport from './pages/CBETAImport'
-import SutraReaderPage from './pages/SutraReaderPage'
-import SutraParallelReader from './pages/SutraParallelReader'
-import PunctuationTransfer from './pages/PunctuationTransfer'
-import Settings from './pages/Settings'
+
+// 路由级代码分割：每个 page 独立 chunk，按需加载，大幅缩短首屏 JS
+const Workspace = lazy(() => import('./pages/Workspace'))
+const Comparison = lazy(() => import('./pages/Comparison'))
+const ComparisonNew = lazy(() => import('./pages/ComparisonNew'))
+const MultiCollation = lazy(() => import('./pages/MultiCollation'))
+const CBETAImport = lazy(() => import('./pages/CBETAImport'))
+const SutraReaderPage = lazy(() => import('./pages/SutraReaderPage'))
+const SutraParallelReader = lazy(() => import('./pages/SutraParallelReader'))
+const PunctuationTransfer = lazy(() => import('./pages/PunctuationTransfer'))
+const Settings = lazy(() => import('./pages/Settings'))
+
+function PageLoader() {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: 'calc(100vh - 160px)',
+      }}
+    >
+      <Spin size="large" tip="加载中…" />
+    </div>
+  )
+}
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
-        {/* 默认跳转到标点版本对比 */}
-        <Route index element={<Navigate to="/punctuation-compare" replace />} />
-        <Route path="workspace" element={<Workspace />} />
-        {/* 标点版本对比 */}
-        <Route path="punctuation-compare" element={<Comparison />} />
-        {/* 版本对勘 */}
-        <Route path="two-version-collation" element={<ComparisonNew />} />
-        <Route path="multi-collation" element={<MultiCollation />} />
-        {/* CBETA数据导入 */}
-        <Route path="cbeta-import" element={<CBETAImport />} />
-        {/* CBETA经文阅读 */}
-        <Route path="cbeta/read/:sutraId" element={<SutraReaderPage />} />
-        {/* 经论注疏对读 */}
-        <Route path="sutra-parallel-reader" element={<SutraParallelReader />} />
-        {/* 标点迁移 */}
-        <Route path="punctuation-transfer" element={<PunctuationTransfer />} />
-        {/* 其他 */}
-        <Route path="settings" element={<Settings />} />
-        {/* 兼容旧路由 */}
-        <Route path="comparison" element={<Navigate to="/punctuation-compare" replace />} />
+        <Route
+          element={
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route index element={<Navigate to="/punctuation-compare" replace />} />
+                <Route path="workspace" element={<Workspace />} />
+                <Route path="punctuation-compare" element={<Comparison />} />
+                <Route path="two-version-collation" element={<ComparisonNew />} />
+                <Route path="multi-collation" element={<MultiCollation />} />
+                <Route path="cbeta-import" element={<CBETAImport />} />
+                <Route path="cbeta/read/:sutraId" element={<SutraReaderPage />} />
+                <Route path="sutra-parallel-reader" element={<SutraParallelReader />} />
+                <Route path="punctuation-transfer" element={<PunctuationTransfer />} />
+                <Route path="settings" element={<Settings />} />
+                <Route path="comparison" element={<Navigate to="/punctuation-compare" replace />} />
+              </Routes>
+            </Suspense>
+          }
+          path="*"
+        />
       </Route>
     </Routes>
   )
