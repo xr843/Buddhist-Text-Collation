@@ -13,14 +13,14 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
-    "@tanstack/react-query": "^5.14.0",
+    "@tanstack/react-query": "^5.100.8",
     "antd": "^5.12.0",
-    "axios": "^1.6.2",
+    "axios": "^1.15.2",
     "classnames": "^2.3.2",
-    "dayjs": "^1.11.10",
+    "dayjs": "^1.11.20",
     "echarts": "^6.0.0",
-    "echarts-for-react": "^3.0.5",
-    "lodash-es": "^4.17.21",
+    "echarts-for-react": "^3.0.6",
+    "lodash-es": "^4.18.1",
     "react": "^18.2.0",
     "react-diff-viewer-continued": "^3.3.1",
     "react-dom": "^18.2.0",
@@ -28,9 +28,9 @@
     "react-markdown": "^10.1.0",
     "react-router-dom": "^6.20.0",
     "react-split": "^2.0.14",
-    "slate": "^0.101.5",
-    "slate-history": "^0.100.0",
-    "slate-react": "^0.101.5",
+    "slate": "^0.124.1",
+    "slate-history": "^0.113.1",
+    "slate-react": "^0.124.0",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
@@ -42,7 +42,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
+    "eslint-plugin-react-refresh": "^0.5.2",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   }
