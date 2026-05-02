@@ -1,46 +1,46 @@
 # FastAPI核心
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
-pydantic==2.5.0
-pydantic-settings==2.1.0
+fastapi==0.136.1
+uvicorn[standard]==0.46.0
+pydantic==2.13.3
+pydantic-settings==2.14.0
 
 # 数据库
-sqlalchemy==2.0.23
-alembic==1.12.1
-psycopg2-binary==2.9.9  # PostgreSQL
-asyncpg==0.29.0
+sqlalchemy==2.0.49
+alembic==1.18.4
+psycopg2-binary==2.9.12  # PostgreSQL
+asyncpg==0.31.0
 
 # 异步任务和缓存
 redis>=5.0.0  # 包含异步支持
 
 # 认证和安全
-python-jose[cryptography]==3.3.0
+python-jose[cryptography]==3.5.0
 passlib[bcrypt]==1.7.4
-python-multipart==0.0.6
+python-multipart==0.0.27
 bcrypt==4.1.1
 
 # 速率限制和中间件
 slowapi==0.1.9
 
 # 文本处理
-python-Levenshtein==0.23.0
+python-Levenshtein==0.27.3
 chardet==5.2.0
 
 # 文件处理
-python-docx==1.1.0
+python-docx==1.2.0
 lxml==5.1.0
-openpyxl==3.1.2
+openpyxl==3.1.5
 PyPDF2==3.0.1
-PyMuPDF==1.24.0
+PyMuPDF==1.27.2.3
 Pillow==10.2.0
-beautifulsoup4==4.12.2
-markdown==3.5.1
+beautifulsoup4==4.14.3
+markdown==3.10.2
 
 # 工具库
-httpx==0.25.2
+httpx==0.28.1
 aiofiles==23.2.1
-python-dotenv==1.0.0
-loguru==0.7.2
+python-dotenv==1.2.2
+loguru==0.7.3
 
 # 监控和性能
 prometheus-fastapi-instrumentator==6.1.0
