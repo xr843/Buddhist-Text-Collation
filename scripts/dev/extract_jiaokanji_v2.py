@@ -151,8 +151,13 @@ def create_docx(jiaokanji_list, output_path):
     return len(jiaokanji_list)
 
 if __name__ == '__main__':
-    input_file = '/home/lqsxi/projects/AI-Powered Platform for Buddhist Text Punctuation and Collation Research/CBETA_述文记_卷9.txt'
-    output_file = '/home/lqsxi/projects/AI-Powered Platform for Buddhist Text Punctuation and Collation Research/顺正理论述文记第9卷校勘记.docx'
+    import sys
+    # 用法：python extract_jiaokanji_v2.py <input.txt> [output.docx]
+    if len(sys.argv) < 2:
+        print("Usage: python extract_jiaokanji_v2.py <input.txt> [output.docx]")
+        sys.exit(1)
+    input_file = sys.argv[1]
+    output_file = sys.argv[2] if len(sys.argv) > 2 else input_file.rsplit('.', 1)[0] + '_校勘记.docx'
 
     # 提取校勘记
     jiaokanji = extract_jiaokanji(input_file)

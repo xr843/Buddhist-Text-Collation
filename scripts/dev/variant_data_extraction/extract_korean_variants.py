@@ -14,9 +14,10 @@ from typing import List, Tuple, Dict, Set
 import warnings
 warnings.filterwarnings('ignore')
 
-# PDF路径
-PDF_PATH = "/home/lqsxi/projects/AI-Powered Platform for Buddhist Text Punctuation and Collation Research/高麗大藏經異體字典 (李圭甲).pdf"
-OUTPUT_DIR = "/home/lqsxi/projects/AI-Powered Platform for Buddhist Text Punctuation and Collation Research/backend/app/services/variant_data/korean_tripitaka"
+# PDF 路径（请通过环境变量覆盖；本仓库不再分发原始 PDF）
+import os
+PDF_PATH = os.environ.get("PDF_PATH", "/path/to/your_variants_dictionary.pdf")
+OUTPUT_DIR = os.environ.get("OUTPUT_DIR", "./korean_tripitaka_output")
 
 
 class KoreanTripitakaExtractor:

@@ -12,8 +12,9 @@ echo ""
 API_PORT=${1:-${VITE_API_PORT:-8001}}
 export VITE_API_PORT="$API_PORT"
 
-# 进入前端目录
-cd "/home/lqsxi/projects/AI-Powered Platform for Buddhist Text Punctuation and Collation Research/frontend"
+# 进入前端目录（脚本所在目录的 frontend/ 子目录）
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$SCRIPT_DIR/frontend"
 
 # 检查node_modules是否存在
 if [ ! -d "node_modules" ]; then

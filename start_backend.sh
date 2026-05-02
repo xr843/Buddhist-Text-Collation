@@ -12,8 +12,9 @@ echo " 模式: 本地开发 (端口 $PORT)"
 echo "============================================"
 echo ""
 
-# 进入后端目录
-cd "/home/lqsxi/projects/AI-Powered Platform for Buddhist Text Punctuation and Collation Research/backend"
+# 进入后端目录（脚本所在目录的 backend/ 子目录）
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$SCRIPT_DIR/backend"
 
 # 激活虚拟环境
 echo "[1/2] 激活Python虚拟环境..."
