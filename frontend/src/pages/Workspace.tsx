@@ -26,6 +26,8 @@ import {
   RightOutlined,
   PlusOutlined,
   DatabaseOutlined,
+  SwapOutlined,
+  ReadOutlined,
 } from '@ant-design/icons'
 import { apiFetchJson } from '../utils/apiFetch'
 
@@ -136,6 +138,22 @@ export default function Workspace() {
       color: '#384E77',
       count: stats.punctuationProjects,
     },
+    {
+      title: '标点迁移',
+      description: '把已校好标点的版本迁移到无标点的相似文本',
+      icon: <SwapOutlined style={{ fontSize: 32, color: '#13c2c2' }} />,
+      path: '/punctuation-transfer',
+      color: '#13c2c2',
+      count: 0,
+    },
+    {
+      title: '经论注疏对读',
+      description: '经文与多家注疏并排，跨文本逐句对照',
+      icon: <ReadOutlined style={{ fontSize: 32, color: '#C64153' }} />,
+      path: '/sutra-parallel-reader',
+      color: '#C64153',
+      count: 0,
+    },
   ]
 
   // 获取状态标签
@@ -198,7 +216,7 @@ export default function Workspace() {
       >
         <Row gutter={[16, 16]}>
           {quickActions.map((action) => (
-            <Col xs={24} sm={12} md={6} key={action.path}>
+            <Col xs={24} sm={12} md={8} key={action.path}>
               <Badge
                 count={action.count}
                 offset={[-10, 10]}
