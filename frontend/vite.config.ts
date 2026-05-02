@@ -35,7 +35,6 @@ export default defineConfig(({ mode }) => {
           manualChunks: {
             'react-vendor': ['react', 'react-dom', 'react-router-dom'],
             'ui-vendor': ['antd', '@ant-design/icons'],
-            'editor-vendor': ['slate', 'slate-react', 'slate-history'],
           },
         },
       },
