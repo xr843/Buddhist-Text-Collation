@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
-import { Layout, Menu, theme, Button, Tooltip, Space } from 'antd'
+import { Layout, Menu, theme, Button, Tooltip, Space, Dropdown } from 'antd'
 import {
   FileTextOutlined,
   DiffOutlined,
@@ -12,9 +12,12 @@ import {
   CompressOutlined,
   ReadOutlined,
   SwapOutlined,
+  GlobalOutlined,
 } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
+import { useTranslation } from 'react-i18next'
 import { useSettingsStore } from '../../store/settingsStore'
+import { supportedLanguages } from '../../i18n'
 
 const { Header, Content, Sider } = Layout
 
@@ -34,19 +37,10 @@ function getItem(
   } as MenuItem
 }
 
-const menuItems: MenuItem[] = [
-  getItem('工作台', '/workspace', <AppstoreOutlined />),
-  getItem('CBETA导入', '/cbeta-import', <DatabaseOutlined />),
-  getItem('版本对勘', '/multi-collation', <BookOutlined />),
-  getItem('标点版本对比', '/punctuation-compare', <DiffOutlined />),
-  getItem('标点迁移', '/punctuation-transfer', <SwapOutlined />),
-  getItem('经论注疏对读', '/sutra-parallel-reader', <ReadOutlined />),
-  getItem('设置', '/settings', <SettingOutlined />),
-]
-
 export default function MainLayout() {
   const navigate = useNavigate()
   const location = useLocation()
+  const { t, i18n } = useTranslation()
   const [collapsed, setCollapsed] = useState(false)
   const {
     token: { colorBgContainer, borderRadiusLG, colorPrimary },
@@ -56,9 +50,25 @@ export default function MainLayout() {
   const { settings, toggleZenMode } = useSettingsStore()
   const { zenMode } = settings.ui
 
+  const menuItems: MenuItem[] = [
+    getItem(t('menu.workspace'), '/workspace', <AppstoreOutlined />),
+    getItem(t('menu.cbetaImport'), '/cbeta-import', <DatabaseOutlined />),
+    getItem(t('menu.multiCollation'), '/multi-collation', <BookOutlined />),
+    getItem(t('menu.punctuationCompare'), '/punctuation-compare', <DiffOutlined />),
+    getItem(t('menu.punctuationTransfer'), '/punctuation-transfer', <SwapOutlined />),
+    getItem(t('menu.sutraParallelReader'), '/sutra-parallel-reader', <ReadOutlined />),
+    getItem(t('menu.settings'), '/settings', <SettingOutlined />),
+  ]
+
   const handleMenuClick: MenuProps['onClick'] = (e) => {
     navigate(e.key)
   }
+
+  const languageMenuItems: MenuProps['items'] = supportedLanguages.map((lng) => ({
+    key: lng.code,
+    label: lng.label,
+    onClick: () => i18n.changeLanguage(lng.code),
+  }))
 
   // 专注模式下显示浮动工具条
   if (zenMode) {
@@ -66,7 +76,7 @@ export default function MainLayout() {
       <Layout style={{ minHeight: '100vh' }}>
         {/* 浮动工具条 */}
         <div className="zen-mode-toolbar">
-          <Tooltip title="退出专注模式">
+          <Tooltip title={t('actions.exitZenMode')}>
             <Button
               type="text"
               icon={<CompressOutlined />}
@@ -114,14 +124,21 @@ export default function MainLayout() {
               fontFamily: 'var(--font-family-heading)',
             }}
           >
-            佛典标点与校勘研究平台
+            {t('app.title')}
           </h1>
         </div>
 
         {/* 右侧工具栏 */}
         <Space size="small">
+          {/* 语言切换 */}
+          <Dropdown menu={{ items: languageMenuItems, selectable: true, selectedKeys: [i18n.language] }} placement="bottomRight">
+            <Tooltip title={t('actions.switchLanguage')}>
+              <Button type="text" icon={<GlobalOutlined />} />
+            </Tooltip>
+          </Dropdown>
+
           {/* 专注模式按钮 */}
-          <Tooltip title="专注模式">
+          <Tooltip title={t('actions.zenMode')}>
             <Button
               type="text"
               icon={<ExpandOutlined />}

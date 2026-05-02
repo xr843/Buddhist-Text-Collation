@@ -1,0 +1,28 @@
+{
+  "app": {
+    "title": "佛典标点与校勘研究平台",
+    "tagline": "Buddhist Text Collation Platform"
+  },
+  "menu": {
+    "workspace": "工作台",
+    "cbetaImport": "CBETA导入",
+    "multiCollation": "版本对勘",
+    "punctuationCompare": "标点版本对比",
+    "punctuationTransfer": "标点迁移",
+    "sutraParallelReader": "经论注疏对读",
+    "settings": "设置"
+  },
+  "actions": {
+    "zenMode": "专注模式",
+    "exitZenMode": "退出专注模式",
+    "switchLanguage": "切换语言"
+  },
+  "common": {
+    "loading": "加载中…",
+    "save": "保存",
+    "cancel": "取消",
+    "confirm": "确认",
+    "delete": "删除",
+    "edit": "编辑"
+  }
+}
