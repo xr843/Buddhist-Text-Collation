@@ -64,5 +64,5 @@ public distribution.
 - `SECRET_KEY` / `UMAMI_APP_SECRET` / `UMAMI_DB_PASSWORD` 必须从环境变量注入
 - `gitleaks` CI 步骤会扫描每次 push 的密钥泄露
 
-[Unreleased]: https://github.com/xr843/buddhist-text-collation/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/xr843/buddhist-text-collation/releases/tag/v0.1.0
+[Unreleased]: https://github.com/xr843/Buddhist-Text-Collation/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/xr843/Buddhist-Text-Collation/releases/tag/v0.1.0
