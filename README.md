@@ -12,7 +12,7 @@
 >
 > **One line** · A unified research workbench for punctuation diff, multi-edition collation, commentary cross-reading, and version-lineage analysis of Buddhist canonical texts.
 
-📖 详细中文文档 / Full Chinese docs: **[docs/README.zh-CN.md](docs/README.zh-CN.md)** · 🛡️ 安全 / Security: **[SECURITY.md](SECURITY.md)** · 🤝 参与 / Contribute: **[CONTRIBUTING.md](CONTRIBUTING.md)** · 📝 更新日志 / Changelog: **[CHANGELOG.md](CHANGELOG.md)**
+📖 详细中文文档 / Full Chinese docs: **[docs/README.zh-CN.md](docs/README.zh-CN.md)** · 🛡️ 安全 / Security: **[SECURITY.md](SECURITY.md)** · 🤝 参与 / Contribute: **[CONTRIBUTING.md](CONTRIBUTING.md)** · 🗺️ 路线图 / Roadmap: **[ROADMAP.md](ROADMAP.md)** · 📝 更新日志 / Changelog: **[CHANGELOG.md](CHANGELOG.md)**
 
 ---
 
