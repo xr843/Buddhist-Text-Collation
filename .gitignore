@@ -121,7 +121,9 @@ _private/
 private/
 
 # Large data assets — distribute via GitHub Releases instead
-data/
+# (anchor at repo root so we don't accidentally ignore frontend/src/data etc.)
+/data/
+/backend/data/
 variant_data.tar.gz
 *.tar.gz
 *.zip
