@@ -238,7 +238,7 @@ class PunctuationTransferService:
             位置映射字典: {源位置: 目标位置或None}
         """
         position_mapping: Dict[int, Optional[int]] = {}
-        source_len = len(source_text)
+        len(source_text)
         target_len = len(target_text)
 
         matcher = difflib.SequenceMatcher(None, source_text, target_text, autojunk=False)

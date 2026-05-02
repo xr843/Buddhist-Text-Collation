@@ -301,7 +301,7 @@ async def list_comments(
     """
     获取项目评论列表
     """
-    project = await get_project_with_permission(
+    await get_project_with_permission(
         project_id=project_id,
         current_user=current_user,
         db=db,
@@ -334,7 +334,7 @@ async def add_comment(
     添加评论
     需要是项目成员
     """
-    project = await get_project_with_permission(
+    await get_project_with_permission(
         project_id=project_id,
         current_user=current_user,
         db=db,
@@ -374,7 +374,7 @@ async def edit_comment(
     编辑评论（只能编辑自己的评论）
     """
     # 检查项目访问权限
-    project = await get_project_with_permission(
+    await get_project_with_permission(
         project_id=project_id,
         current_user=current_user,
         db=db,
@@ -429,7 +429,7 @@ async def delete_comment(
     删除评论（只能删除自己的评论，管理员可删除任何评论）
     """
     # 检查项目访问权限
-    project = await get_project_with_permission(
+    await get_project_with_permission(
         project_id=project_id,
         current_user=current_user,
         db=db,
@@ -480,7 +480,7 @@ async def list_edit_history(
     """
     获取项目编辑历史
     """
-    project = await get_project_with_permission(
+    await get_project_with_permission(
         project_id=project_id,
         current_user=current_user,
         db=db,

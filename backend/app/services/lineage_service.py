@@ -204,7 +204,7 @@ class VersionLineageService:
         # 而 similarity_matrix 包含所有版本（底本+校本）
         error_matrix = shared_errors.get('matrix', [])
         error_names = shared_errors.get('names', [])
-        error_details = shared_errors.get('details', {})
+        shared_errors.get('details', {})
 
         # 构建名称到索引的映射（用于共同讹误矩阵）
         error_name_to_idx = {name: idx for idx, name in enumerate(error_names)}
@@ -222,14 +222,14 @@ class VersionLineageService:
                 # 确定方向（年代早→晚）
                 if year1 < year2:
                     source, target = v1, v2
-                    source_idx, target_idx = i, j
+                    _source_idx, _target_idx = i, j
                 elif year1 > year2:
                     source, target = v2, v1
-                    source_idx, target_idx = j, i
+                    _source_idx, _target_idx = j, i
                 else:
                     # 年代相同，按名称顺序（仍然尝试创建关联）
                     source, target = v1, v2
-                    source_idx, target_idx = i, j
+                    _source_idx, _target_idx = i, j
 
                 # 计算传承置信度
                 similarity = similarity_matrix[i][j] if similarity_matrix else 0

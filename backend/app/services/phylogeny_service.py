@@ -402,7 +402,6 @@ class PhylogenyAnalysisService:
                 if "yanwen" in categories:
                     # 衍文的位置用插入点之前的底本位置表示
                     pos_in_block = 0
-                    seg1_idx = 0
 
                     for seg in segments1:
                         seg_type = seg.get("type", "")
@@ -431,7 +430,6 @@ class PhylogenyAnalysisService:
                             base_pos += len(seg_text)
 
                     # 更简单的方法：直接遍历 segments2
-                    insert_pos = 0  # 用于标记衍文位置
                     for seg_idx, seg in enumerate(segments2):
                         seg_type = seg.get("type", "")
                         seg_text = seg.get("text", "")

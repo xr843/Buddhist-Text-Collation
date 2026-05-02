@@ -231,7 +231,7 @@ async def get_system_stats(
     # 用户统计
     total_users = (await db.execute(select(func.count(User.id)))).scalar() or 0
     active_users = (await db.execute(
-        select(func.count(User.id)).where(User.is_active == True)
+        select(func.count(User.id)).where(User.is_active)
     )).scalar() or 0
     admin_users = (await db.execute(
         select(func.count(User.id)).where(User.role == UserRole.ADMIN)
