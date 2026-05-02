@@ -4,7 +4,7 @@
 import { useMemo, useState } from 'react'
 import { Card, Tree, Tag, Space, Typography, Alert, Button, Collapse } from 'antd'
 import { SYSTEM_COLORS } from './constants'
-import type { PhylogenyNode, SimilarityMatrix } from './types'
+import type { PhylogenyNode } from './types'
 
 const { Text, Paragraph } = Typography
 const { Panel } = Collapse

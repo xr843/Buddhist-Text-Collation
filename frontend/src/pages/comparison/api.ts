@@ -2,7 +2,6 @@
  * 标点对比模块 API 服务
  */
 
-import { message } from 'antd'
 import { apiFetchJson } from '../../utils/apiFetch'
 import { API_BASE } from './constants'
 import type {

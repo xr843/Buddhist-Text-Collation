@@ -17,7 +17,7 @@ import SimilarityTable from './SimilarityTable'
 import SharedErrorHeatmap from './SharedErrorHeatmap'
 import PhylogenyTree, { SystemInfoCard } from './PhylogenyTree'
 import ErrorDetailsTable, { VersionTotalTable } from './ErrorDetailsTable'
-import { mergeVariantDetails, getTotalByVersionForType, getTypeName } from './utils'
+import { mergeVariantDetails, getTotalByVersionForType } from './utils'
 import type { PhylogenyAnalysisProps, VariantType } from './types'
 
 export default function PhylogenyAnalysis({ data, baseName, projectId }: PhylogenyAnalysisProps) {
