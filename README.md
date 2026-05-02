@@ -27,18 +27,35 @@
 
 ## 界面预览 / Screenshots
 
-> 📷 截图征集中——正在准备首批界面预览。
-> Screenshots wanted: working on the first batch of UI previews.
->
-> 想帮忙的朋友可以提交 PR 把截图放进 [`docs/screenshots/`](docs/screenshots/)。
-> Contributions welcome — drop them in [`docs/screenshots/`](docs/screenshots/).
+### 经论注疏对读 / Commentary Parallel Reading
+> 经文与多家注疏三栏并排，跨文本逐句对照
+> Sutra text and multiple commentaries side-by-side, sentence-aligned.
 
-<!-- 占位，等待加入：
-![标点对比 / Punctuation diff](docs/screenshots/feature-punctuation-diff.png)
-![多版本对勘 / Multi-edition collation](docs/screenshots/feature-multi-collation.png)
-![注疏对读 / Commentary parallel reading](docs/screenshots/feature-commentary-parallel.png)
-![版本谱系 / Lineage graph](docs/screenshots/feature-lineage-graph.png)
--->
+![经论注疏对读](docs/screenshots/feature-commentary-parallel.png)
+
+### 多版本对勘 / Multi-edition Collation
+> 一底多校：选一个底本，最多 30 个校本同屏对勘
+> Pick one base edition and collate against up to 30 witnesses in one workspace.
+
+![版本对勘](docs/screenshots/feature-multi-collation.png)
+
+### 标点版本对比 / Punctuation Diff
+> 上传两个带标点版本，差异分析与可视化
+> Upload two punctuated editions for diff analysis & visualization.
+
+![标点版本对比](docs/screenshots/feature-punctuation-diff.png)
+
+### 标点迁移 / Punctuation Transfer
+> 把已校好标点的版本，迁移到无标点的相似文本上
+> Transfer punctuation from a polished edition to a similar unpunctuated text.
+
+![标点迁移](docs/screenshots/feature-punctuation-transfer.png)
+
+> 📷 更多截图（带真实数据的差异高亮 / 校勘记 / 版本谱系图等）正在筹备中。
+> More screenshots (highlighted diffs, collation notes, lineage graph, etc.) coming soon.
+>
+> 想帮忙的朋友可以提交 PR 到 [`docs/screenshots/`](docs/screenshots/)。
+> Contributions welcome via PR.
 
 ---
 
