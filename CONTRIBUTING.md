@@ -19,6 +19,9 @@
 5. 推送后开 PR，描述清楚改动动机、影响范围、自测情况。
 6. CI 通过且至少一位 maintainer review 后合并。
 
+> 💡 **快捷脚本**：仓库根目录运行 `./scripts/dev/newpr.sh <branch-name> "PR title"`
+> 自动完成"建分支 → commit → push → 开 PR"全流程，避免直推 main。
+
 ### 开发环境
 见 [docs/WSL_SETUP.md](docs/WSL_SETUP.md) 与 [README.md](README.md#快速开始)。
 
@@ -45,6 +48,9 @@ expected vs. actual behavior, environment details, and logs/screenshots if relev
 4. Use [Conventional Commits](https://www.conventionalcommits.org/).
 5. Open a PR with motivation, scope, and self-test notes.
 6. CI must pass and at least one maintainer must review before merge.
+
+> 💡 **Helper**: From the repo root run `./scripts/dev/newpr.sh <branch-name> "PR title"`
+> to do the whole "branch → commit → push → open PR" dance in one command.
 
 ### Data & Copyright
 This repo does **not** redistribute copyrighted modern punctuated editions
