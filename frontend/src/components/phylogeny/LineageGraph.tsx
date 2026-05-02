@@ -32,8 +32,10 @@ const calculateYearLevels = (nodes: LineageNode[]): Map<string, number> => {
   const levels = new Map<string, number>()
   if (nodes.length === 0) return levels
 
-  // 按年代排序
-  const sortedYears = [...new Set(nodes.map(n => n.year))].sort((a, b) => a - b)
+  // 按年代排序（year 可能是 number 或 string，统一为 number 比较）
+  const sortedYears = [...new Set(nodes.map(n => n.year))].sort(
+    (a, b) => Number(a) - Number(b)
+  )
 
   // 为每个独特的年代分配层级
   sortedYears.forEach((year, index) => {
@@ -87,7 +89,7 @@ export default function LineageGraph({ lineageData }: LineageGraphProps) {
     const getShortName = createVersionNameSimplifier(12)
 
     // 构建 ECharts 节点数据
-    const graphNodes = nodes.map((node, idx) => {
+    const graphNodes = nodes.map((node) => {
       const system = node.system || '未知'
       const level = yearLevels.get(node.id) || 0
       const systemNodes = systemGroups.get(system) || []
@@ -173,7 +175,7 @@ export default function LineageGraph({ lineageData }: LineageGraphProps) {
             return `
               <div style="font-weight:bold;margin-bottom:4px;">${node.name}</div>
               <div>年代: ${node.year}</div>
-              <div>系统: <span style="color:${getSystemColor(node.system)}">${node.system}</span></div>
+              <div>系统: <span style="color:${getSystemColor(node.system || '未知')}">${node.system || '未知'}</span></div>
               ${node.city ? `<div>刻印地: ${node.city}</div>` : ''}
               ${node.period ? `<div>时期: ${node.period}</div>` : ''}
               ${node.is_ancestor ? '<div style="color:#faad14;margin-top:4px;">祖本</div>' : ''}
