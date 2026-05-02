@@ -9,6 +9,7 @@ import 'dayjs/locale/zh-cn'
 import App from './App'
 import ErrorBoundary from './components/ErrorBoundary'
 import ThemeProvider from './theme/ThemeProvider'
+import './i18n' // i18n 必须在任何使用 useTranslation 的组件之前 init
 import './index.css'
 
 // 配置dayjs
