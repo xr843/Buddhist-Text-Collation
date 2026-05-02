@@ -84,7 +84,6 @@ class TextComparisonService:
             标点差异信息
         """
         # 提取标点符号位置
-        punct_marks = PUNCTUATION_SET
 
         # 移除标点后的文本
         clean_text1 = strip_punctuation_and_whitespace(text1)

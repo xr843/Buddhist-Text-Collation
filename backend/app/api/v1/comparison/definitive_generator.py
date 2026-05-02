@@ -13,7 +13,6 @@ PUNCT_MARKS = set('。，、；：？！""''（）《》【】「」『』．·�
 
 def find_actual_position(text: str, clean_pos: int) -> int:
     """将纯文本位置转换为实际字符位置"""
-    actual_pos = 0
     clean_count = 0
     for i, char in enumerate(text):
         if clean_count == clean_pos:

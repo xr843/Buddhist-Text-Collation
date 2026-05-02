@@ -41,7 +41,7 @@ async def export_collation_notes(request: ExportCollationNotesRequest):
         aligned_segments = collation_service._global_char_alignment(normalized_text1, normalized_text2)
 
         # 3. 计算统计信息
-        statistics = collation_service._compute_alignment_statistics(
+        collation_service._compute_alignment_statistics(
             aligned_segments, normalized_text1, normalized_text2
         )
 

@@ -280,7 +280,7 @@ async def update_project_info(
     更新项目基本信息（标题、描述、状态、可见性）
     需要编辑权限
     """
-    project = await get_project_with_permission(
+    await get_project_with_permission(
         project_id=project_id,
         current_user=current_user,
         db=db,
@@ -328,7 +328,7 @@ async def update_project_data(
     更新项目核心数据（校勘数据等）
     需要编辑权限
     """
-    project = await get_project_with_permission(
+    await get_project_with_permission(
         project_id=project_id,
         current_user=current_user,
         db=db,
@@ -369,7 +369,7 @@ async def set_project_visibility(
     设置项目可见性
     只有所有者可以修改
     """
-    project = await check_project_owner(
+    await check_project_owner(
         project_id=project_id,
         current_user=current_user,
         db=db,
@@ -383,7 +383,7 @@ async def set_project_visibility(
         )
 
     service = get_project_service(db)
-    updated = await service.update_project(
+    await service.update_project(
         project_id=project_id,
         user_id=current_user.id,
         visibility=vis,
@@ -404,7 +404,7 @@ async def delete_project(
     """
     删除项目（只有所有者可以删除）
     """
-    project = await check_project_owner(
+    await check_project_owner(
         project_id=project_id,
         current_user=current_user,
         db=db,
