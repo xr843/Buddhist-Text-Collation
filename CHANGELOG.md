@@ -10,10 +10,40 @@ and [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-### 待办 / Planned
-- 后端测试覆盖（pytest）
-- 前端类型债清理（移除 `tsc --noEmit` advisory 模式）
-- 后端依赖升级（`python-jose`、`python-multipart` CVE 修复）
+### Added
+- `examples/classical-chinese-sample/` 公开样本 + README "3 分钟试用" 章节 (#52)
+- 标准 English README + ROADMAP（`README.en.md` / `ROADMAP.en.md`）+ 顶部语言切换 (#53)
+- `docker-compose.yml` 新增 `postgres:15-alpine` 主库服务，`docker-compose up -d --build` 真正可用 (#55)
+- Alembic schema migrations + `0001_baseline` + CI `migration-smoke` job (#56)
+- `CITATION.cff`，GitHub 侧栏出现 "Cite this repository" 按钮 (#58)
+- 27 个 `services/collation/` 算法层单元测试（normalize / split_sentences / compute_char_diff 等）(#60)
+- nginx CSP 与一组安全响应头（X-Frame-Options / Referrer-Policy / Permissions-Policy / COOP）(#62)
+
+### Changed
+- 前端依赖大版本升级 + `npm audit fix`：清掉 12 个 high-severity CVE（axios SSRF、react-router XSS、minimatch ReDoS、rollup 任意写入、follow-redirects header leak 等）；`@typescript-eslint` 6 → 8 (#50)
+- 后端依赖升级：fastapi 0.104 → ≥0.117（含 starlette CVE）、lxml 6.1、markdown 3.8.1、python-dotenv 1.2.2、pytest 8.4；pydantic → 2.9 修 OpenAPI `$ref` 序列化 (#51)
+- backend ruff 85 错全部清零并把 CI 改为 gating（之前 `|| true` advisory）；新增 `[tool.ruff]` 配置，pin `ruff==0.15.12` (#57)
+- Dockerfiles 与 docker-compose 默认走上游镜像源；中国大陆镜像改为 `--build-arg` / 环境变量可选 (#61)
+- 仓库 topics 配齐 12 个 + homepage URL 设置
+
+### Fixed
+- `services/punctuation_analysis/constants.py` curly-quote 字典：源码丢失 U+201C/201D/2018/2019 字符，被压成 ASCII 形成 dup keys，弯引号识别一直是死代码 — 恢复正确 codepoint (#57)
+- `services/collation/text_normalizer.py` 把正则元字符 `\s` 字面塞进 `set()`，等于把 `\` 与 `s` 也算成标点 — 移除 (#57)
+- `services/collation/sentence_aligner.py` 多段字符串里非 raw 段含 `\s`，正则失效 — 改为 raw (#57)
+- `multi_collation/variant_table.py` bare `except:` 收紧到 `(IndexError, ValueError)` (#57)
+- JWT `datetime.utcnow()` (naive) → `datetime.now(timezone.utc)` (aware)；非 UTC 服务器上 token 过期时间会偏差一个本地时区偏移 (#59)
+
+### Security
+- 见上面 #50 / #51 / #62。剩余 1 条 dev-only Vite/esbuild moderate alert（需 vite 5→8 大版本）已记入 follow-up。
+
+### 待办 / Planned (未来 PR)
+- vite 5 → 8 大版本（清最后一条 dev-only alert）
+- pytest 9 升级（先验 pytest-asyncio matrix）
+- `services/punctuation_analysis/` 与 `services/text_compare.py` 测试覆盖
+- 前端 `: any` / `@ts-ignore` 类型债清理（约 76 处，按文件拆 PR）
+- 拆分 3000-行 `MultiCollation.tsx` / 1146-行 `cbeta_service.py`
+- 226KB 数据型 `variant_data/variant_groups_unified.py` 改 JSON 懒加载
+- backend in-process state 迁出 Redis，解锁 uvicorn `--workers > 1`
 
 ---
 
