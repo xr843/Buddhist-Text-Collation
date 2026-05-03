@@ -561,6 +561,185 @@ class CollationNoteService:
 
         return output.getvalue()
 
+    def export_to_latex(
+        self,
+        notes: Optional[List[CollationNote]] = None,
+        title: str = "校勘记",
+        base_version: str = "底本",
+        variant_version: str = "校本",
+        base_text: Optional[str] = None,
+    ) -> str:
+        """
+        导出为 LaTeX (reledmac) critical apparatus 格式。
+
+        生成可直接 \\input 进 reledmac 文档的 \\beginnumbering / \\endnumbering 块；
+        每个 lemma 用 \\edtext{底本读法}{\\Afootnote{异读 \\witness{校本}}}。
+
+        没有 base_text 时退化为按 lemma 序逐条列出（仍可编译，便于研究者快速浏览）。
+        """
+        notes = notes or self.notes
+        wit_base = self._latex_witness_id(base_version)
+        wit_var = self._latex_witness_id(variant_version)
+
+        lines = [
+            "% reledmac critical apparatus",
+            f"% Title: {self._latex_escape(title)}",
+            f"% Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+            f"% Base witness: {wit_base} = {self._latex_escape(base_version)}",
+            f"% Variant witness: {wit_var} = {self._latex_escape(variant_version)}",
+            "",
+            "\\beginnumbering",
+            "\\pstart",
+        ]
+
+        if base_text:
+            lines.append(self._latex_render_with_apparatus(base_text, notes, wit_base, wit_var))
+        else:
+            for note in notes:
+                lemma = self._latex_escape(note.base_text or "")
+                reading = self._latex_escape(note.variant_text or "（无）")
+                if not lemma:
+                    lemma = "\\textit{(om.)}"
+                lines.append(
+                    f"\\edtext{{{lemma}}}{{\\Afootnote{{{reading} \\textsuperscript{{{wit_var}}}}}}}"
+                )
+
+        lines.extend([
+            "\\pend",
+            "\\endnumbering",
+            "",
+        ])
+        return "\n".join(lines)
+
+    def export_to_markdown(
+        self,
+        notes: Optional[List[CollationNote]] = None,
+        title: str = "校勘记",
+        base_version: str = "底本",
+        variant_version: str = "校本",
+    ) -> str:
+        """
+        导出为 Markdown 格式。
+
+        结构：标题 + 元信息 + 表格（序号/类型/底本/校本/上下文/按语）。
+        便于贴入论文草稿、Notion、GitHub Discussion。
+        """
+        notes = notes or self.notes
+        lines = [
+            f"# {title}",
+            "",
+            f"- 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+            f"- 底本：**{base_version}**",
+            f"- 校本：**{variant_version}**",
+            f"- 校勘记总数：{len(notes)}",
+            "",
+        ]
+
+        if not notes:
+            lines.append("_（无校勘记）_")
+            return "\n".join(lines)
+
+        stats = self._compute_note_statistics(notes)
+        if stats["by_type"]:
+            lines.append("## 类型统计")
+            lines.append("")
+            for k, v in stats["by_type"].items():
+                lines.append(f"- {k}：{v}")
+            lines.append("")
+
+        lines.extend([
+            "## 校勘条目",
+            "",
+            "| # | 位置 | 类型 | 底本 | 校本 | 前文 | 后文 | 按语 |",
+            "| - | ---- | ---- | ---- | ---- | ---- | ---- | ---- |",
+        ])
+
+        for note in notes:
+            lines.append(
+                "| {idx} | {pos} | {ntype} | {base} | {var} | {before} | {after} | {anno} |".format(
+                    idx=note.index,
+                    pos=note.position,
+                    ntype=note.note_type.value,
+                    base=self._md_cell(note.base_text),
+                    var=self._md_cell(note.variant_text),
+                    before=self._md_cell(note.context_before),
+                    after=self._md_cell(note.context_after),
+                    anno=self._md_cell(note.annotation),
+                )
+            )
+
+        return "\n".join(lines) + "\n"
+
+    @staticmethod
+    def _latex_escape(text: Optional[str]) -> str:
+        if not text:
+            return ""
+        replacements = {
+            "\\": r"\textbackslash{}",
+            "&": r"\&",
+            "%": r"\%",
+            "$": r"\$",
+            "#": r"\#",
+            "_": r"\_",
+            "{": r"\{",
+            "}": r"\}",
+            "~": r"\textasciitilde{}",
+            "^": r"\textasciicircum{}",
+        }
+        out = []
+        for ch in text:
+            out.append(replacements.get(ch, ch))
+        return "".join(out)
+
+    @staticmethod
+    def _latex_witness_id(version: str) -> str:
+        """取版本名首字符（或 ASCII 缩写）作为 reledmac \\witness sigla。"""
+        if not version:
+            return "X"
+        for ch in version:
+            if ch.isalnum():
+                return ch.upper()
+        return "X"
+
+    def _latex_render_with_apparatus(
+        self,
+        base_text: str,
+        notes: List[CollationNote],
+        wit_base: str,
+        wit_var: str,
+    ) -> str:
+        """按 position 把 \\edtext 注入底本，未覆盖的字符按原样输出。"""
+        sorted_notes = sorted(notes, key=lambda n: (n.position, -len(n.base_text or "")))
+        out: List[str] = []
+        cursor = 0
+        for note in sorted_notes:
+            # Skip notes whose base span overlaps an already-emitted lemma — emitting
+            # them would shift the lemma off the actual base text and silently corrupt
+            # the apparatus. Caller should pre-merge overlapping notes if needed.
+            if note.position < cursor:
+                continue
+            pos = min(note.position, len(base_text))
+            if pos > cursor:
+                out.append(self._latex_escape(base_text[cursor:pos]))
+            span_len = len(note.base_text or "")
+            actual = base_text[pos : pos + span_len] if span_len else ""
+            lemma_source = actual or note.base_text or ""
+            lemma = self._latex_escape(lemma_source) or "\\textit{(om.)}"
+            reading = self._latex_escape(note.variant_text or "") or "\\textit{(om.)}"
+            out.append(
+                f"\\edtext{{{lemma}}}{{\\Afootnote{{{reading} \\textsuperscript{{{wit_var}}}}}}}"
+            )
+            cursor = pos + span_len
+        if cursor < len(base_text):
+            out.append(self._latex_escape(base_text[cursor:]))
+        return "".join(out)
+
+    @staticmethod
+    def _md_cell(text: Optional[str]) -> str:
+        if not text:
+            return ""
+        return text.replace("|", "\\|").replace("\n", " ").replace("\r", " ")
+
 
 # 创建全局服务实例
 collation_note_service = CollationNoteService()

@@ -63,6 +63,6 @@ class ExportCollationNotesRequest(BaseModel):
     text2: str = Field(..., min_length=1, description="校本文本")
     version1_name: str = Field("底本", max_length=50, description="底本名称")
     version2_name: str = Field("校本", max_length=50, description="校本名称")
-    format: str = Field("txt", description="导出格式: txt, tei-xml, json, csv")
+    format: str = Field("txt", description="导出格式: txt, tei-xml, latex, markdown, json, csv")
     include_context: bool = Field(True, description="是否包含上下文")
     title: str = Field("校勘记", max_length=100, description="标题")
