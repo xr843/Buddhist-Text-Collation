@@ -12,6 +12,7 @@ import {
   getStoredRefreshToken,
   getStoredUser,
 } from '../services/authApi'
+import { getApiErrorMessage, isAuthError } from '../utils/errors'
 
 interface AuthState {
   // 状态
@@ -61,8 +62,8 @@ export const useAuthStore = create<AuthState>()(
             isAuthenticated: true,
             isLoading: false,
           })
-        } catch (error: any) {
-          const message = error.response?.data?.detail || error.message || '登录失败'
+        } catch (error) {
+          const message = getApiErrorMessage(error, '登录失败')
           set({ error: message, isLoading: false })
           throw new Error(message)
         }
@@ -81,8 +82,8 @@ export const useAuthStore = create<AuthState>()(
             isAuthenticated: true,
             isLoading: false,
           })
-        } catch (error: any) {
-          const message = error.response?.data?.detail || error.message || '注册失败'
+        } catch (error) {
+          const message = getApiErrorMessage(error, '注册失败')
           set({ error: message, isLoading: false })
           throw new Error(message)
         }
@@ -146,8 +147,8 @@ export const useAuthStore = create<AuthState>()(
           const user = await authApi.updateUser(token, data)
           localStorage.setItem('buddhist_user', JSON.stringify(user))
           set({ user, isLoading: false })
-        } catch (error: any) {
-          const message = error.response?.data?.detail || error.message || '更新失败'
+        } catch (error) {
+          const message = getApiErrorMessage(error, '更新失败')
           set({ error: message, isLoading: false })
           throw new Error(message)
         }
@@ -164,8 +165,8 @@ export const useAuthStore = create<AuthState>()(
         try {
           await authApi.changePassword(token, data)
           set({ isLoading: false })
-        } catch (error: any) {
-          const message = error.response?.data?.detail || error.message || '修改密码失败'
+        } catch (error) {
+          const message = getApiErrorMessage(error, '修改密码失败')
           set({ error: message, isLoading: false })
           throw new Error(message)
         }
@@ -182,9 +183,9 @@ export const useAuthStore = create<AuthState>()(
           const user = await authApi.getCurrentUser(token)
           localStorage.setItem('buddhist_user', JSON.stringify(user))
           set({ user, isAuthenticated: true })
-        } catch (error: any) {
+        } catch (error) {
           // Token可能过期，尝试刷新
-          if (error.response?.status === 401) {
+          if (isAuthError(error)) {
             const success = await refreshAuth()
             if (!success) {
               clearAuthData()

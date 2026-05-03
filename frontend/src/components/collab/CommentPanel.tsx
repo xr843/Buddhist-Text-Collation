@@ -27,6 +27,7 @@ import {
 } from '@ant-design/icons'
 import api from '../../services/api'
 import { useAuthStore } from '../../store/authStore'
+import { getApiErrorMessage } from '../../utils/errors'
 
 const { Text, Paragraph } = Typography
 const { TextArea } = Input
@@ -76,8 +77,8 @@ const CommentPanel: React.FC<CommentPanelProps> = ({
       if (response.data.success) {
         setComments(response.data.comments || [])
       }
-    } catch (error: any) {
-      message.error(error.message || '获取评论失败')
+    } catch (error) {
+      message.error(getApiErrorMessage(error, '获取评论失败'))
     } finally {
       setLoading(false)
     }
@@ -115,8 +116,8 @@ const CommentPanel: React.FC<CommentPanelProps> = ({
           listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: 'smooth' })
         }, 100)
       }
-    } catch (error: any) {
-      message.error(error.message || '发表失败')
+    } catch (error) {
+      message.error(getApiErrorMessage(error, '发表失败'))
     } finally {
       setSubmitting(false)
     }
@@ -139,8 +140,8 @@ const CommentPanel: React.FC<CommentPanelProps> = ({
         setEditContent('')
         fetchComments()
       }
-    } catch (error: any) {
-      message.error(error.message || '编辑失败')
+    } catch (error) {
+      message.error(getApiErrorMessage(error, '编辑失败'))
     }
   }
 
@@ -153,8 +154,8 @@ const CommentPanel: React.FC<CommentPanelProps> = ({
       if (response.data.success) {
         fetchComments()
       }
-    } catch (error: any) {
-      message.error(error.message || '删除失败')
+    } catch (error) {
+      message.error(getApiErrorMessage(error, '删除失败'))
     }
   }
 
