@@ -36,6 +36,8 @@ services:
       DEBUG: "false"
       HOST: "0.0.0.0"
       PORT: "8000"
+      # 数据库（compose 内置 postgres 服务，覆盖 .env 默认值）
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-buddhist_user}:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD required}@postgres:5432/${POSTGRES_DB:-buddhist_text}
       # Redis 配置（可选，不配置则自动降级）
       REDIS_URL: redis://redis:6379/0
       # CORS 配置 (JSON 格式) — 通过 .env 覆盖；默认仅本地
@@ -43,6 +45,8 @@ services:
       # 日志
       LOG_LEVEL: INFO
     depends_on:
+      postgres:
+        condition: service_healthy
       redis:
         condition: service_healthy
     healthcheck:
@@ -107,6 +111,28 @@ services:
       retries: 5
 
   # ================================
+  # PostgreSQL 主库
+  # ================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: buddhist-text-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-buddhist_text}
+      POSTGRES_USER: ${POSTGRES_USER:-buddhist_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD required}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-buddhist_user} -d ${POSTGRES_DB:-buddhist_text}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # 默认不暴露 5432 公网端口；本地开发需要时取消注释
+    # ports:
+    #   - "127.0.0.1:5432:5432"
+
+  # ================================
   # Redis 缓存（可选）
   # ================================
   redis:
@@ -133,6 +159,8 @@ volumes:
   backend_logs:
     driver: local
   backend_data:
+    driver: local
+  postgres_data:
     driver: local
   redis_data:
     driver: local
