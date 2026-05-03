@@ -50,6 +50,19 @@
 
 ---
 
+## 3 分钟试用 / 3-minute Try
+
+不想立刻搭环境？先看 [`examples/`](examples/) 里的公开样本——
+一个 `diff` 就能看见平台要解决的"差异在哪、怎么呈现"问题。
+跑起平台后，把样本里两个文件上传到"两版本对勘"或"标点迁移"，
+即可在本机走通完整路径。
+
+Don't want to set up the stack first? Browse [`examples/`](examples/) for
+public-domain samples — a single `diff` shows the kind of textual variation
+this platform highlights and writes into a collation note. Once the
+platform is running, upload the two sample files to **Two-Edition
+Collation** or **Punctuation Transfer** to walk the full path locally.
+
 ## 这是什么 / What is this?
 
 中文：本平台帮助研究者在同一个工作台中完成佛经古籍的 **标点对比、多版本对勘、注疏对读、版本谱系分析**。底层集成 CBETA、DILA 等公开学术资源，前端提供"禅意/学术 UI"以适配长时间校勘工作。
