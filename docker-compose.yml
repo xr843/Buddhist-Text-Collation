@@ -81,7 +81,7 @@ services:
   # Umami 访问统计
   # ================================
   umami:
-    image: ghcr.nju.edu.cn/umami-software/umami:postgresql-latest
+    image: ${UMAMI_IMAGE:-ghcr.io/umami-software/umami:postgresql-latest}
     container_name: buddhist-text-umami
     restart: unless-stopped
     ports:
@@ -95,7 +95,7 @@ services:
         condition: service_healthy
 
   umami-db:
-    image: swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/postgres:15-alpine
+    image: ${UMAMI_DB_IMAGE:-postgres:15-alpine}
     container_name: buddhist-text-umami-db
     restart: unless-stopped
     environment:
