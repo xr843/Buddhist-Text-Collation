@@ -144,8 +144,15 @@ npm install
 ### Docker 部署 / Docker deployment
 
 ```bash
+# 1. 准备 .env（务必填好 POSTGRES_PASSWORD / UMAMI_*）
+cp .env.example .env
+# 2. 一键起 backend + frontend + postgres + redis + umami
 docker-compose up -d --build
 ```
+
+`docker-compose.yml` 现已内置 `postgres:15-alpine` 主库，无需另行准备 DB。
+The compose file now provisions `postgres:15-alpine` for you — no
+external DB needed.
 
 详见 [docs/DEPLOYMENT_CHECKLIST.md](docs/DEPLOYMENT_CHECKLIST.md) 与
 [docs/WSL_SETUP.md](docs/WSL_SETUP.md)。
