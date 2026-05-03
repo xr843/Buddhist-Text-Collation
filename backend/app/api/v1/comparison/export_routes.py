@@ -22,6 +22,8 @@ async def export_collation_notes(request: ExportCollationNotesRequest):
     支持格式：
     - txt: 传统校勘记格式（参照陈垣《校勘学释例》）
     - tei-xml: TEI P5 Critical Apparatus格式
+    - latex: reledmac critical apparatus（可直接编译进 LaTeX 论文）
+    - markdown: 便于贴入 Notion/GitHub 的表格式
     - json: 结构化JSON格式
     - csv: 学术CSV格式
 
@@ -93,10 +95,31 @@ async def export_collation_notes(request: ExportCollationNotesRequest):
             content_type = "text/csv; charset=utf-8"
             file_ext = "csv"
 
+        elif export_format in ("latex", "tex"):
+            content = collation_note_service.export_to_latex(
+                notes=notes,
+                title=request.title,
+                base_version=request.version1_name,
+                variant_version=request.version2_name,
+                base_text=normalized_text1,
+            )
+            content_type = "application/x-tex; charset=utf-8"
+            file_ext = "tex"
+
+        elif export_format in ("markdown", "md"):
+            content = collation_note_service.export_to_markdown(
+                notes=notes,
+                title=request.title,
+                base_version=request.version1_name,
+                variant_version=request.version2_name,
+            )
+            content_type = "text/markdown; charset=utf-8"
+            file_ext = "md"
+
         else:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"不支持的导出格式: {export_format}，支持: txt, tei-xml, json, csv"
+                detail=f"不支持的导出格式: {export_format}，支持: txt, tei-xml, latex, markdown, json, csv"
             )
 
         # 生成文件名

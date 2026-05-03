@@ -142,6 +142,7 @@ from app.api.v1 import (  # noqa: E402
     sutra_commentary,
     sutra_reading,
     punctuation_transfer,
+    citation,
 )
 
 # 文本对比API
@@ -198,6 +199,13 @@ app.include_router(
     punctuation_transfer.router,
     prefix=f"{settings.API_V1_PREFIX}/punctuation-transfer",
     tags=["标点迁移"]
+)
+
+# 引用与永久链接
+app.include_router(
+    citation.router,
+    prefix=settings.API_V1_PREFIX,
+    tags=["引用"]
 )
 
 

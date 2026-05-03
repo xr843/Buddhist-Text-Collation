@@ -19,6 +19,7 @@ from .project_routes import router as project_router
 from .collation_routes import router as collation_router
 from .decision_routes import router as decision_router
 from .note_routes import router as note_router
+from .phylogeny_export_routes import router as phylogeny_export_router
 
 # 导入工具函数（供外部使用）
 from .variant_table import generate_variant_table
@@ -43,6 +44,7 @@ router.include_router(project_router)
 router.include_router(collation_router)
 router.include_router(decision_router)
 router.include_router(note_router)
+router.include_router(phylogeny_export_router)
 
 
 # 导出所有公共API

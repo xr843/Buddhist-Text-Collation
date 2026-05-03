@@ -7,6 +7,7 @@
 3. 版本系统识别与用户自定义
 4. UPGMA层次聚类生成谱系树
 """
+import re
 from typing import List, Dict, Any, Optional
 from collections import defaultdict
 
@@ -872,6 +873,114 @@ class PhylogenyAnalysisService:
                 )
 
         return conclusions
+
+    # ==================== 标准格式导出（FigTree / SplitsTree / Bio.Phylo 互通） ====================
+
+    NEWICK_QUOTE_RE = re.compile(r"[\s,():;\[\]']")
+
+    @staticmethod
+    def _newick_label(name: str) -> str:
+        """Newick 规范：含特殊字符的 label 用单引号包裹，内部单引号双写。"""
+        if not name:
+            return "''"
+        if PhylogenyAnalysisService.NEWICK_QUOTE_RE.search(name):
+            return "'" + name.replace("'", "''") + "'"
+        return name
+
+    @classmethod
+    def to_newick(cls, tree: Dict, default_branch_length: float = 1.0) -> str:
+        """
+        把 analyze_phylogeny 返回的 tree dict 转成 Newick 字符串。
+
+        约定：
+        - 叶子节点 children 为空，分支长度取 1 - similarity（无 similarity 时退化为
+          default_branch_length）。
+        - 内部节点（is_group）写成 (children)label:length，无 length 时省略。
+        - 输出末尾带分号。
+        """
+
+        def render(node: Dict) -> str:
+            children = node.get("children") or []
+            label = cls._newick_label(node.get("name", ""))
+            if not children:
+                similarity = node.get("similarity")
+                if similarity is not None:
+                    length = max(0.0, 1.0 - float(similarity))
+                else:
+                    length = default_branch_length
+                return f"{label}:{length:.6f}"
+
+            sub = ",".join(render(c) for c in children)
+            return f"({sub}){label}"
+
+        return render(tree) + ";"
+
+    @classmethod
+    def to_nexus(
+        cls,
+        tree: Dict,
+        similarity_matrix: Optional[Dict] = None,
+        tree_name: str = "phylogeny",
+    ) -> str:
+        """
+        生成 NEXUS 文件（FigTree / SplitsTree / PAUP* 通用）。
+
+        包含三个块：TAXA、TREES、可选 DISTANCES（来自 similarity matrix）。
+        """
+        leaf_names: List[str] = []
+
+        def collect(node: Dict) -> None:
+            if not node.get("children"):
+                name = node.get("name", "")
+                if name and name not in leaf_names:
+                    leaf_names.append(name)
+            else:
+                for child in node["children"]:
+                    collect(child)
+
+        # 把根（底本）也加入 taxa；FigTree 需要每个出现在树上的 label 都在 TAXA 中。
+        root_name = tree.get("name", "")
+        if root_name and root_name not in leaf_names:
+            leaf_names.append(root_name)
+        for child in tree.get("children", []) or []:
+            collect(child)
+
+        out: List[str] = ["#NEXUS", ""]
+
+        out.append("BEGIN TAXA;")
+        out.append(f"  DIMENSIONS NTAX={len(leaf_names)};")
+        out.append("  TAXLABELS")
+        for name in leaf_names:
+            out.append(f"    {cls._newick_label(name)}")
+        out.append("  ;")
+        out.append("END;")
+        out.append("")
+
+        out.append("BEGIN TREES;")
+        out.append(f"  TREE {tree_name} = {cls.to_newick(tree)}")
+        out.append("END;")
+        out.append("")
+
+        if similarity_matrix and similarity_matrix.get("matrix"):
+            names = similarity_matrix.get("names", [])
+            matrix = similarity_matrix["matrix"]
+            n = len(names)
+            if n and len(matrix) == n:
+                out.append("BEGIN DISTANCES;")
+                out.append(f"  DIMENSIONS NTAX={n};")
+                out.append("  FORMAT TRIANGLE=BOTH DIAGONAL LABELS;")
+                out.append("  MATRIX")
+                for i, name in enumerate(names):
+                    row = " ".join(
+                        f"{max(0.0, 1.0 - float(matrix[i][j])):.6f}"
+                        for j in range(n)
+                    )
+                    out.append(f"    {cls._newick_label(name)} {row}")
+                out.append("  ;")
+                out.append("END;")
+                out.append("")
+
+        return "\n".join(out)
 
 
 # 全局实例
