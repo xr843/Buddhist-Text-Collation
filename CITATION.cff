@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: >-
+  If you use this software in academic work, please cite it using the
+  metadata below. GitHub renders this file as a "Cite this repository"
+  button on the repository sidebar.
+title: "Buddhist Text Collation Platform"
+abstract: >-
+  An open-source research workbench unifying punctuation diff,
+  multi-edition collation, commentary cross-reading, and
+  version-lineage analysis for Buddhist canonical texts. Integrates
+  open scholarly resources (CBETA, DILA) and provides a focused
+  reading UI suited to long collation sessions.
+type: software
+authors:
+  - alias: xr843
+    name: "xr843"
+repository-code: "https://github.com/xr843/Buddhist-Text-Collation"
+url: "https://github.com/xr843/Buddhist-Text-Collation"
+license: AGPL-3.0
+version: 0.1.0
+date-released: 2026-05-02
+keywords:
+  - buddhist studies
+  - digital humanities
+  - textual criticism
+  - text collation
+  - philology
+  - cbeta
+  - dila
+  - chinese buddhism
+  - tipitaka
