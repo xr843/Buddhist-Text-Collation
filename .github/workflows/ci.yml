@@ -66,6 +66,50 @@ jobs:
           REDIS_URL: ""
         run: pytest tests/ -v --no-header
 
+  migration-smoke:
+    name: Alembic migration smoke
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_DB: buddhist_text
+          POSTGRES_USER: buddhist_user
+          POSTGRES_PASSWORD: ci-test-password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U buddhist_user -d buddhist_text"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install dependencies
+        working-directory: backend
+        run: pip install -r requirements.txt
+
+      - name: alembic upgrade head + downgrade base
+        working-directory: backend
+        env:
+          ENV: development
+          DEBUG: "true"
+          SECRET_KEY: ci-test-secret-key-not-for-production-use-only
+          DATABASE_URL: postgresql+asyncpg://buddhist_user:ci-test-password@localhost:5432/buddhist_text
+          REDIS_URL: ""
+        run: |
+          alembic upgrade head
+          alembic downgrade base
+          alembic upgrade head
+
   frontend-typecheck:
     name: Frontend type-check
     runs-on: ubuntu-latest
