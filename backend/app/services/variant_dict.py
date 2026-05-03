@@ -195,11 +195,11 @@ def get_dict_stats() -> dict:
 if __name__ == "__main__":
     # 测试
     stats = get_dict_stats()
-    print(f"异体字词典统计:")
+    print("异体字词典统计:")
     print(f"  - 总组数: {stats['total_groups']}")
     print(f"  - 总字符数: {stats['total_chars']}")
     print(f"  - 版本: {stats['version']}")
-    print(f"  - 数据来源:")
+    print("  - 数据来源:")
     for src in stats['sources']:
         print(f"      · {src}")
     print()

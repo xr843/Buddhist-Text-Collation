@@ -4,7 +4,7 @@
 """
 import difflib
 import re
-from typing import List, Dict, Tuple
+from typing import Dict, Tuple
 
 
 def extract_clean_text_with_mapping(text: str) -> Tuple[str, Dict[int, int]]:

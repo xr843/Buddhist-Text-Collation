@@ -29,7 +29,6 @@ CNS 11643 工具模块
 """
 
 import json
-import os
 from pathlib import Path
 from typing import Optional, List, Dict
 from collections import defaultdict
@@ -394,18 +393,18 @@ if __name__ == '__main__':
     print("=" * 50)
 
     stats = get_cns_stats()
-    print(f"\n统计信息:")
+    print("\n统计信息:")
     print(f"  CNS 编码数: {stats['cns_codes']}")
     print(f"  有属性的字符: {stats['chars_with_attrs']}")
     print(f"  部首种类: {stats['radicals']}")
 
-    print(f"\n编码转换测试:")
+    print("\n编码转换测试:")
     test_cns = ['1-4421', '1-4422', '1-5765']
     for cns in test_cns:
         char = cns_to_char(cns)
         print(f"  {cns} -> '{char}'")
 
-    print(f"\n字符属性测试:")
+    print("\n字符属性测试:")
     test_chars = ['一', '漢', '佛', '經', '般', '若']
     for char in test_chars:
         info = get_char_info(char)
@@ -418,6 +417,6 @@ if __name__ == '__main__':
         else:
             print(f"  {char}: 无数据")
 
-    print(f"\n按部首查找测试 (水部, 10-15画):")
+    print("\n按部首查找测试 (水部, 10-15画):")
     chars = find_chars_by_radical('水', (10, 15))
     print(f"  找到 {len(chars)} 字: {chars[:20]}...")

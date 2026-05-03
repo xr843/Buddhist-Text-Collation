@@ -7,9 +7,8 @@
 3. 版本系统识别与用户自定义
 4. UPGMA层次聚类生成谱系树
 """
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List, Dict, Any, Optional
 from collections import defaultdict
-import re
 
 
 # ==================== 版本系统映射 ====================

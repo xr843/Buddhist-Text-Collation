@@ -5,14 +5,14 @@
 from fastapi import APIRouter, HTTPException, Response
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
-from typing import List, Dict, Any, Optional
+from typing import Dict, Any, Optional
 from datetime import datetime
 import csv
-from io import StringIO, BytesIO
+from io import StringIO
 
 from app.services.export_word_service import WordExportService
 from app.services.export_tei_service import TEIExportService
-from app.services.local_storage_service import ProjectService, ExportHistoryService
+from app.services.local_storage_service import ProjectService
 
 router = APIRouter()
 
@@ -190,10 +190,10 @@ async def export_markdown(collation_data: Dict, filename: str):
     md_lines = []
 
     # 标题
-    md_lines.append(f"# 校勘记\n")
+    md_lines.append("# 校勘记\n")
 
     # 基本信息
-    md_lines.append(f"## 基本信息\n")
+    md_lines.append("## 基本信息\n")
     md_lines.append(f"- **底本**：{collation_data.get('base_name', '未命名')}")
 
     collations = collation_data.get('collations', [])
@@ -208,8 +208,8 @@ async def export_markdown(collation_data: Dict, filename: str):
     # 统计信息
     statistics = collation_data.get('statistics', {})
     if statistics and 'by_category' in statistics:
-        md_lines.append(f"## 统计分析\n")
-        md_lines.append(f"### 异文类型分布\n")
+        md_lines.append("## 统计分析\n")
+        md_lines.append("### 异文类型分布\n")
         for category, count in statistics['by_category'].items():
             category_names = {
                 'error': '讹误',
@@ -223,7 +223,7 @@ async def export_markdown(collation_data: Dict, filename: str):
         md_lines.append("")
 
     # 异文汇校表
-    md_lines.append(f"## 异文汇校表\n")
+    md_lines.append("## 异文汇校表\n")
 
     if differences:
         # Markdown表格
@@ -267,12 +267,12 @@ async def export_markdown(collation_data: Dict, filename: str):
             md_lines.append('| ' + ' | '.join(row) + ' |')
 
         if len(differences) > 100:
-            md_lines.append(f"\n*注：仅显示前100条，完整数据请导出CSV格式*\n")
+            md_lines.append("\n*注：仅显示前100条，完整数据请导出CSV格式*\n")
     else:
         md_lines.append("（无异文）\n")
 
     # 页脚
-    md_lines.append(f"\n---\n")
+    md_lines.append("\n---\n")
     md_lines.append(f"*本报告由[佛典标点与校勘研究平台](https://github.com)生成于{datetime.now().strftime('%Y年%m月%d日')}*")
 
     markdown_content = '\n'.join(md_lines)

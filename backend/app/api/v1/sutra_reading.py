@@ -6,7 +6,7 @@
 
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
-from typing import List, Optional, Any
+from typing import List, Optional
 
 from app.services.sutra_reading_service import sutra_reading_service
 

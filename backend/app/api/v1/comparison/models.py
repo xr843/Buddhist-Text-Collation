@@ -2,7 +2,7 @@
 对比API - Pydantic模型定义
 """
 from pydantic import BaseModel, Field, validator
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any
 
 
 class ProjectUpdateRequest(BaseModel):

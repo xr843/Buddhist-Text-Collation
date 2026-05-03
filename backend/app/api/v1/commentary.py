@@ -6,12 +6,10 @@ import json
 import uuid
 from datetime import datetime
 from fastapi import APIRouter, HTTPException, UploadFile, File, Form, Query
-from fastapi.responses import JSONResponse
 from typing import List, Optional, Dict, Any
 from pydantic import BaseModel
 
 from app.services.commentary_service import commentary_service
-from app.services.file_parser import file_parser_service
 from app.services.project_storage import project_storage, ProjectType
 
 router = APIRouter()

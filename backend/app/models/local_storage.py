@@ -2,7 +2,7 @@
 本地SQLite数据持久化模型
 用于个人使用场景，无需用户系统
 """
-from sqlalchemy import Column, Integer, String, Text, Float, DateTime, JSON, Boolean
+from sqlalchemy import Column, Integer, String, Text, Float, DateTime, JSON
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 

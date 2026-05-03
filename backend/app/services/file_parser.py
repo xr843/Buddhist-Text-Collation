@@ -2,7 +2,7 @@
 文件解析服务 - 处理txt和docx文件上传
 """
 import os
-from typing import Tuple, Optional
+from typing import Tuple
 import chardet
 from docx import Document
 from fastapi import UploadFile, HTTPException
@@ -132,7 +132,7 @@ class FileParserService:
 
         # 所有编码都失败
         raise ValueError(
-            f"无法识别文件编码，请确保文件是 UTF-8、GBK 或 Big5 编码的文本文件"
+            "无法识别文件编码，请确保文件是 UTF-8、GBK 或 Big5 编码的文本文件"
         )
 
     def _parse_docx(self, content: bytes) -> str:

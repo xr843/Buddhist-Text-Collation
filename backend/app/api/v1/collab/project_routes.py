@@ -16,7 +16,6 @@ from ....core.deps import (
 )
 from ....models.user import User
 from ....models.collaboration import (
-    CollabProject,
     CollabProjectType,
     CollabProjectStatus,
     ProjectVisibility,
@@ -29,8 +28,6 @@ from .schemas import (
     ProjectDataUpdate,
     ProjectListResponse,
     ProjectSummary,
-    ProjectDetail,
-    MessageResponse,
 )
 from ..multi_collation.phylogeny_utils import enrich_phylogeny_with_locations, enrich_phylogeny_with_lineage
 

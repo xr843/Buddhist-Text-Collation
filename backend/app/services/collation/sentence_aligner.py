@@ -4,7 +4,7 @@
 """
 import re
 import difflib
-from typing import List, Dict, Tuple
+from typing import List, Tuple
 
 
 def split_sentences(text: str) -> List[str]:
@@ -190,7 +190,7 @@ def _split_by_fixed_length(text: str, target_length: int = 80) -> List[str]:
 def compute_similarity(text1: str, text2: str) -> float:
     """计算文本相似度（0-1）- 基于纯文本（忽略标点）"""
     # 提取纯文本（去除所有标点符号和空白）
-    punct_pattern = r'[。，、；：？！""' "（）《》【】·…—\s]"
+    punct_pattern = r'[。，、；：？！""' r'（）《》【】·…—\s]'
     text1_clean = re.sub(punct_pattern, "", text1)
     text2_clean = re.sub(punct_pattern, "", text2)
 

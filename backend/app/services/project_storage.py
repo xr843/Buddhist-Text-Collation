@@ -16,7 +16,6 @@ from pathlib import Path
 from typing import List, Dict, Optional, Any
 from enum import Enum
 
-from app.core.config import settings
 
 
 class ProjectType(str, Enum):
