@@ -1,5 +1,7 @@
 # 佛典标点与校勘研究平台 / Buddhist Text Collation Platform
 
+**中文** · [English](README.en.md)
+
 [![CI](https://github.com/xr843/Buddhist-Text-Collation/actions/workflows/ci.yml/badge.svg)](https://github.com/xr843/Buddhist-Text-Collation/actions/workflows/ci.yml)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/)
