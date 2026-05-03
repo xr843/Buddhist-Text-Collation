@@ -22,6 +22,7 @@ import {
   scrollToVariantRow,
   copyToClipboard,
 } from './utils'
+import { getApiErrorMessage } from '../../utils/errors'
 import { getCollationDisplayOrder } from './constants'
 
 /**
@@ -43,8 +44,8 @@ export function useProjectManager() {
       const { items, total } = await fetchProjectList(50)
       setProjectList(items)
       setProjectListTotal(total)
-    } catch (error: any) {
-      message.error('加载项目列表失败: ' + error.message)
+    } catch (error) {
+      message.error('加载项目列表失败: ' + getApiErrorMessage(error))
     } finally {
       setProjectListLoading(false)
     }
@@ -86,8 +87,8 @@ export function useProjectManager() {
         return true // 返回是否需要清空结果
       }
       return false
-    } catch (error: any) {
-      message.error('删除项目失败: ' + error.message)
+    } catch (error) {
+      message.error('删除项目失败: ' + getApiErrorMessage(error))
       return false
     }
   }, [currentProjectId, loadProjectList])
@@ -100,8 +101,8 @@ export function useProjectManager() {
       message.success('项目标题已更新')
       setEditingTitle(false)
       return true
-    } catch (error: any) {
-      message.error('更新失败: ' + error.message)
+    } catch (error) {
+      message.error('更新失败: ' + getApiErrorMessage(error))
       return false
     }
   }, [currentProjectId])
@@ -213,8 +214,8 @@ export function useDecisionManager(
     try {
       const data = await apiSaveDecisions(currentProjectId, decisions)
       message.success(`已保存 ${data.total_decisions} 条判取结果`)
-    } catch (error: any) {
-      message.error('保存判取结果失败: ' + error.message)
+    } catch (error) {
+      message.error('保存判取结果失败: ' + getApiErrorMessage(error))
     }
   }, [currentProjectId, decisions])
 
@@ -237,9 +238,9 @@ export function useDecisionManager(
     try {
       await apiDeleteDecision(currentProjectId, position)
       message.success(`已删除位置 ${position} 的判取结果`)
-    } catch (e: any) {
+    } catch (e) {
       setDecisions((prev) => ({ ...prev, [position]: existing }))
-      message.error(e?.message ? `删除失败：${e.message}` : '删除失败')
+      message.error(`删除失败：${getApiErrorMessage(e, '请稍后重试')}`)
     }
   }, [currentProjectId, decisions])
 

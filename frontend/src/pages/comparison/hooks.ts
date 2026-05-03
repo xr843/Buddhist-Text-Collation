@@ -21,6 +21,7 @@ import type {
   PunctuationDecision,
   PunctuationDefinitiveData,
 } from './types'
+import { getApiErrorMessage } from '../../utils/errors'
 
 /**
  * 项目管理 Hook
@@ -58,8 +59,8 @@ export function useProjectManager() {
       const { items, total } = await fetchProjectList()
       setProjectList(items)
       setProjectListTotal(total)
-    } catch (error: any) {
-      message.error('加载项目列表失败: ' + error.message)
+    } catch (error) {
+      message.error('加载项目列表失败: ' + getApiErrorMessage(error))
     } finally {
       setProjectListLoading(false)
     }
@@ -84,8 +85,8 @@ export function useProjectManager() {
           return true // 表示删除了当前项目
         }
         return false
-      } catch (error: any) {
-        message.error('删除项目失败: ' + error.message)
+      } catch (error) {
+        message.error('删除项目失败: ' + getApiErrorMessage(error))
         return false
       }
     },
@@ -99,8 +100,8 @@ export function useProjectManager() {
         await apiUpdateProjectTitle(currentProjectId, newTitle)
         setCurrentProjectTitle(newTitle.trim())
         message.success('项目标题已更新')
-      } catch (error: any) {
-        message.error('更新失败: ' + error.message)
+      } catch (error) {
+        message.error('更新失败: ' + getApiErrorMessage(error))
       }
       setEditingTitle(false)
     },
@@ -233,8 +234,8 @@ export function useDecisionManager(
     try {
       await apiSaveDecisions(currentProjectId, decisions)
       message.success(`已保存 ${Object.keys(decisions).length} 条判取结果`)
-    } catch (error: any) {
-      message.error('保存判取失败: ' + error.message)
+    } catch (error) {
+      message.error('保存判取失败: ' + getApiErrorMessage(error))
     } finally {
       setSavingDecisions(false)
     }
@@ -259,8 +260,8 @@ export function useDecisionManager(
       const data = await apiGenerateDefinitive(currentProjectId)
       setDefinitiveData(data)
       setDefinitiveModalOpen(true)
-    } catch (error: any) {
-      message.error('生成定本失败: ' + error.message)
+    } catch (error) {
+      message.error('生成定本失败: ' + getApiErrorMessage(error))
     } finally {
       setGeneratingDefinitive(false)
     }
@@ -480,9 +481,9 @@ export function useFileCompare() {
         message.success(response.project ? '标点对比完成，项目已保存！' : '标点对比分析完成！')
 
         return { result: response, ...projectInfo }
-      } catch (error: any) {
+      } catch (error) {
         console.error('[标点对比] 错误:', error)
-        const errorMsg = error.message || '对比失败，请稀后重试'
+        const errorMsg = getApiErrorMessage(error, '对比失败，请稀后重试')
         message.error(errorMsg)
         return null
       } finally {
