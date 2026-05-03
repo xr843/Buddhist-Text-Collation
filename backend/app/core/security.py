@@ -1,7 +1,7 @@
 """
 安全相关配置和工具 - 增强版
 """
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 from jose import JWTError, jwt
 from passlib.context import CryptContext
@@ -35,9 +35,9 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -
     """
     to_encode = data.copy()
     if expires_delta:
-        expire = datetime.utcnow() + expires_delta
+        expire = datetime.now(timezone.utc) + expires_delta
     else:
-        expire = datetime.utcnow() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+        expire = datetime.now(timezone.utc) + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
 
     to_encode.update({"exp": expire})
     secret_key = settings.SECRET_KEY.get_secret_value()
@@ -52,7 +52,7 @@ def create_refresh_token(data: dict) -> str:
     注意：推荐使用 app.core.auth.create_refresh_token 代替
     """
     to_encode = data.copy()
-    expire = datetime.utcnow() + timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
+    expire = datetime.now(timezone.utc) + timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
     to_encode.update({"exp": expire})
     secret_key = settings.SECRET_KEY.get_secret_value()
     encoded_jwt = jwt.encode(to_encode, secret_key, algorithm=settings.ALGORITHM)
