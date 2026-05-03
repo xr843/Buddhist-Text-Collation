@@ -40,7 +40,7 @@ def extract_punctuation_differences(text1: str, text2: str) -> List[Dict]:
     clean_text1 = extract_clean_text(text1, punct_marks)
     clean_text2 = extract_clean_text(text2, punct_marks)
 
-    print(f"\n=== 后端标点差异提取调试 ===")
+    print("\n=== 后端标点差异提取调试 ===")
     print(f"版本1长度: {len(text1)}, 纯文本长度: {len(clean_text1)}")
     print(f"版本2长度: {len(text2)}, 纯文本长度: {len(clean_text2)}")
 
@@ -89,7 +89,7 @@ def extract_punctuation_differences(text1: str, text2: str) -> List[Dict]:
         )
 
     print(f"总共发现 {len(differences)} 处标点差异")
-    print(f"=== 调试结束 ===\n")
+    print("=== 调试结束 ===\n")
 
     return differences
 
@@ -104,7 +104,7 @@ def _extract_differences_exact(
     """
     differences = []
 
-    print(f"✓ 纯文本长度相同，使用精确位置比较算法")
+    print("✓ 纯文本长度相同，使用精确位置比较算法")
     punct_map1 = build_punctuation_map(text1, punct_marks)
     punct_map2 = build_punctuation_map(text2, punct_marks)
 

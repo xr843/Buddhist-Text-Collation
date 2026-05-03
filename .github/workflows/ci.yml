@@ -26,14 +26,13 @@ jobs:
           cache-dependency-path: backend/requirements.txt
 
       - name: Install ruff
-        run: pip install ruff
+        # Pinned so CI ratchet stays under our control (Dependabot will
+        # propose bumps via PR rather than silently breaking the gate).
+        run: pip install "ruff==0.15.12"
 
-      - name: Lint backend
+      - name: Lint backend (gating)
         working-directory: backend
-        run: |
-          ruff check app/ --output-format=github || true
-          # 当前不阻塞合并；待规范完善后改为 strict 模式
-          echo "::notice::ruff completed (advisory mode)"
+        run: ruff check app/ --output-format=github
 
       - name: Syntax check
         working-directory: backend

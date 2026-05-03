@@ -5,7 +5,6 @@ TEI XML格式导出服务
 from lxml import etree
 from datetime import datetime
 from typing import Dict, List, Any
-from io import BytesIO
 
 
 class TEIExportService:

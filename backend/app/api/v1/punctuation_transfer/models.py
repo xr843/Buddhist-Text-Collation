@@ -2,7 +2,7 @@
 标点迁移 API 数据模型
 """
 from pydantic import BaseModel, Field
-from typing import List, Optional
+from typing import List
 
 # 文本字数上限（5万字）
 MAX_TEXT_LENGTH = 50000

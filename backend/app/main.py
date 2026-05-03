@@ -132,8 +132,17 @@ async def health_check():
     return health_status
 
 
-# 注册API路由
-from app.api.v1 import comparison, multi_collation, cbeta, export, commentary, sutra_commentary, sutra_reading, punctuation_transfer
+# 注册API路由（late import 故意：路由模块依赖上面 settings/middleware 的初始化）
+from app.api.v1 import (  # noqa: E402
+    comparison,
+    multi_collation,
+    cbeta,
+    export,
+    commentary,
+    sutra_commentary,
+    sutra_reading,
+    punctuation_transfer,
+)
 
 # 文本对比API
 app.include_router(

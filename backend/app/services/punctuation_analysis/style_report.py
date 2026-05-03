@@ -11,7 +11,6 @@ from typing import List, Dict
 
 from .constants import (
     PUNCT_MARKS_SET,
-    PUNCTUATION_CATEGORIES,
     PUNCTUATION_NAMES,
     RESEARCH_CATEGORIES,
 )

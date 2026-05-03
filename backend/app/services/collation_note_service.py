@@ -11,7 +11,7 @@
 - TEI P5 Guidelines: Critical Apparatus
 """
 from dataclasses import dataclass
-from typing import List, Dict, Optional, Any
+from typing import List, Dict, Optional
 from enum import Enum
 from datetime import datetime
 import json
@@ -328,7 +328,7 @@ class CollationNoteService:
             parts.append(f"，{note.variant_version}无此字")
         elif note.note_type == NoteType.YANWEN:
             # 衍文：底本无，校本有
-            parts.append(f"（底本无）")
+            parts.append("（底本无）")
             parts.append(f"{note.variant_version}有“{note.variant_text or '□'}”字")
         elif note.note_type == NoteType.DAOWEN:
             # 倒文

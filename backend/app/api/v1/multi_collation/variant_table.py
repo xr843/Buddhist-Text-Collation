@@ -238,7 +238,7 @@ def generate_variant_table(
             try:
                 parts = str(pos_key).split("_")
                 return (int(parts[1]), int(parts[2]))
-            except:
+            except (IndexError, ValueError):
                 return (item.get("position", 0), 0)
 
     sorted_keys = sorted(position_variants.keys(), key=get_sort_key)

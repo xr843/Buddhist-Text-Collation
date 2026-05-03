@@ -11,7 +11,7 @@ from io import BytesIO
 from datetime import datetime
 
 from app.services.project_storage import project_storage, ProjectType
-from app.services.collation_note_generator import collation_note_generator, CollationNote
+from app.services.collation_note_generator import collation_note_generator
 
 router = APIRouter()
 

@@ -14,11 +14,10 @@ DILA 数据格式说明：
 - T1829: 瑜伽师地论略纂
 """
 
-import os
 import re
 import json
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 from dataclasses import dataclass, field, asdict
 from bs4 import BeautifulSoup
 import logging
@@ -329,7 +328,7 @@ if __name__ == '__main__':
     # 解析第1卷
     mappings = parser.build_mapping(1)
 
-    print(f"\n=== 卷1 映射数据样例 ===")
+    print("\n=== 卷1 映射数据样例 ===")
     for i, entry in enumerate(mappings[:10]):
         print(f"\n{i+1}. {entry.base_node_id}")
         print(f"   标题: {entry.base_head}")

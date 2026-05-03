@@ -5,9 +5,8 @@
 from sqlalchemy import create_engine, desc
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.pool import StaticPool
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict
 from pathlib import Path
-import json
 from datetime import datetime
 
 from app.models.local_storage import Base, Project, PhylogenyAnalysis, ExportHistory, SystemSettings

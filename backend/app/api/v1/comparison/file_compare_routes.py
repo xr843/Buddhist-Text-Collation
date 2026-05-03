@@ -13,7 +13,7 @@ from app.services.text_compare import text_comparison_service
 from app.services.punctuation_analysis import punctuation_analysis_service
 from app.services.file_parser import file_parser_service
 from app.services.collation_service import collation_service
-from app.services.project_storage import project_storage, ProjectType
+from app.services.project_storage import project_storage
 
 router = APIRouter()
 
@@ -90,12 +90,12 @@ async def compare_files(
         if force_mode == 'punctuation':
             use_punctuation_mode = True
             if not is_consistent:
-                print(f"[文件对比] 强制标点对比模式 - 检测到文字有差异，将忽略文字差异，专注标点分析")
+                print("[文件对比] 强制标点对比模式 - 检测到文字有差异，将忽略文字差异，专注标点分析")
             else:
-                print(f"[文件对比] 强制标点对比模式 - 文字一致")
+                print("[文件对比] 强制标点对比模式 - 文字一致")
         elif force_mode == 'collation':
             use_punctuation_mode = False
-            print(f"[文件对比] 强制使用文字校勘模式")
+            print("[文件对比] 强制使用文字校勘模式")
         else:
             use_punctuation_mode = is_consistent
             print(f"[文件对比] 自动检测 - 纯文本一致性: {is_consistent}")
@@ -140,7 +140,7 @@ async def _handle_punctuation_mode(
     project_title: Optional[str], project_id: Optional[str]
 ):
     """处理标点对比模式"""
-    print(f"[文件对比] 进入标点对比模式")
+    print("[文件对比] 进入标点对比模式")
 
     # 进行专业的标点差异分析
     punctuation_analysis = punctuation_analysis_service.analyze_punctuation_differences(
@@ -223,7 +223,7 @@ async def _handle_collation_mode(
     project_title: Optional[str], project_id: Optional[str]
 ):
     """处理文字校勘模式"""
-    print(f"[文件对比] 进入文字校勘模式")
+    print("[文件对比] 进入文字校勘模式")
 
     # 使用文字校勘服务
     collation_result = collation_service.collate_texts(

@@ -5,7 +5,6 @@ Redis 缓存工具
 import json
 import hashlib
 from typing import Optional, Any, Callable
-import asyncio
 from functools import wraps
 from redis import asyncio as aioredis
 

@@ -15,7 +15,6 @@
 """
 from typing import Dict, List, Any, Optional
 from pydantic import BaseModel
-from datetime import datetime
 
 
 class CollationNote(BaseModel):

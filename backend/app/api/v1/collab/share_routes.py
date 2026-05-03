@@ -2,21 +2,19 @@
 项目共享和协作API路由
 包括成员管理、评论、编辑历史
 """
-from fastapi import APIRouter, Depends, HTTPException, status, Query, Path
+from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, or_
+from sqlalchemy import select
 from typing import Optional
 
 from ....core.database import get_db
 from ....core.deps import (
     get_current_user_db,
     get_project_with_permission,
-    check_project_owner,
     require_project_admin,
 )
 from ....models.user import User
 from ....models.collaboration import (
-    CollabProject,
     MemberRole,
     Comment,
 )
@@ -32,7 +30,6 @@ from .schemas import (
     CommentResponse,
     HistoryListResponse,
     HistoryEntry,
-    MessageResponse,
 )
 
 router = APIRouter()

@@ -95,7 +95,9 @@ def parse_text_to_chars_and_gaps(text: str) -> Tuple[List[str], List[str]]:
     current_gap = ""
 
     # 定义标点集合 (包含空白)
-    puncts = set('。，、；：？！""''（）《》【】·…—\s\n\r\t \u3000')
+    # NB: 之前误把正则元字符 `\s` 写进字符集，会把字面 `\` 和 `s` 当成
+    # 标点；空白由后面的 `not char.strip()` 兜底，这里只列具体空白字符。
+    puncts = set('。，、；：？！""''（）《》【】·…—\n\r\t \u3000')
 
     for char in text:
         if char in puncts or not char.strip():  # 标点或空白

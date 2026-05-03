@@ -4,12 +4,12 @@
 """
 from fastapi import Depends, HTTPException, status, Path
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, or_
+from sqlalchemy import select
 from typing import Optional, List
 
 from .database import get_db
 from .auth import get_current_user, get_current_user_optional, TokenData
-from ..models.user import User, UserRole
+from ..models.user import User
 from ..models.collaboration import (
     CollabProject,
     ProjectMember,

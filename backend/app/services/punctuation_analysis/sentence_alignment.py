@@ -35,7 +35,7 @@ def generate_sentence_alignment(
     """
     punct_marks = PUNCT_MARKS_SET
 
-    print(f"\n=== 句子对齐调试（块对齐策略） ===")
+    print("\n=== 句子对齐调试（块对齐策略） ===")
 
     # 按句号分割成句子（保持原始文本！）
     sentences1 = split_into_sentences(text1)
@@ -59,7 +59,7 @@ def generate_sentence_alignment(
     )
 
     print(f"总共生成 {len(result)} 个对齐块")
-    print(f"=== 对齐调试结束 ===\n")
+    print("=== 对齐调试结束 ===\n")
 
     return result
 

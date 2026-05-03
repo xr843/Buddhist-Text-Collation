@@ -19,7 +19,7 @@ import re
 import json
 import logging
 from typing import List, Dict, Optional, Any
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 from pathlib import Path
 
 logging.basicConfig(level=logging.INFO)

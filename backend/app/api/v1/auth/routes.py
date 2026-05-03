@@ -5,13 +5,11 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, or_
 from datetime import datetime
-from typing import Optional
 
 from ....core.database import get_db
 from ....core.auth import (
     create_access_token,
     create_refresh_token,
-    verify_token,
     verify_refresh_token,
     get_current_user,
     TokenData,
