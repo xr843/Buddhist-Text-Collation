@@ -4,7 +4,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, or_
-from datetime import datetime
+from datetime import datetime, timezone
 
 from ....core.database import get_db
 from ....core.auth import (
@@ -94,7 +94,7 @@ async def register(
         institution=user_data.institution,
         role=UserRole.USER,
         is_active=True,
-        last_login=datetime.utcnow(),
+        last_login=datetime.now(timezone.utc),
     )
 
     db.add(new_user)
@@ -150,7 +150,7 @@ async def login(
         )
 
     # 更新最后登录时间
-    user.last_login = datetime.utcnow()
+    user.last_login = datetime.now(timezone.utc)
     await db.commit()
     await db.refresh(user)
 

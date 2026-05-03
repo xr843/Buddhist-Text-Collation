@@ -2,7 +2,7 @@
 数据库项目服务 - 协作项目的CRUD操作
 支持权限检查和编辑历史记录
 """
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, and_, or_, func, desc
@@ -158,7 +158,7 @@ class ProjectDBService:
             else:
                 project.data = data
 
-        project.updated_at = datetime.utcnow()
+        project.updated_at = datetime.now(timezone.utc)
 
         await self.db.commit()
         await self.db.refresh(project)
@@ -520,7 +520,7 @@ class ProjectDBService:
             return None
 
         comment.content = content
-        comment.updated_at = datetime.utcnow()
+        comment.updated_at = datetime.now(timezone.utc)
         await self.db.commit()
         await self.db.refresh(comment)
 
