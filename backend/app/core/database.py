@@ -72,7 +72,7 @@ async def init_db():
     try:
         async with engine.begin() as conn:
             # 导入所有模型以确保它们被注册
-            from app.models import user, project, task  # noqa
+            from app import models  # noqa: F401
 
             # 创建所有表（仅开发环境）
             if settings.ENV == Environment.DEVELOPMENT:
