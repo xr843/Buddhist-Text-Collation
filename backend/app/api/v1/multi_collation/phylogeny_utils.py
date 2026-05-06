@@ -6,6 +6,7 @@ from typing import List, Dict, Any, Optional
 
 from app.services.phylogeny_service import phylogeny_service
 from app.services.canon_locations import CanonLocationService
+from app.services.lineage_service import lineage_service
 
 
 def enrich_phylogeny_with_locations(
@@ -92,3 +93,20 @@ def calculate_phylogeny_analysis(
         collation_texts=collation_texts,
         custom_systems=custom_systems,
     )
+
+
+def enrich_phylogeny_with_lineage(phylogeny_data: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Add version-lineage graph data to a phylogeny payload when it is missing.
+
+    Collaboration projects can be opened from older saved payloads. They may
+    have similarity/geography data but no ``lineage`` key yet.
+    """
+    if not isinstance(phylogeny_data, dict):
+        return phylogeny_data
+    if phylogeny_data.get("lineage"):
+        return phylogeny_data
+
+    enriched = dict(phylogeny_data)
+    enriched["lineage"] = lineage_service.infer_lineage(enriched)
+    return enriched

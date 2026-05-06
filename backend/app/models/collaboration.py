@@ -13,6 +13,10 @@ from datetime import datetime
 from ..core.database import Base
 
 
+def enum_values(enum_cls):
+    return [item.value for item in enum_cls]
+
+
 class CollabProjectType(str, enum.Enum):
     """协作项目类型"""
     MULTI_COLLATION = "multi_collation"  # 多版本校勘
@@ -69,9 +73,21 @@ class CollabProject(Base):
     owner_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
 
     # 项目类型和状态
-    project_type = Column(Enum(CollabProjectType), nullable=False, default=CollabProjectType.MULTI_COLLATION)
-    status = Column(Enum(CollabProjectStatus), nullable=False, default=CollabProjectStatus.IN_PROGRESS)
-    visibility = Column(Enum(ProjectVisibility), nullable=False, default=ProjectVisibility.PRIVATE)
+    project_type = Column(
+        Enum(CollabProjectType, values_callable=enum_values, native_enum=False, length=32),
+        nullable=False,
+        default=CollabProjectType.MULTI_COLLATION,
+    )
+    status = Column(
+        Enum(CollabProjectStatus, values_callable=enum_values, native_enum=False, length=32),
+        nullable=False,
+        default=CollabProjectStatus.IN_PROGRESS,
+    )
+    visibility = Column(
+        Enum(ProjectVisibility, values_callable=enum_values, native_enum=False, length=32),
+        nullable=False,
+        default=ProjectVisibility.PRIVATE,
+    )
 
     # 核心数据（JSONB）- 包含 base, collations, summary, variant_table, phylogeny, decisions
     data = Column(JSONB, default={})
@@ -109,7 +125,11 @@ class ProjectMember(Base):
     id = Column(Integer, primary_key=True, index=True)
     project_id = Column(String(50), ForeignKey("collab_projects.id", ondelete="CASCADE"), nullable=False)
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    role = Column(Enum(MemberRole), nullable=False, default=MemberRole.VIEWER)
+    role = Column(
+        Enum(MemberRole, values_callable=enum_values, native_enum=False, length=32),
+        nullable=False,
+        default=MemberRole.VIEWER,
+    )
 
     # 邀请者
     invited_by = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
@@ -178,7 +198,10 @@ class EditHistory(Base):
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
 
     # 操作类型
-    action = Column(Enum(EditAction), nullable=False)
+    action = Column(
+        Enum(EditAction, values_callable=enum_values, native_enum=False, length=32),
+        nullable=False,
+    )
 
     # 变更详情（JSONB）
     # 例如: {"field": "decisions", "variant_index": 5, "old_value": null, "new_value": "底本"}

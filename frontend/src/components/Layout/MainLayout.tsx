@@ -18,6 +18,7 @@ import type { MenuProps } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useSettingsStore } from '../../store/settingsStore'
 import { supportedLanguages } from '../../i18n'
+import UserMenu from '../auth/UserMenu'
 
 const { Header, Content, Sider } = Layout
 
@@ -145,6 +146,8 @@ export default function MainLayout() {
               onClick={toggleZenMode}
             />
           </Tooltip>
+
+          <UserMenu />
         </Space>
       </Header>
 

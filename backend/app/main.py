@@ -134,6 +134,9 @@ async def health_check():
 
 # 注册API路由（late import 故意：路由模块依赖上面 settings/middleware 的初始化）
 from app.api.v1 import (  # noqa: E402
+    auth,
+    admin,
+    collab,
     comparison,
     multi_collation,
     cbeta,
@@ -143,6 +146,32 @@ from app.api.v1 import (  # noqa: E402
     sutra_reading,
     punctuation_transfer,
     citation,
+)
+
+# 认证API
+app.include_router(
+    auth.router,
+    prefix=settings.API_V1_PREFIX,
+    tags=["认证"]
+)
+
+# 管理员API
+app.include_router(
+    admin.router,
+    prefix=settings.API_V1_PREFIX,
+    tags=["管理员"]
+)
+
+# 协作项目API
+app.include_router(
+    collab.project_router,
+    prefix=f"{settings.API_V1_PREFIX}/collab",
+    tags=["协作"]
+)
+app.include_router(
+    collab.share_router,
+    prefix=f"{settings.API_V1_PREFIX}/collab",
+    tags=["协作"]
 )
 
 # 文本对比API
