@@ -31,7 +31,7 @@ python-docx==1.1.0
 lxml>=6.1.0,<7  # CVE-2026-41066
 PyPDF2==3.0.1
 beautifulsoup4==4.12.2
-markdown>=3.8.1,<4  # CVE-2025-69534
+markdown>=3.10.2,<4  # CVE-2025-69534
 
 # 工具库
 httpx==0.25.2
