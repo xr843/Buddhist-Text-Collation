@@ -1,14 +1,14 @@
 # FastAPI 核心
 fastapi>=0.117.0,<0.121  # CVE-2024-24762 + transitively pulls starlette>=0.47 (CVE-2024-47874, CVE-2025-54121)
-uvicorn[standard]==0.24.0
+uvicorn[standard]==0.46.0
 pydantic>=2.9,<3  # required by fastapi 0.117+ for openapi $ref handling
 pydantic-settings>=2.5,<3
 
 # 数据库
-sqlalchemy==2.0.23
-alembic==1.12.1
-psycopg2-binary==2.9.9  # PostgreSQL
-asyncpg==0.29.0
+sqlalchemy==2.0.49
+alembic==1.18.4
+psycopg2-binary==2.9.12  # PostgreSQL
+asyncpg==0.31.0
 
 # 异步任务和缓存
 redis>=5.3.1  # 包含异步支持
@@ -17,26 +17,26 @@ redis>=5.3.1  # 包含异步支持
 python-jose[cryptography]>=3.4.0
 passlib[bcrypt]==1.7.4
 python-multipart>=0.0.18
-bcrypt==4.1.1
+bcrypt==4.3.0
 
 # 速率限制和中间件
 slowapi==0.1.9
 
 # 文本处理
-python-Levenshtein==0.23.0
+python-Levenshtein==0.27.3
 chardet==5.2.0
 
 # 文件处理（导入：txt/docx/pdf-text/html/md；导出：docx/TEI XML）
-python-docx==1.1.0
+python-docx==1.2.0
 lxml>=6.1.0,<7  # CVE-2026-41066
 PyPDF2==3.0.1
-beautifulsoup4==4.12.2
+beautifulsoup4==4.14.3
 markdown>=3.10.2,<4  # CVE-2025-69534
 
 # 工具库
-httpx==0.25.2
+httpx==0.28.1
 python-dotenv>=1.2.2,<2  # CVE-2026-28684
-loguru==0.7.2
+loguru==0.7.3
 
 # 测试
 pytest>=8.4.2,<9  # CVE-2025-71176 (held at <9 for pytest-asyncio compat)
