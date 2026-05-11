@@ -3,7 +3,7 @@ fastapi>=0.117.0,<0.121  # CVE-2024-24762 + transitively pulls starlette>=0.47 (
 uvicorn[standard]==0.46.0
 pydantic>=2.9,<3  # required by fastapi 0.117+ for openapi $ref handling
 pydantic-settings>=2.5,<3
-email-validator>=2.2,<3  # required by pydantic.EmailStr in auth schemas
+email-validator>=2.3.0,<3  # required by pydantic.EmailStr in auth schemas
 
 # 数据库
 sqlalchemy==2.0.49
