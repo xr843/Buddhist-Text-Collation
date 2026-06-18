@@ -1,6 +1,9 @@
 /**
- * 把图片按「相对比例选区」裁剪成一个新的 PNG File（客户端 canvas 实现）。
+ * 把图片按「相对比例选区」裁剪成一个新的 JPEG File（客户端 canvas 实现）。
  * 用于框选区域 OCR：只把选区送给后端识别，绕开引擎"只认主文本块"的版面裁切。
+ *
+ * 用 JPEG 而非 PNG：实测上传体积是识别耗时的主因——同一张图 PNG(≈1.9MB) 要 33s，
+ * JPEG q0.92(≈0.4MB) 只要 ~10s，且识别字数基本不变（427↔428，精度不损）。
  *
  * 关键：向选区外扩一圈「牺牲边距」（取真实图像周边像素，越界则截到图边）再裁。
  * 因为 gj.cool 引擎对收到的每张图都会做版面检测、裁掉一圈边距；若紧贴选区裁，
@@ -53,10 +56,11 @@ export async function cropToFile(file: File, region: Region, name: string): Prom
     const blob: Blob = await new Promise((resolve, reject) =>
       canvas.toBlob(
         (b) => (b ? resolve(b) : reject(new Error('图片裁剪失败'))),
-        'image/png'
+        'image/jpeg',
+        0.92
       )
     )
-    return new File([blob], `${name}-region.png`, { type: 'image/png' })
+    return new File([blob], `${name}-region.jpg`, { type: 'image/jpeg' })
   } finally {
     URL.revokeObjectURL(url)
   }
