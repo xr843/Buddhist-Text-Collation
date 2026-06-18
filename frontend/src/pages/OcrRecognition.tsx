@@ -26,9 +26,13 @@ import {
   CopyOutlined,
   DownloadOutlined,
   SendOutlined,
+  ClearOutlined,
+  PictureOutlined,
 } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import { ocrApi } from '../services/api'
+import RegionSelectImage, { type Region } from './ocr/RegionSelectImage'
+import { cropToFile } from './ocr/cropImage'
 
 const { Dragger } = Upload
 const { TextArea } = Input
@@ -46,6 +50,7 @@ export default function OcrRecognition() {
   const [enabled, setEnabled] = useState<boolean | null>(null)
   const [file, setFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string>('')
+  const [region, setRegion] = useState<Region | null>(null)
   const [recognizing, setRecognizing] = useState(false)
   const [text, setText] = useState('')
   const [stats, setStats] = useState<Stats>({})
@@ -70,17 +75,25 @@ export default function OcrRecognition() {
       if (previewUrl) URL.revokeObjectURL(previewUrl)
       setFile(f)
       setPreviewUrl(URL.createObjectURL(f))
+      setRegion(null)
       setText('')
       setStats({})
     },
     [previewUrl]
   )
 
+  const baseName = useCallback(() => {
+    const raw = file?.name?.replace(/\.[^.]+$/, '').trim()
+    return raw || t('ocr.defaultName')
+  }, [file, t])
+
   const handleRecognize = useCallback(async () => {
     if (!file) return
     setRecognizing(true)
     try {
-      const result = await ocrApi.recognize(file)
+      // 有框选则只识别选区（裁出来单独发，绕开引擎"只认主文本块"的版面裁切）
+      const target = region ? await cropToFile(file, region, baseName()) : file
+      const result = await ocrApi.recognize(target)
       setText(result.text || '')
       setStats({ charNumber: result.char_number, lineNumber: result.line_number })
       if (!result.text) {
@@ -93,12 +106,7 @@ export default function OcrRecognition() {
     } finally {
       setRecognizing(false)
     }
-  }, [file, t])
-
-  const baseName = useCallback(() => {
-    const raw = file?.name?.replace(/\.[^.]+$/, '').trim()
-    return raw || t('ocr.defaultName')
-  }, [file, t])
+  }, [file, region, baseName, t])
 
   const handleCopy = useCallback(async () => {
     try {
@@ -169,36 +177,63 @@ export default function OcrRecognition() {
       )}
 
       <Row gutter={16}>
-        {/* 左：上传 + 预览 */}
+        {/* 左：上传 + 预览 + 框选 */}
         <Col xs={24} md={11}>
           <Card title={t('ocr.uploadTitle')} size="small">
-            <Dragger
-              accept="image/*"
-              multiple={false}
-              showUploadList={false}
-              disabled={enabled === false}
-              beforeUpload={(f) => {
-                onSelectFile(f as unknown as File)
-                return false // 阻止自动上传，由「开始识别」触发
-              }}
-              fileList={[] as UploadFile[]}
-            >
-              {previewUrl ? (
-                <img
-                  src={previewUrl}
-                  alt="preview"
-                  style={{ maxWidth: '100%', maxHeight: 360, objectFit: 'contain' }}
-                />
-              ) : (
-                <>
-                  <p className="ant-upload-drag-icon">
-                    <InboxOutlined />
-                  </p>
-                  <p className="ant-upload-text">{t('ocr.dragHint')}</p>
-                  <p className="ant-upload-hint">{t('ocr.formatHint')}</p>
-                </>
-              )}
-            </Dragger>
+            {!previewUrl ? (
+              <Dragger
+                accept="image/*"
+                multiple={false}
+                showUploadList={false}
+                disabled={enabled === false}
+                beforeUpload={(f) => {
+                  onSelectFile(f as unknown as File)
+                  return false // 阻止自动上传，由「开始识别」触发
+                }}
+                fileList={[] as UploadFile[]}
+              >
+                <p className="ant-upload-drag-icon">
+                  <InboxOutlined />
+                </p>
+                <p className="ant-upload-text">{t('ocr.dragHint')}</p>
+                <p className="ant-upload-hint">{t('ocr.formatHint')}</p>
+              </Dragger>
+            ) : (
+              <>
+                <div style={{ textAlign: 'center' }}>
+                  <RegionSelectImage
+                    src={previewUrl}
+                    region={region}
+                    onRegionChange={setRegion}
+                  />
+                </div>
+                <Text type="secondary" style={{ display: 'block', marginTop: 8, fontSize: 12 }}>
+                  {region ? t('ocr.regionSelectedHint') : t('ocr.dragSelectHint')}
+                </Text>
+                <Space style={{ marginTop: 8 }} wrap>
+                  <Upload
+                    accept="image/*"
+                    multiple={false}
+                    showUploadList={false}
+                    disabled={enabled === false}
+                    beforeUpload={(f) => {
+                      onSelectFile(f as unknown as File)
+                      return false
+                    }}
+                    fileList={[] as UploadFile[]}
+                  >
+                    <Button icon={<PictureOutlined />}>{t('ocr.reselect')}</Button>
+                  </Upload>
+                  <Button
+                    icon={<ClearOutlined />}
+                    disabled={!region}
+                    onClick={() => setRegion(null)}
+                  >
+                    {t('ocr.clearSelection')}
+                  </Button>
+                </Space>
+              </>
+            )}
 
             <Button
               type="primary"
@@ -209,7 +244,7 @@ export default function OcrRecognition() {
               style={{ marginTop: 12 }}
               block
             >
-              {t('ocr.startRecognize')}
+              {region ? t('ocr.startRecognizeRegion') : t('ocr.startRecognize')}
             </Button>
           </Card>
         </Col>
