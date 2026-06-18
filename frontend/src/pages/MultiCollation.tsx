@@ -357,6 +357,8 @@ export default function MultiCollation() {
     const state = location.state as
       | {
           fromCBETA?: boolean
+          prefill?: boolean
+          source?: string
           baseText?: string
           baseName?: string
           collationText?: string
@@ -364,8 +366,10 @@ export default function MultiCollation() {
         }
       | null
 
-    if (state?.fromCBETA) {
-      const toastKey = `multiCollation:prefill:cbeta:${location.key || 'no-key'}`
+    // fromCBETA 为旧的 CBETA 导入入口；prefill 为通用预填入口（如古籍OCR）
+    if (state?.fromCBETA || state?.prefill) {
+      const src = state.source || (state.fromCBETA ? 'cbeta' : 'prefill')
+      const toastKey = `multiCollation:prefill:${src}:${location.key || 'no-key'}`
       if (sessionStorage.getItem(toastKey) !== '1') {
         sessionStorage.setItem(toastKey, '1')
 

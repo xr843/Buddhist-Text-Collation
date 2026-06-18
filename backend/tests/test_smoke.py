@@ -34,9 +34,9 @@ def test_openapi_schema(client):
     assert any("/comparison" in p or "/multi-collation" in p for p in paths)
 
 
-def test_no_ocr_routes_left(client):
-    """OCR 模块在 v0.1.0 已下线——确保对应路由不存在。"""
+def test_ocr_routes_present(client):
+    """古籍酷 OCR 模块已重新接入——确保关键路由存在。"""
     resp = client.get("/openapi.json")
     paths = resp.json().get("paths", {})
-    for p in paths:
-        assert "/ocr/" not in p, f"unexpected OCR route still present: {p}"
+    assert "/api/v1/ocr/status" in paths
+    assert "/api/v1/ocr/recognize" in paths

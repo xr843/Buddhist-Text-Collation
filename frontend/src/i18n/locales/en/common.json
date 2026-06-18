@@ -5,6 +5,7 @@
   },
   "menu": {
     "workspace": "Workbench",
+    "ocr": "Ancient OCR",
     "cbetaImport": "CBETA Import",
     "multiCollation": "Multi-edition Collation",
     "punctuationCompare": "Punctuation Diff",
@@ -16,6 +17,30 @@
     "zenMode": "Focus mode",
     "exitZenMode": "Exit focus mode",
     "switchLanguage": "Switch language"
+  },
+  "ocr": {
+    "title": "Ancient Text OCR",
+    "ready": "Ready",
+    "notConfigured": "OCR not configured",
+    "notConfiguredHint": "Set the gj.cool credentials in backend/.env (GJCOOL_OCR_BASE_URL / GJCOOL_OCR_APIID / GJCOOL_OCR_PASSWORD) and restart the backend.",
+    "uploadTitle": "Upload image",
+    "dragHint": "Click or drag an image of an ancient text here",
+    "formatHint": "JPEG / PNG / TIFF / WebP / HEIC, etc. — up to 20MB each",
+    "startRecognize": "Recognize",
+    "resultTitle": "Result (editable)",
+    "resultPlaceholder": "Recognized text will appear here and can be edited.",
+    "stats": "{{chars}} chars · {{lines}} lines",
+    "copy": "Copy",
+    "download": "Download .txt",
+    "sendToCollation": "Send to collation",
+    "sendAsBase": "As base text",
+    "sendAsCollation": "As witness",
+    "defaultName": "OCR result",
+    "recognizeSuccess": "Recognition complete",
+    "recognizeFailed": "Recognition failed",
+    "emptyResult": "No text recognized",
+    "copied": "Copied to clipboard",
+    "copyFailed": "Copy failed"
   },
   "common": {
     "loading": "Loading…",

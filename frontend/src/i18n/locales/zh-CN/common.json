@@ -5,6 +5,7 @@
   },
   "menu": {
     "workspace": "工作台",
+    "ocr": "古籍OCR",
     "cbetaImport": "CBETA导入",
     "multiCollation": "版本对勘",
     "punctuationCompare": "标点版本对比",
@@ -16,6 +17,30 @@
     "zenMode": "专注模式",
     "exitZenMode": "退出专注模式",
     "switchLanguage": "切换语言"
+  },
+  "ocr": {
+    "title": "古籍 OCR 识别",
+    "ready": "已就绪",
+    "notConfigured": "OCR 未配置",
+    "notConfiguredHint": "请在 backend/.env 填写古籍酷凭据（GJCOOL_OCR_BASE_URL / GJCOOL_OCR_APIID / GJCOOL_OCR_PASSWORD）后重启后端。",
+    "uploadTitle": "上传图片",
+    "dragHint": "点击或拖拽古籍图片到此处",
+    "formatHint": "支持 JPEG / PNG / TIFF / WebP / HEIC 等，单张 ≤ 20MB",
+    "startRecognize": "开始识别",
+    "resultTitle": "识别结果（可编辑校正）",
+    "resultPlaceholder": "识别后的文本将显示在这里，可直接编辑校正。",
+    "stats": "字数 {{chars}} · 行数 {{lines}}",
+    "copy": "复制",
+    "download": "下载 .txt",
+    "sendToCollation": "送入版本对勘",
+    "sendAsBase": "作为底本",
+    "sendAsCollation": "作为校本",
+    "defaultName": "OCR识别结果",
+    "recognizeSuccess": "识别完成",
+    "recognizeFailed": "识别失败",
+    "emptyResult": "未识别到文字",
+    "copied": "已复制到剪贴板",
+    "copyFailed": "复制失败"
   },
   "common": {
     "loading": "加载中…",

@@ -13,6 +13,7 @@ import {
   ReadOutlined,
   SwapOutlined,
   GlobalOutlined,
+  ScanOutlined,
 } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { useTranslation } from 'react-i18next'
@@ -53,6 +54,7 @@ export default function MainLayout() {
 
   const menuItems: MenuItem[] = [
     getItem(t('menu.workspace'), '/workspace', <AppstoreOutlined />),
+    getItem(t('menu.ocr'), '/ocr', <ScanOutlined />),
     getItem(t('menu.cbetaImport'), '/cbeta-import', <DatabaseOutlined />),
     getItem(t('menu.multiCollation'), '/multi-collation', <BookOutlined />),
     getItem(t('menu.punctuationCompare'), '/punctuation-compare', <DiffOutlined />),
