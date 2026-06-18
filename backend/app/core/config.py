@@ -105,6 +105,31 @@ class Settings(BaseSettings):
     MAX_UPLOAD_SIZE: int = 10 * 1024 * 1024  # 10MB
     ALLOWED_EXTENSIONS: set = {".txt", ".docx", ".pdf"}
 
+    # 古籍酷（gj.cool）OCR 配置
+    # 注：base_url / apiid 从古籍酷「账户设置」页获取（apiid 非用户名）
+    OCR_ENABLED: bool = Field(default=True, description="是否启用古籍酷 OCR 集成（凭据未填则自动不可用）")
+    GJCOOL_OCR_BASE_URL: str = Field(default="", description="古籍酷 OCR API 专属端点，如 https://xxx.gj.cool")
+    GJCOOL_OCR_APIID: str = Field(default="", description="古籍酷 apiid（账户页获取，非用户名）")
+    GJCOOL_OCR_PASSWORD: SecretStr = Field(default=SecretStr(""), description="古籍酷账号密码")
+    GJCOOL_OCR_TIMEOUT: int = Field(default=120, description="单次 OCR 请求超时（秒）")
+    OCR_MAX_UPLOAD_SIZE: int = Field(default=20 * 1024 * 1024, description="OCR 上传图片大小上限（字节，默认 20MB）")
+    OCR_ALLOWED_CONTENT_TYPES: List[str] = Field(
+        default_factory=lambda: [
+            "image/jpeg", "image/png", "image/tiff", "image/webp",
+            "image/heic", "image/heif", "image/jp2", "image/avif",
+        ],
+        description="OCR 允许的图片 MIME 类型",
+    )
+
+    @property
+    def ocr_configured(self) -> bool:
+        """base_url / apiid / password 三者齐全才算已配置。"""
+        return bool(
+            self.GJCOOL_OCR_BASE_URL
+            and self.GJCOOL_OCR_APIID
+            and self.GJCOOL_OCR_PASSWORD.get_secret_value()
+        )
+
     # 导出配置
     EXPORT_DIR: Path = Path("exports")
     EXPORT_EXPIRY_HOURS: int = 24  # 导出文件保留时间

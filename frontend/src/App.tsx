@@ -10,6 +10,7 @@ const Comparison = lazy(() => import('./pages/Comparison'))
 const ComparisonNew = lazy(() => import('./pages/ComparisonNew'))
 const MultiCollation = lazy(() => import('./pages/MultiCollation'))
 const CBETAImport = lazy(() => import('./pages/CBETAImport'))
+const OcrRecognition = lazy(() => import('./pages/OcrRecognition'))
 const SutraReaderPage = lazy(() => import('./pages/SutraReaderPage'))
 const SutraParallelReader = lazy(() => import('./pages/SutraParallelReader'))
 const PunctuationTransfer = lazy(() => import('./pages/PunctuationTransfer'))
@@ -47,6 +48,7 @@ function App() {
                 <Route path="punctuation-compare" element={<Comparison />} />
                 <Route path="two-version-collation" element={<ComparisonNew />} />
                 <Route path="multi-collation" element={<MultiCollation />} />
+                <Route path="ocr" element={<OcrRecognition />} />
                 <Route path="cbeta-import" element={<CBETAImport />} />
                 <Route path="cbeta/read/:sutraId" element={<SutraReaderPage />} />
                 <Route path="sutra-parallel-reader" element={<SutraParallelReader />} />

@@ -144,4 +144,35 @@ export const comparisonApi = {
   },
 }
 
+/**
+ * 古籍酷 OCR API（图片 → 识别文本，后端代理）
+ */
+export interface OcrRecognizeResult {
+  success: boolean
+  text: string
+  char_number?: number | null
+  line_number?: number | null
+  width?: number | null
+  height?: number | null
+}
+
+export const ocrApi = {
+  /** OCR 是否已配置可用 */
+  async status(): Promise<{ enabled: boolean }> {
+    const response = await api.get<{ enabled: boolean }>('/api/v1/ocr/status')
+    return response.data
+  },
+
+  /** 对单张图片做古籍 OCR */
+  async recognize(file: File): Promise<OcrRecognizeResult> {
+    const formData = new FormData()
+    formData.append('img', file)
+    const response = await api.post<OcrRecognizeResult>('/api/v1/ocr/recognize', formData, {
+      timeout: 180000,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    return response.data
+  },
+}
+
 export default api

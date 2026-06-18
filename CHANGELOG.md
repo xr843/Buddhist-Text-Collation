@@ -11,6 +11,7 @@ and [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **古籍OCR / Ancient OCR** —— 新增「古籍OCR」tab（工作台与 CBETA 导入之间），通过古籍酷（gj.cool）OCR API 实现图片→文字；结果可编辑、复制 / 下载 .txt / 一键送入版本对勘。后端代理：gj.cool 凭据与 access_token 全在服务端，前端只上传图片。需在 `backend/.env` 配置 `GJCOOL_OCR_BASE_URL` / `GJCOOL_OCR_APIID` / `GJCOOL_OCR_PASSWORD` 后启用。
 - `examples/classical-chinese-sample/` 公开样本 + README "3 分钟试用" 章节 (#52)
 - 标准 English README + ROADMAP（`README.en.md` / `ROADMAP.en.md`）+ 顶部语言切换 (#53)
 - `docker-compose.yml` 新增 `postgres:15-alpine` 主库服务，`docker-compose up -d --build` 真正可用 (#55)

@@ -55,6 +55,14 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.error(f"❌ 关闭 CBETA HTTP 客户端失败: {e}")
 
+    # 关闭古籍酷 OCR HTTP 客户端
+    try:
+        from app.services.gjcool_ocr_service import GjcoolOCRService
+        await GjcoolOCRService.close_http_client()
+        logger.info("✅ 古籍酷 OCR HTTP 客户端已关闭")
+    except Exception as e:
+        logger.error(f"❌ 关闭古籍酷 OCR HTTP 客户端失败: {e}")
+
     # 关闭 Redis 连接
     try:
         await close_cache()
@@ -146,6 +154,7 @@ from app.api.v1 import (  # noqa: E402
     sutra_reading,
     punctuation_transfer,
     citation,
+    ocr,
 )
 
 # 认证API
@@ -235,6 +244,13 @@ app.include_router(
     citation.router,
     prefix=settings.API_V1_PREFIX,
     tags=["引用"]
+)
+
+# 古籍酷 OCR API
+app.include_router(
+    ocr.router,
+    prefix=f"{settings.API_V1_PREFIX}/ocr",
+    tags=["古籍OCR"]
 )
 
 
