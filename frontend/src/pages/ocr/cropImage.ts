@@ -36,9 +36,12 @@ export async function cropToFile(file: File, region: Region, name: string): Prom
     const sw = Math.max(1, Math.round(region.fw * W))
     const sh = Math.max(1, Math.round(region.fh * H))
 
-    // 牺牲边距：约选区尺寸的 6%，下限 32px、上限 200px（覆盖引擎的边距裁切 + 半截列）
-    const padX = clamp(Math.round(sw * 0.06), 32, 200)
-    const padY = clamp(Math.round(sh * 0.06), 32, 200)
+    // 牺牲边距：按选区尺寸成比例（8%），下限 12px、上限 120px。
+    // 关键是比例而非固定下限：窄选区（如单列）→ 极小边距，不会带进相邻列；
+    // 宽选区（框边可能切穿外缘列）→ 大边距，把被切的边列补全。
+    // 实测：窄单列 pad12 → 仅识别该列无邻列；宽框 pad120 → 完整救回被切的最左列。
+    const padX = clamp(Math.round(sw * 0.08), 12, 120)
+    const padY = clamp(Math.round(sh * 0.08), 12, 120)
     const x0 = clamp(sx - padX, 0, W)
     const y0 = clamp(sy - padY, 0, H)
     const x1 = clamp(sx + sw + padX, 0, W)
