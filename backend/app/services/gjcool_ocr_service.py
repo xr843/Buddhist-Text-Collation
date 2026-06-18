@@ -2,8 +2,13 @@
 古籍酷（gj.cool）OCR 服务
 
 封装：登录拿 access_token（内存缓存，官方有效期 24h）+ 调用古籍 OCR `/ocr_pro`。
-凭据（base_url / apiid / password）全部来自服务端配置（backend/.env），
-绝不下发到前端——前端只把图片传给我们自己的 `/api/v1/ocr/recognize`。
+凭据全部来自服务端配置（backend/.env），绝不下发到前端——前端只把图片传给我们
+自己的 `/api/v1/ocr/recognize`。
+
+注意 gj.cool 的两段式拓扑：
+- 登录是中心化的（`GJCOOL_OCR_LOGIN_BASE_URL`，默认 https://ocr.gj.cool）；
+- 识别在账户专属 worker（`GJCOOL_OCR_BASE_URL`，如 https://ap2.jzd.cool:9043，
+  端点见账户「演示」页 OCR 的 URL 下拉），登录拿到的 token 在该 worker 上通用。
 """
 from __future__ import annotations
 
@@ -40,11 +45,24 @@ class GjcoolOCRService:
         return settings.OCR_ENABLED and settings.ocr_configured
 
     @classmethod
+    def _login_url(cls) -> str:
+        base = (settings.GJCOOL_OCR_LOGIN_BASE_URL or settings.GJCOOL_OCR_BASE_URL).rstrip("/")
+        return f"{base}/ocr_login"
+
+    @classmethod
+    def _recognize_url(cls) -> str:
+        return f"{settings.GJCOOL_OCR_BASE_URL.rstrip('/')}/ocr_pro"
+
+    @classmethod
     def _get_http_client(cls) -> httpx.AsyncClient:
         if cls._http_client is None or cls._http_client.is_closed:
             cls._http_client = httpx.AsyncClient(
-                base_url=settings.GJCOOL_OCR_BASE_URL.rstrip("/"),
                 timeout=httpx.Timeout(settings.GJCOOL_OCR_TIMEOUT, connect=10.0),
+                # gj.cool 是公网 API，直连即可；不继承环境里的 HTTP(S)_PROXY / ALL_PROXY
+                # （开发机常设科学上网代理，把国内站路由进去既无必要又会触发 SOCKS 依赖问题）
+                trust_env=False,
+                # worker 端证书可能临时过期/不被信任；由配置决定是否校验
+                verify=settings.GJCOOL_OCR_VERIFY_SSL,
             )
         return cls._http_client
 
@@ -60,7 +78,7 @@ class GjcoolOCRService:
         client = cls._get_http_client()
         try:
             resp = await client.post(
-                "/ocr_login",
+                cls._login_url(),
                 data={
                     "apiid": settings.GJCOOL_OCR_APIID,
                     "password": settings.GJCOOL_OCR_PASSWORD.get_secret_value(),
@@ -107,9 +125,11 @@ class GjcoolOCRService:
 
         client = cls._get_http_client()
 
+        url = cls._recognize_url()
+
         async def _call(token: str) -> httpx.Response:
             return await client.post(
-                "/ocr_pro",
+                url,
                 headers={"Authorization": f"gjcool {token}"},
                 files={"img": (filename, img_bytes, content_type)},
             )

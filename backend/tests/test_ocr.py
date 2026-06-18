@@ -9,15 +9,17 @@ from __future__ import annotations
 from app.services.gjcool_ocr_service import GjcoolOCRService
 
 
-def test_status_disabled_when_unconfigured(client):
-    """未配置凭据时 status 返回 enabled=False。"""
+def test_status_disabled_when_unconfigured(client, monkeypatch):
+    """未配置凭据时 status 返回 enabled=False（用 monkeypatch 强制未配置，避免依赖本地 .env）。"""
+    monkeypatch.setattr(GjcoolOCRService, "is_configured", lambda: False)
     resp = client.get("/api/v1/ocr/status")
     assert resp.status_code == 200
     assert resp.json() == {"enabled": False}
 
 
-def test_recognize_503_when_unconfigured(client):
+def test_recognize_503_when_unconfigured(client, monkeypatch):
     """未配置时 recognize 返回 503。"""
+    monkeypatch.setattr(GjcoolOCRService, "is_configured", lambda: False)
     resp = client.post(
         "/api/v1/ocr/recognize",
         files={"img": ("x.png", b"\x89PNG\r\n\x1a\n", "image/png")},

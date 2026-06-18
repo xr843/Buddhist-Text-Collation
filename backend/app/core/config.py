@@ -108,9 +108,11 @@ class Settings(BaseSettings):
     # 古籍酷（gj.cool）OCR 配置
     # 注：base_url / apiid 从古籍酷「账户设置」页获取（apiid 非用户名）
     OCR_ENABLED: bool = Field(default=True, description="是否启用古籍酷 OCR 集成（凭据未填则自动不可用）")
-    GJCOOL_OCR_BASE_URL: str = Field(default="", description="古籍酷 OCR API 专属端点，如 https://xxx.gj.cool")
+    GJCOOL_OCR_BASE_URL: str = Field(default="", description="识别 worker 端点 base（/ocr_pro），如 https://ap2.jzd.cool:9043；见账户『演示』页 OCR URL")
+    GJCOOL_OCR_LOGIN_BASE_URL: str = Field(default="https://ocr.gj.cool", description="登录 base（/ocr_login，中心化认证）；留空则用 GJCOOL_OCR_BASE_URL")
     GJCOOL_OCR_APIID: str = Field(default="", description="古籍酷 apiid（账户页获取，非用户名）")
     GJCOOL_OCR_PASSWORD: SecretStr = Field(default=SecretStr(""), description="古籍酷账号密码")
+    GJCOOL_OCR_VERIFY_SSL: bool = Field(default=True, description="是否校验 worker TLS 证书（worker 证书临时过期时设 false）")
     GJCOOL_OCR_TIMEOUT: int = Field(default=120, description="单次 OCR 请求超时（秒）")
     OCR_MAX_UPLOAD_SIZE: int = Field(default=20 * 1024 * 1024, description="OCR 上传图片大小上限（字节，默认 20MB）")
     OCR_ALLOWED_CONTENT_TYPES: List[str] = Field(
