@@ -13,8 +13,8 @@
 ## 当前状态 / Current
 
 **v0.2.0 release candidate** — 工程基础设施、测试门禁、Docker/Alembic、
-双语入口、OCR 集成与文档基线已经完成。正式发布前仍需要补齐公开展示素材：
-GitHub Social Preview 与主要功能"满状态"截图。
+双语入口、OCR 集成、公开展示素材与安全依赖清理已经完成。正式发布前仅剩
+tag / GitHub Release 流程。
 
 完整变更见 [`CHANGELOG.md`](CHANGELOG.md)。
 
@@ -42,14 +42,14 @@ GitHub Social Preview 与主要功能"满状态"截图。
 | `CITATION.cff` 与引用入口 | [#58](../../pull/58) | GitHub 侧栏可显示引用 |
 | 算法层单元测试基线 | [#60](../../pull/60) | 已覆盖 collation 基础算法 |
 | 古籍 OCR 集成 | [#88](../../pull/88) | 需自配 gj.cool 凭据 |
+| GitHub Social Preview Image | [#25](../../issues/25) | 已加入社交预览资源 |
+| 主要功能"满状态"截图（带真实数据） | [#26](../../issues/26) | README 顶部已替换为真实截图 |
+| `CHANGELOG.md` 固化为 v0.2.0 release notes | [#96](../../pull/96) | 待发布 tag 时补日期与链接 |
 
 ### 发布前剩余 / Release Polish
 
 | Item | Issue | Size |
 |---|---|---|
-| GitHub Social Preview Image | [#25](../../issues/25) | XS |
-| 主要功能"满状态"截图（带真实数据） | [#26](../../issues/26) | M |
-| `CHANGELOG.md` 固化为 v0.2.0 release notes | TBD | XS |
 | 发布 tag / GitHub Release | TBD | XS |
 
 **预期产出**：一个可信的 v0.2 开源版本，文档、示例、CI、部署路径与安全边界都足够清楚。
