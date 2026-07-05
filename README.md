@@ -36,7 +36,7 @@
 > 上传两个带标点版本，差异分析与可视化
 > Upload two punctuated editions for diff analysis & visualization.
 
-![标点版本对比](docs/screenshots/feature-punctuation-diff.png)
+![标点版本对比](docs/screenshots/feature-punctuation-diff-result.png)
 
 ### 标点迁移 / Punctuation Transfer
 > 把已校好标点的版本，迁移到无标点的相似文本上

@@ -10,6 +10,7 @@
 - `overview-main.png`
 - `feature-multi-collation.png`
 - `feature-punctuation-diff.png`
+- `feature-punctuation-diff-result.png`
 - `feature-commentary-parallel.png`
 - `feature-lineage-graph.png`
 
