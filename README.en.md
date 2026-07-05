@@ -20,6 +20,7 @@
 
 | Module | Preview |
 |---|---|
+| Workspace Overview | ![Workspace Overview](docs/screenshots/overview-workspace.png) |
 | Commentary Parallel Reading | sutra text + multiple commentaries side-by-side, sentence-aligned |
 | Multi-edition Collation | one base edition vs. up to 30 witnesses in one workspace |
 | Punctuation Diff | upload two punctuated editions for visual diff + analysis |
