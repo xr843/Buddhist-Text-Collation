@@ -11,6 +11,7 @@
 - `feature-multi-collation.png`
 - `feature-multi-collation-loaded.png`
 - `feature-punctuation-diff.png`
+- `feature-punctuation-diff-result.png`
 - `feature-commentary-parallel.png`
 - `feature-lineage-graph.png`
 
