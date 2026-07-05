@@ -20,6 +20,12 @@
 
 ## 界面预览 / Screenshots
 
+### 工作台概览 / Workspace Overview
+> 五个核心入口集中在一个研究工作台，便于快速进入导入、对勘、标点和注疏流程。
+> Five core entry points in one research dashboard for import, collation, punctuation, and commentary workflows.
+
+![工作台概览](docs/screenshots/overview-workspace.png)
+
 ### 经论注疏对读 / Commentary Parallel Reading
 > 经文与多家注疏三栏并排，跨文本逐句对照
 > Sutra text and multiple commentaries side-by-side, sentence-aligned.
