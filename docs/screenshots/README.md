@@ -9,6 +9,7 @@
 文件命名：
 - `overview-main.png`
 - `feature-multi-collation.png`
+- `feature-multi-collation-loaded.png`
 - `feature-punctuation-diff.png`
 - `feature-commentary-parallel.png`
 - `feature-lineage-graph.png`
