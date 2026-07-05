@@ -7,8 +7,9 @@
 - GIF 演示：< 5MB，10-15 秒
 
 文件命名：
-- `overview-main.png`
+- `overview-workspace.png`
 - `feature-multi-collation.png`
+- `feature-multi-collation-loaded.png`
 - `feature-punctuation-diff.png`
 - `feature-punctuation-diff-result.png`
 - `feature-commentary-parallel.png`

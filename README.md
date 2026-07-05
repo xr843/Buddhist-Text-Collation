@@ -20,6 +20,12 @@
 
 ## 界面预览 / Screenshots
 
+### 工作台概览 / Workspace Overview
+> 五个核心入口集中在一个研究工作台，便于快速进入导入、对勘、标点和注疏流程。
+> Five core entry points in one research dashboard for import, collation, punctuation, and commentary workflows.
+
+![工作台概览](docs/screenshots/overview-workspace.png)
+
 ### 经论注疏对读 / Commentary Parallel Reading
 > 经文与多家注疏三栏并排，跨文本逐句对照
 > Sutra text and multiple commentaries side-by-side, sentence-aligned.
@@ -30,7 +36,7 @@
 > 一底多校：选一个底本，最多 30 个校本同屏对勘
 > Pick one base edition and collate against up to 30 witnesses in one workspace.
 
-![版本对勘](docs/screenshots/feature-multi-collation.png)
+![版本对勘](docs/screenshots/feature-multi-collation-loaded.png)
 
 ### 标点版本对比 / Punctuation Diff
 > 上传两个带标点版本，差异分析与可视化
