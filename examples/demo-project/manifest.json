@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "project_slug": "classical-chinese-collation-demo",
+  "title": "Classical Chinese Collation Demo",
+  "language": "zh-Hans",
+  "source_note": "Public-domain sample from the opening of the Analects, used only as a compact demonstration fixture.",
+  "license_note": "Public domain source text; repository documentation and expected outputs follow the project license.",
+  "texts": [
+    "texts/base-punctuated.txt",
+    "texts/witness-variant.txt",
+    "texts/target-unpunctuated.txt"
+  ],
+  "expected_outputs": [
+    "expected/text-compare.json",
+    "expected/punctuation-transfer.txt"
+  ],
+  "workflows": [
+    {
+      "name": "text-comparison",
+      "base": "texts/base-punctuated.txt",
+      "witness": "texts/witness-variant.txt",
+      "expected": "expected/text-compare.json"
+    },
+    {
+      "name": "punctuation-transfer",
+      "source": "texts/base-punctuated.txt",
+      "target": "texts/target-unpunctuated.txt",
+      "expected": "expected/punctuation-transfer.txt"
+    }
+  ]
+}

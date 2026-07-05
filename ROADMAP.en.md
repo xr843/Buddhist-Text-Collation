@@ -69,6 +69,11 @@ collaboration from implemented features to usable research workflows.
 | Public read-only demo site | TBD | M |
 | Expanded English docs (`README.en.md` to `docs/en/`) | TBD | M |
 
+Progress: the reproducible demo project baseline now lives in
+[`examples/demo-project/`](examples/demo-project/). Future demo-site,
+screenshot-refresh, and expanded-English-docs work should reuse its manifest
+and expected outputs first.
+
 ---
 
 ## v0.4 — Research-grade Exports

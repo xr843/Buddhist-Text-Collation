@@ -68,6 +68,10 @@
 | 公开只读 Demo Site | TBD | M |
 | 文档英文版扩展（`README.en.md` → `docs/en/`） | TBD | M |
 
+进展：可复现 demo project 基线已放在
+[`examples/demo-project/`](examples/demo-project/)，后续 Demo Site、截图刷新与英文文档扩展
+应优先复用这份 manifest 和 expected outputs。
+
 ---
 
 ## v0.4 — 研究级导出 / Research-grade Exports
