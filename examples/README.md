@@ -12,10 +12,15 @@ works the same way as a Buddhist canonical text.
 
 ```
 examples/
-└── classical-chinese-sample/
-    ├── punctuated.txt    # 通行标点版（《论语·学而》开篇三句）
-    ├── unpunctuated.txt  # 同一文本，去标点版（用于"标点迁移"演示）
-    └── variant.txt       # 引入一处异体字差异（"说" → "悦"，用于"对勘"演示）
+├── classical-chinese-sample/
+│   ├── punctuated.txt    # 通行标点版（《论语·学而》开篇三句）
+│   ├── unpunctuated.txt  # 同一文本，去标点版（用于"标点迁移"演示）
+│   └── variant.txt       # 引入一处异体字差异（"说" → "悦"，用于"对勘"演示）
+└── demo-project/
+    ├── manifest.json
+    ├── texts/            # v0.3 可复现 demo 的输入数据
+    ├── expected/         # 后端服务生成的固定期望输出
+    └── screenshots/      # 后续截图刷新应使用的数据源说明
 ```
 
 样本取自《论语·学而》开篇——公元前 5 世纪典籍，**公有领域**，
@@ -27,6 +32,20 @@ chosen purely to demonstrate diff/collation behavior. CBETA/DILA Buddhist
 texts go through the exact same pipeline.
 
 ## 怎么用 / How to use
+
+### 推荐：v0.3 可复现 demo project
+
+`demo-project/` 是后续公开 Demo Site、截图刷新、英文文档扩展和回归测试
+共同使用的基线数据集。它包含 manifest、输入文本和已提交的 expected outputs。
+
+从仓库根目录运行：
+
+```bash
+cd backend
+.venv/bin/python -m pytest tests/services/test_demo_project_expected_outputs.py -q
+```
+
+该测试会验证 committed expected outputs 与当前后端服务行为一致。
 
 ### A. 不装环境 — 用文件直接看 / No setup — just inspect
 

@@ -1,0 +1,31 @@
+{
+  "version1_name": "Demo base punctuated",
+  "version2_name": "Demo witness variant",
+  "differences": [
+    {
+      "type": "replace",
+      "position": 12,
+      "text1": "说",
+      "text2": "悦",
+      "context_before": "子曰：「学而时习之，不亦",
+      "context_after": "乎？有朋自远方来，不亦乐乎？人不知而不愠",
+      "text1_range": [
+        12,
+        13
+      ],
+      "text2_range": [
+        12,
+        13
+      ]
+    }
+  ],
+  "statistics": {
+    "text1_length": 41,
+    "text2_length": 41,
+    "total_differences": 1,
+    "insertions": 0,
+    "deletions": 0,
+    "replacements": 1
+  },
+  "similarity": 0.9756
+}
