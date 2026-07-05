@@ -8,7 +8,7 @@ import chardet
 import tempfile
 import os
 from docx import Document
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 from bs4 import BeautifulSoup
 import markdown
 from loguru import logger
