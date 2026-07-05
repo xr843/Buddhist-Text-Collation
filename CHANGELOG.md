@@ -26,6 +26,7 @@ and [Semantic Versioning](https://semver.org/).
 > dated and linked to the GitHub Release when the `v0.2.0` tag is published.
 
 ### Added
+- GitHub Social Preview asset and filled-state feature screenshots for the README / repository preview (#97, #99-#102).
 - **古籍OCR / Ancient OCR** —— 新增「古籍OCR」tab（工作台与 CBETA 导入之间），通过古籍酷（gj.cool）OCR API 实现图片→文字；结果可编辑、复制 / 下载 .txt / 一键送入版本对勘。后端代理：gj.cool 凭据与 access_token 全在服务端，前端只上传图片。需在 `backend/.env` 配置 `GJCOOL_OCR_BASE_URL` / `GJCOOL_OCR_APIID` / `GJCOOL_OCR_PASSWORD` 后启用。
 - `examples/classical-chinese-sample/` 公开样本 + README "3 分钟试用" 章节 (#52)
 - 标准 English README + ROADMAP（`README.en.md` / `ROADMAP.en.md`）+ 顶部语言切换 (#53)
@@ -50,11 +51,11 @@ and [Semantic Versioning](https://semver.org/).
 - JWT `datetime.utcnow()` (naive) → `datetime.now(timezone.utc)` (aware)；非 UTC 服务器上 token 过期时间会偏差一个本地时区偏移 (#59)
 
 ### Security
-- 见上面 #50 / #51 / #62。剩余 1 条 dev-only Vite/esbuild moderate alert（需 vite 5→8 大版本）已记入 follow-up。
+- 见上面 #50 / #51 / #62。
+- 前端依赖安全刷新：Vite、ECharts、Undici、form-data、React Router、Babel、esbuild 等告警已清理；`npm audit --audit-level=low` 为 0。
+- 后端依赖安全刷新：`PyPDF2` 迁移到 `pypdf`，并提升 FastAPI / Starlette / pytest / python-jose / email-validator / pytest-asyncio 版本下限；`pip-audit -r backend/requirements.txt` 为 0。
 
 ### 待办 / Planned (未来 PR)
-- vite 5 → 8 大版本（清最后一条 dev-only alert）
-- pytest 9 升级（先验 pytest-asyncio matrix）
 - `services/punctuation_analysis/` 与 `services/text_compare.py` 测试覆盖
 - 前端 `: any` / `@ts-ignore` 类型债清理（约 76 处，按文件拆 PR）
 - 拆分 3000-行 `MultiCollation.tsx` / 1146-行 `cbeta_service.py`

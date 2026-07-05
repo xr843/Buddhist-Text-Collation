@@ -56,8 +56,8 @@
 
 ![标点迁移](docs/screenshots/feature-punctuation-transfer.png)
 
-> 📷 更多截图（带真实数据的差异高亮 / 校勘记 / 版本谱系图等）正在筹备中。
-> More screenshots (highlighted diffs, collation notes, lineage graph, etc.) coming soon.
+> 📷 更多截图与预览素材见 [`docs/screenshots/`](docs/screenshots/)。
+> More screenshots and preview assets live in [`docs/screenshots/`](docs/screenshots/).
 >
 > 想帮忙的朋友可以提交 PR 到 [`docs/screenshots/`](docs/screenshots/)。
 > Contributions welcome via PR.
