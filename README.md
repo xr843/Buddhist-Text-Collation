@@ -38,6 +38,12 @@
 
 ![版本对勘](docs/screenshots/feature-multi-collation-loaded.png)
 
+### 版本谱系 / Version Lineage
+> 基于相似度矩阵、共同异文和系统归属，展示版本亲疏关系
+> Visualize relationships between witnesses with similarity, shared variants, and lineage groups.
+
+![版本谱系](docs/screenshots/feature-lineage-graph.png)
+
 ### 标点版本对比 / Punctuation Diff
 > 上传两个带标点版本，差异分析与可视化
 > Upload two punctuated editions for diff analysis & visualization.

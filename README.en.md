@@ -23,6 +23,7 @@
 | Workspace Overview | ![Workspace Overview](docs/screenshots/overview-workspace.png) |
 | Commentary Parallel Reading | sutra text + multiple commentaries side-by-side, sentence-aligned |
 | Multi-edition Collation | ![Multi-edition Collation](docs/screenshots/feature-multi-collation-loaded.png) |
+| Version Lineage | ![Version Lineage](docs/screenshots/feature-lineage-graph.png) |
 | Punctuation Diff | ![Punctuation Diff](docs/screenshots/feature-punctuation-diff-result.png) |
 | Punctuation Transfer | map punctuation from a polished edition to an unpunctuated one |
 
