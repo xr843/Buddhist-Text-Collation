@@ -20,10 +20,11 @@ and [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [0.2.0] — Pending release
+## [0.2.0] — 2026-07-05
 
-> Release-candidate notes for the next public release. This section should be
-> dated and linked to the GitHub Release when the `v0.2.0` tag is published.
+Second public release focused on open-source credibility: runnable examples,
+CI hardening, deployment docs, filled-state screenshots, OCR integration, and
+dependency security cleanup.
 
 ### Added
 - GitHub Social Preview asset and filled-state feature screenshots for the README / repository preview (#97, #99-#102).
@@ -112,5 +113,5 @@ public distribution.
 - `gitleaks` CI 步骤会扫描每次 push 的密钥泄露
 
 [Unreleased]: https://github.com/xr843/Buddhist-Text-Collation/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/xr843/Buddhist-Text-Collation/compare/v0.1.0...HEAD
+[0.2.0]: https://github.com/xr843/Buddhist-Text-Collation/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/xr843/Buddhist-Text-Collation/releases/tag/v0.1.0

@@ -12,9 +12,8 @@
 
 ## 当前状态 / Current
 
-**v0.2.0 release candidate** — 工程基础设施、测试门禁、Docker/Alembic、
-双语入口、OCR 集成、公开展示素材与安全依赖清理已经完成。正式发布前仅剩
-tag / GitHub Release 流程。
+**v0.2.0 已发布** — 工程基础设施、测试门禁、Docker/Alembic、
+双语入口、OCR 集成、公开展示素材与安全依赖清理已经完成。
 
 完整变更见 [`CHANGELOG.md`](CHANGELOG.md)。
 
@@ -44,13 +43,13 @@ tag / GitHub Release 流程。
 | 古籍 OCR 集成 | [#88](../../pull/88) | 需自配 gj.cool 凭据 |
 | GitHub Social Preview Image | [#25](../../issues/25) | 已加入社交预览资源 |
 | 主要功能"满状态"截图（带真实数据） | [#26](../../issues/26) | README 顶部已替换为真实截图 |
-| `CHANGELOG.md` 固化为 v0.2.0 release notes | [#96](../../pull/96) | 待发布 tag 时补日期与链接 |
+| `CHANGELOG.md` 固化为 v0.2.0 release notes | [#96](../../pull/96) | 已定稿并标注发布日期 |
 
-### 发布前剩余 / Release Polish
+### 发布状态 / Release Status
 
 | Item | Issue | Size |
 |---|---|---|
-| 发布 tag / GitHub Release | TBD | XS |
+| v0.2.0 tag / GitHub Release | TBD | Done |
 
 **预期产出**：一个可信的 v0.2 开源版本，文档、示例、CI、部署路径与安全边界都足够清楚。
 
