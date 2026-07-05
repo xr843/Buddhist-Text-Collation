@@ -9,10 +9,9 @@
 
 ## Current
 
-**v0.2.0 release candidate** — engineering baseline, CI gates, Docker/Alembic,
+**v0.2.0 is published** — engineering baseline, CI gates, Docker/Alembic,
 bilingual entry points, OCR integration, public-facing assets, and dependency
-security cleanup are in place. Before the formal release, only the tag /
-GitHub Release workflow remains.
+security cleanup are in place.
 
 Full notes live in [`CHANGELOG.md`](CHANGELOG.md).
 
@@ -43,13 +42,13 @@ state, run samples quickly, and see deployment boundaries.
 | Ancient OCR integration | [#88](../../pull/88) | Requires user-supplied gj.cool credentials |
 | GitHub Social Preview Image | [#25](../../issues/25) | Social preview assets are in place |
 | Full-state feature screenshots with real data | [#26](../../issues/26) | README now uses filled-state screenshots |
-| Freeze `CHANGELOG.md` as v0.2.0 release notes | [#96](../../pull/96) | Date and release link will be added when the tag is published |
+| Freeze `CHANGELOG.md` as v0.2.0 release notes | [#96](../../pull/96) | Finalized with the release date |
 
-### Release Polish
+### Release Status
 
 | Item | Issue | Size |
 |---|---|---|
-| Publish tag / GitHub Release | TBD | XS |
+| v0.2.0 tag / GitHub Release | TBD | Done |
 
 **Outcome**: a credible v0.2 open-source release with clear docs, examples,
 CI, deployment path, and security boundaries.
