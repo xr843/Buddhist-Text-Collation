@@ -20,10 +20,11 @@
 
 | Module | Preview |
 |---|---|
+| Workspace Overview | ![Workspace Overview](docs/screenshots/overview-workspace.png) |
 | Commentary Parallel Reading | sutra text + multiple commentaries side-by-side, sentence-aligned |
-| Multi-edition Collation | one base edition vs. up to 30 witnesses in one workspace |
+| Multi-edition Collation | ![Multi-edition Collation](docs/screenshots/feature-multi-collation-loaded.png) |
 | Version Lineage | ![Version Lineage](docs/screenshots/feature-lineage-graph.png) |
-| Punctuation Diff | upload two punctuated editions for visual diff + analysis |
+| Punctuation Diff | ![Punctuation Diff](docs/screenshots/feature-punctuation-diff-result.png) |
 | Punctuation Transfer | map punctuation from a polished edition to an unpunctuated one |
 
 See [`docs/screenshots/`](docs/screenshots/) — high-fidelity captures
