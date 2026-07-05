@@ -1,7 +1,7 @@
-# 佛典标点与校勘研究平台
+# 佛典标点与校勘研究平台（历史设计档案）
 
-[![Version](https://img.shields.io/badge/version-2.10-blue.svg)](https://github.com)
-[![License](https://img.shields.io/badge/license-TBD-lightgrey.svg)](#开源协议)
+[![Docs](https://img.shields.io/badge/docs-historical_archive-lightgrey.svg)](../README.md)
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](../LICENSE)
 [![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/)
 [![React](https://img.shields.io/badge/react-18+-blue.svg)](https://react.dev/)
 [![Docker](https://img.shields.io/badge/docker-支持-blue.svg)](#docker部署推荐)
@@ -13,7 +13,7 @@
 
 佛经古籍标点比较与校勘研究平台。提供标点版本对比、两版本对勘、多版本对勘、版本谱系分析、经论注疏对读等功能，帮助研究者高效完成佛典文献的校勘工作。
 
-> **关于本文档**：这是历史完整版中文文档（V1 → V2.10 演进记录）。它**保留了若干已在 v0.1.0 开源版下线的功能介绍**（最显著的是"OCR 数字化工作台"——开源版未集成第三方付费 OCR 服务）。请以仓库根目录的 `README.md` 为当前功能权威说明；本文档作为**研究背景与设计思路参考**保留。
+> **关于本文档**：这是历史完整版中文文档（V1 → V2.10 演进记录），作为**研究背景与设计思路参考**保留。它可能包含已下线、已重做、需要自配第三方凭据，或仅在早期内部版本存在的功能说明。请以仓库根目录的 [`README.md`](../README.md)、[`ROADMAP.md`](../ROADMAP.md) 与 [`CHANGELOG.md`](../CHANGELOG.md) 为当前功能、版本和部署边界的权威说明。
 
 ## 核心功能
 
@@ -728,15 +728,15 @@ kill -9 $(lsof -ti:8000)
 
 ---
 
-### v0.1.0 (当前公开版本 / current open-source release) — 2026-05-02
+### v0.1.0 (首个公开版本 / first open-source release) — 2026-05-02
 首个开源版本，从内部 V2.10 整理而来。
 
 **核心模块（开源版包含）：**
 - ✅ 标点版本对比、两/多版本对勘、注疏对读、版本谱系、标点迁移
 - ✅ CBETA 集成、协作、导出（TXT / DOCX / TEI / CSV）
 
-**移除的模块（开源版**不**包含）：**
-- ❌ OCR 数字化工作台（依赖第三方付费 API gj.cool）
+**首发时移除的模块（v0.1.0 初始开源版**不**包含）：**
+- ❌ OCR 数字化工作台（依赖第三方付费 API gj.cool；后续版本已以自配凭据方式重新接入，当前状态请看根目录 `README.md` 与 `CHANGELOG.md`）
 
 详见仓库根目录 [`CHANGELOG.md`](../CHANGELOG.md) 与 [`README.md`](../README.md)。
 
@@ -763,7 +763,7 @@ kill -9 $(lsof -ti:8000)
 
 ## 开源协议
 
-待补充（README 中的 License 徽章为占位）
+本项目采用 [GNU Affero General Public License v3.0](../LICENSE)。如本文档中的历史描述与仓库根目录的 `README.md` 或 `LICENSE` 不一致，请以后者为准。
 
 ## 致谢
 
