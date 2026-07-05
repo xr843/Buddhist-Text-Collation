@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+  <title id="title">Buddhist Text Collation Platform social preview</title>
+  <desc id="desc">A restrained scholarly social preview for a Buddhist text collation research workbench.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbf7ef"/>
+      <stop offset="0.55" stop-color="#f1eadf"/>
+      <stop offset="1" stop-color="#e6dccd"/>
+    </linearGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#26352f"/>
+      <stop offset="1" stop-color="#3b4f47"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#4e4538" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="640" fill="#f4ecdf"/>
+
+  <g opacity="0.08" stroke="#6d5945" stroke-width="1.4" fill="none">
+    <path d="M96 94h1088M96 546h1088M126 68v504M1154 68v504"/>
+    <path d="M150 116h980M150 524h980"/>
+  </g>
+
+  <g transform="translate(86 72)" filter="url(#shadow)">
+    <rect x="0" y="0" width="1108" height="496" rx="20" fill="#fffdf8" stroke="#d4c5b0" stroke-width="1.5"/>
+    <rect x="0" y="0" width="1108" height="72" rx="20" fill="#f7efe3"/>
+    <path d="M0 52h1108" stroke="#d8c7b0" stroke-width="1"/>
+
+    <g transform="translate(34 23)">
+      <circle cx="13" cy="13" r="6" fill="#9a6a4b"/>
+      <circle cx="37" cy="13" r="6" fill="#c2a15c"/>
+      <circle cx="61" cy="13" r="6" fill="#60796f"/>
+      <text x="95" y="20" fill="#5f5548" font-family="DejaVu Sans, Arial, sans-serif" font-size="20" font-weight="600">Research workbench</text>
+    </g>
+
+    <g transform="translate(54 126)">
+      <rect x="0" y="0" width="292" height="238" rx="14" fill="#f6f0e7" stroke="#d8c8b5"/>
+      <text x="28" y="50" fill="#5c4938" font-family="DejaVu Serif, Georgia, serif" font-size="30" font-weight="700">Base Text</text>
+      <g font-family="DejaVu Serif, Georgia, serif" font-size="22" fill="#38463f">
+        <text x="28" y="102">T01n0001  line 18</text>
+        <text x="28" y="140">variant A  aligns</text>
+        <text x="28" y="178">punctuation noted</text>
+      </g>
+      <path d="M28 206h224" stroke="#b79a6e" stroke-width="4" stroke-linecap="round"/>
+    </g>
+
+    <g transform="translate(402 126)">
+      <rect x="0" y="0" width="294" height="238" rx="14" fill="#fdfaf3" stroke="#d8c8b5"/>
+      <text x="28" y="50" fill="#5c4938" font-family="DejaVu Serif, Georgia, serif" font-size="30" font-weight="700">Collation</text>
+      <g font-family="DejaVu Sans Mono, Consolas, monospace" font-size="21">
+        <text x="28" y="104" fill="#2f5f57">+ witness B</text>
+        <text x="28" y="143" fill="#8a4f3f">- witness C</text>
+        <text x="28" y="182" fill="#485750">= shared phrase</text>
+      </g>
+      <g stroke-width="4" stroke-linecap="round">
+        <path d="M226 95h32" stroke="#2f5f57"/>
+        <path d="M226 134h32" stroke="#8a4f3f"/>
+        <path d="M226 173h32" stroke="#485750"/>
+      </g>
+    </g>
+
+    <g transform="translate(752 126)">
+      <rect x="0" y="0" width="294" height="238" rx="14" fill="#f6f0e7" stroke="#d8c8b5"/>
+      <text x="28" y="50" fill="#5c4938" font-family="DejaVu Serif, Georgia, serif" font-size="30" font-weight="700">Sources</text>
+      <g font-family="DejaVu Sans, Arial, sans-serif" font-size="22" fill="#39453f">
+        <text x="28" y="104">CBETA integrated</text>
+        <text x="28" y="143">DILA references</text>
+        <text x="28" y="182">Public samples</text>
+      </g>
+      <circle cx="235" cy="194" r="28" fill="#efe1c9" stroke="#b79254" stroke-width="3"/>
+      <path d="M235 170c8 17 8 31 0 48c-8-17-8-31 0-48zM211 194c17-8 31-8 48 0c-17 8-31 8-48 0z" fill="#b79254" opacity="0.76"/>
+    </g>
+  </g>
+
+  <g transform="translate(124 506)">
+    <rect x="0" y="-72" width="1032" height="122" rx="18" fill="#26352f" opacity="0.96"/>
+    <text x="34" y="-14" fill="#fff8ec" font-family="DejaVu Serif, Georgia, serif" font-size="44" font-weight="700">Buddhist Text Collation Platform</text>
+    <text x="36" y="27" fill="#d8c8ad" font-family="DejaVu Sans, Arial, sans-serif" font-size="24">Punctuation diff · multi-edition collation · commentary reading · lineage notes</text>
+  </g>
+</svg>
