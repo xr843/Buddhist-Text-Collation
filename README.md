@@ -36,7 +36,7 @@
 > 一底多校：选一个底本，最多 30 个校本同屏对勘
 > Pick one base edition and collate against up to 30 witnesses in one workspace.
 
-![版本对勘](docs/screenshots/feature-multi-collation.png)
+![版本对勘](docs/screenshots/feature-multi-collation-loaded.png)
 
 ### 标点版本对比 / Punctuation Diff
 > 上传两个带标点版本，差异分析与可视化
