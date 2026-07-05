@@ -16,7 +16,7 @@ asyncpg==0.31.0
 redis>=5.3.1  # 包含异步支持
 
 # 认证和安全
-python-jose[cryptography]>=3.4.0
+python-jose[cryptography]>=3.5.0
 passlib[bcrypt]==1.7.4
 python-multipart>=0.0.18
 bcrypt==4.3.0
